@@ -12,12 +12,10 @@ const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export default function TabNavigator() {
   return (
-    <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="AddConnection" component={AddConnection}/>
                 {/* note: component, as a prop, refers to which screen the stack navigator points to, NOT UI components*/}
         <Tab.Screen name="DeleteConnection" component={DeleteConnection} />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }
