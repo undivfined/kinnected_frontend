@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native';
 
-export default function OtherScreen() {
+export default function MyProfileScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Other Screen</Text>
+      <Text>My Profile Screen</Text>
     </View>
   );
 }
