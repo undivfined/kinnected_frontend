@@ -9,7 +9,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'LandingPage'>;
 
 export default function LandingPage({ navigation } : Props)  {
     return (
-        <View style={styles.containerStyle}>
+        <View style={styles.container}>
             <Text>Kinnected</Text>
             <Pressable style={styles.button} onPress={() => {navigation.navigate('LogInPage')}}>
 
@@ -23,16 +23,15 @@ export default function LandingPage({ navigation } : Props)  {
 
 const styles = StyleSheet.create({
     container: {
-      borderColor: 'red',
-      borderWidth: 2,
-      backgroundColor: 'white',
-      width: '100%',
-      height: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginLeft:0,
+        flex: 1,
+        borderColor: 'red',
+        borderWidth: 2,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft:0,
     },
-    
+
     containerStyle: {
         width: 200,
         marginHorizontal: 50,
@@ -43,11 +42,9 @@ const styles = StyleSheet.create({
       borderRadius: '50%',
       borderColor: 'red',
       borderWidth: 2,
-      width: '25%',
-      height: '25%',
       alignItems: 'center',
       justifyContent: 'center',
-      flexDirection: 'column',
+      flexDirection: 'row'
     },
     
     buttonLabel: {
