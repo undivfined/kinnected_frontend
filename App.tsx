@@ -1,5 +1,5 @@
 import * as React from 'react';
-import StackNavigator from './src/navigation/StackNavigator';
+import StackNavigator from './app/navigation/StackNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {

@@ -9,7 +9,7 @@ export default function HomeScreen({ navigation }: Props) {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home Screen</Text>
       <Button title="Sign Up" onPress={() => navigation.navigate('SignUpScreen')} />
-      <Button title="Go to My Profile Screen" onPress={() => navigation.navigate('MyProfileScreen')} />
+      <Button title="Go to My Profile Screen" onPress={() => navigation.navigate('MyProfileScreen', {itemId: 5})} />
     </View>
   );
 }

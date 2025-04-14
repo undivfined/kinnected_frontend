@@ -6,7 +6,9 @@ import TabNavigator from './TabNavigator';
 
 export type RootStackParamList = {
   Home: undefined;
-  MyProfileScreen: undefined;
+  // undefined means this screen takes no parameters when being navigated to
+  MyProfileScreen: { itemId: number };
+  // {} key-value means screen can take parameters of a specified type
   SignUpScreen: undefined;
   TabNavigator: undefined;
 };
