@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import { useState } from "react";
-import { setStatusBarBackgroundColor } from "expo-status-bar";
 
 
 
@@ -18,7 +17,6 @@ return (
         <Text style={styles.title}>Kinnected</Text>
         <TextInput style={styles.userNameInput} onChangeText={setUserName} value={userName} />
         <TextInput style={styles.passwordInput} onChangeText={setPassword} value={password}/>
-
         <Pressable onPress={() => {console.log('I forgot me password')}} >
             <Text style={styles.forgottenPasswordText}  >Forgotten Password</Text>
         </Pressable> 
