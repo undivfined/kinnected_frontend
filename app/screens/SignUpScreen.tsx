@@ -1,190 +1,90 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, StyleSheet, Pressable, Text, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Pressable, Text, TextInput, ScrollView, } from 'react-native';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { RootStackParamList } from '../navigation/StackNavigator';
+import {Picker } from "@react-native-picker/picker"
+import {  container, headingTwo, inputLabel, logIn, pickerInput, textInput } from '../styles/styles';
 import { useState } from 'react';
-import ImageViewer from '../components/ImageViewer';
-import { Picker } from "@react-native-picker/picker"
-import pickImage from "../utils/pickImage"
 const PlaceholderImage = require("../../assets/freepik-basic-placeholder-profile-picture.png");
 
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
 
+
+
 export default function SignUpScreen({ navigation } : Props) {
-  const [selectedImage, setSelectedImage] = useState<"string" | undefined>(undefined)
+
+  const [date, setDate] = useState(new Date("1992-5-5"))
+  const [showCalender, setShowCalender] = useState(false);
+  const [country, setCountry] = useState<string | null>(null);
+  const [timezone, setTimezone] = useState<string | null>(null);
+
+  function onDateChange(event: DateTimePickerEvent, selectedDate?: Date) {
+    if (event.type === 'set' && selectedDate) {
+      setDate(selectedDate);
+    }
+    setShowCalender(false);
+  }
 
     return (
-        <ScrollView contentContainerStyle={styles.scrollContainer}   showsVerticalScrollIndicator={false}>
-          
-          <Text style={styles.title}>Sign Up</Text>
+        <ScrollView>
+            <View className={container}>
+            <Text className={headingTwo}>Sign Up</Text>
 
-          <View style={styles.imageContainer}>
-            <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage}/>
-          </View>
+            <Text className={inputLabel}>Username</Text>
+            <TextInput className={textInput}/>
 
-            <View style={styles.buttonWrapper}>
-              <Button title="Choose a photo" color="#2196F3" onPress={pickImage}/>
+            <Text className={inputLabel}>Password</Text>
+            <TextInput className={textInput}/>
+
+            <Text className={inputLabel}>Full Name</Text>
+            <TextInput className={textInput}/>
+
+  
+            <Text className={inputLabel}>Date of Birth</Text>
+            <Pressable className={textInput} onPress={()=>{setShowCalender(true)}}><Text>{date.toLocaleDateString()}</Text></Pressable>
+
+            {showCalender && (
+            <DateTimePicker value={date} mode="date" onChange={(event, selectedDate) => {onDateChange(event, selectedDate)}}/>
+            )}
+            
+            <Text className={inputLabel}>Country</Text>
+           
+            <View className={pickerInput} >
+              <Picker selectedValue={country}  onValueChange={(selected) => setCountry(selected)} mode="dropdown">
+                <Picker.Item label="Select your country" value={null} enabled={false} />
+                <Picker.Item label="England" value="england" />
+                <Picker.Item label="Belarus" value="belarus" />
+                <Picker.Item label="South Africa" value="south africa" />
+                <Picker.Item label="London" value="london" />
+              </Picker>
             </View>
+            
+           
+             
+            <Text className={inputLabel}>Timezone</Text>
+         
+            <View className={pickerInput} >
+              <Picker selectedValue={timezone} className={pickerInput} onValueChange={(selected) => setTimezone(selected)}>
+                <Picker.Item label="Select your Timezone" value={null} enabled={false} />
+                <Picker.Item label="No idea" value="No idea" />
+                <Picker.Item label="hmmm" value="hmm" />
+              </Picker>
+            </View>
+          
 
-          <View style={styles.formContainer}>
-            <TextInput style={styles.input} placeholder='Username'/>
-            <TextInput style={styles.input} placeholder='Password'/>
-            <TextInput style={styles.input} placeholder='Full name'/>
-            <TextInput style={styles.input} placeholder='Date of birth'/>
 
-              <View style={styles.pickerWrapper}>
-                <Picker style={styles.picker}/>
-              </View>
+            <Text className="underline">Terms and conditions</Text>
 
-              <View style={styles.pickerWrapper}>
-                <Picker style={styles.picker}/>
-              </View>
+          <Pressable className={logIn} onPress={() => {console.log('do something log in y')}}>
+            <Text className='text-white'>Create Account</Text>
+          </Pressable>
+
+          <Pressable className='underline' onPress={() => {navigation.navigate('LogInScreen')}}>
+            <Text className='underline'>Already have an account? Login</Text>
+          </Pressable>
           </View>
-
-
-          <Pressable style={styles.signUpButton} onPress={() => {navigation.navigate('LogInPage')}}>
-            <Text style={styles.signUpButtonLabel}>Create Account</Text>
-          </Pressable>
-
-          <Pressable style={styles.loginButton} onPress={() => {navigation.navigate('LogInPage')}}>
-            <Text style={styles.loginButtonLabel}>Already have an account? Login</Text>
-          </Pressable>
 
         </ScrollView>
       );
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        borderColor: 'red',
-        borderWidth: 2,
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginLeft:0,
-    },
-
-    containerStyle: {
-        width: 200,
-        marginHorizontal: 50,
-        marginVertical: 10,
-    },
-
-    
-    scrollContainer: {
-      alignItems: 'center',
-      paddingVertical: 40,
-      backgroundColor: 'white',
-    },
-    
-    formContainer: {
-      width: '100%',
-      alignItems: 'center',
-      marginTop: 20,
-    },
-    
-    imageContainer: {
-      flex: 1,
-      paddingTop: 28,
-    },
-    
-    button: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row'
-    },
-    
-    buttonLabel: {
-      color: 'black',
-      fontSize: 16,
-    },
-
-    title: {
-      fontSize: 28,
-      fontWeight: 'bold',
-      marginTop: 80,
-      textAlign: 'center',
-      color: 'black',
-    },
-    
-    
-    loginButton: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row',
-    },
-    
-    loginButtonLabel: {
-      color: 'black',
-      fontSize: 16,
-      textDecorationLine: 'underline',
-      marginTop: 20
-    },
-
-    signUpButton: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row',
-      borderWidth: 1,
-      padding: 10,
-      borderRadius: 5,
-      backgroundColor: "black",
-      width: 180
-    },
-    
-    signUpButtonLabel: {
-      color: 'white',
-      fontSize: 16,
-    },
-
-    photoButton: {
-      flex: 1 / 3,
-      alignItems: 'center',
-      marginTop: 20,
-      borderWidth: 1,
-      borderColor: "transparent",
-      padding: 7,
-      borderRadius: 5,
-    },
-
-    buttonWrapper: {
-      borderRadius: 5,
-      borderWidth: 2,
-      borderColor: "#2196F3",
-      overflow: 'hidden',
-      margin: 10,
-    },
-    
-    photoButtonLabel:{
-      color: "white",
-      fontSize: 14,
-    },
-    
-    input: {
-      width: 280,
-      height: 45,
-      margin: 15,
-      padding: 10,
-      borderRadius: 5,
-      borderWidth: 1.5,
-    },
-    
-    pickerWrapper: {
-      width: 280,
-      height: 45,
-      margin: 15,
-      paddingHorizontal: 10,
-      borderWidth: 1.5,
-      borderRadius: 5,
-      justifyContent: 'center',
-      overflow: "hidden"
-    },
-    
-    picker: {
-      flex: 1,
-      color: 'black',
-    },
-    
-  });
