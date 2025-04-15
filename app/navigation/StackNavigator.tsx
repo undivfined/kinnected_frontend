@@ -1,13 +1,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LandingPage from '../screens/LandingPage';
-import HomeScreen from '../screens/HomeScreen';
+import LandingScreen from '../screens/LandingScreen';
+import LogInScreen from '../screens/LogInScreen';
 import MyProfileScreen from '../screens/MyProfileScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import TabNavigator from './TabNavigator';
 
 export type RootStackParamList = {
-  LandingPage: undefined;
-  LogInPage: undefined;
+  LandingScreen: undefined;
+  LogInScreen: undefined;
   Home: undefined;
   // undefined means this screen takes no parameters when being navigated to
   MyProfileScreen: { itemId: number };
@@ -20,8 +20,9 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function StackNavigator() {
   return (
-      <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="LandingPage">
-        <Stack.Screen name="LandingPage" component={LandingPage} />
+      <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="LandingScreen">
+        <Stack.Screen name="LandingScreen" component={LandingScreen} />
+        <Stack.Screen name="LogInScreen" component={LogInScreen} />
         {/* note: component, as a prop, refers to which screen the stack navigator points to, NOT UI components*/}
         <Stack.Screen name="MyProfileScreen" component={MyProfileScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
