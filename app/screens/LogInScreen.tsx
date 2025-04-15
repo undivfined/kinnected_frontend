@@ -14,7 +14,7 @@ export default function LogInScreen ({ navigation }: Props) {
 
 return (
     <View style={styles.container}>
-        <Text style={styles.title}>Kinnected</Text>
+        <Text className='heading-2 heading-1'>Kinnected</Text>
         <TextInput style={styles.userNameInput} onChangeText={setUserName} value={userName} />
         <TextInput style={styles.passwordInput} onChangeText={setPassword} value={password}/>
         <Pressable onPress={() => {console.log('I forgot me password')}} >
