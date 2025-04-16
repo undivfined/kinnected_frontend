@@ -12,7 +12,13 @@ export default function ConnectAfterSignUp() {
 	return (
 		<>
 			<View>
-				<Text className={skipPress}>SKIP</Text>
+				<Pressable
+					onPress={() => {
+						console.log('ContactListPage');
+					}}
+				>
+					<Text className={skipPress}>SKIP</Text>
+				</Pressable>
 			</View>
 			<View className={container}>
 				<Text className={headingOne}>
