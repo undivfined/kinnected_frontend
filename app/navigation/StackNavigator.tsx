@@ -5,6 +5,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import TabNavigator from './TabNavigator';
 
 import ContactListScreen from '../screens/ContactListScreen';
+import ConnectAfterSignUp from '../screens/ConnectAfterSignUp';
 
 export type RootStackParamList = {
    // undefined means this screen takes no parameters when being navigated to

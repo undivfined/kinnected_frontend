@@ -44,8 +44,6 @@ export const contactInfo = "rounded-full border border-black-400 border-2 w-[50p
 
 export const profileImage = "rounded-full w-[120px] h-[120px] mt-5 mb-5"
 
-export const logIn =
-	'rounded-md w-3/5 px-4 py-2 text-center mb-10 mt-10 bg-black items-center ';
 
 export const skipPress = 'self-end text-2xl font-bold text-gray-400 pt-16 pr-8';
 
