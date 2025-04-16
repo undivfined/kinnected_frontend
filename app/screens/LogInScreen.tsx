@@ -1,8 +1,10 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View } from "react-native";
 import { RootStackParamList } from "../navigation/StackNavigator";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { container, headingTwo, inputLabel, logIn, logInLabel, textInput } from "../styles/styles";
+import bcrypt from 'bcryptjs'
+import { getCredentials } from "../../api";
 
 
 
@@ -13,6 +15,19 @@ export default function LogInScreen ({ navigation }: Props) {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
 
+    function onLogin () {
+        getCredentials(userName).then(({password: hash}) => {
+            return bcrypt.compare(password, hash).then((result) => {
+                if (result) {
+                    navigation.navigate('ContactListScreen')
+                }
+                
+                });
+
+        });
+
+    }
+
 return (
     <View className={container}>
         <Text className={headingTwo}>Kinnected</Text>
@@ -20,13 +35,13 @@ return (
         <TextInput className={textInput} placeholder='enter your username here'onChangeText={setUserName} value={userName} />
 
         <Text className={logInLabel}>Password</Text>
-        <TextInput className={textInput} placeholder='enter your password here' onChangeText={setPassword} value={password}/>
+        <TextInput className={textInput} placeholder='enter your password here' onChangeText={setPassword} value={password} secureTextEntry={true} />
 
         <Pressable onPress={() => {console.log('I forgot me password')}} >
             <Text className='underline' >Forgotten Password</Text>
         </Pressable> 
 
-        <Pressable className={logIn} onPress={() => {console.log('some sort of login thing')}} >
+        <Pressable className={logIn} onPress={onLogin} >
             <Text className='text-white'>Log In</Text>
         </Pressable>
 
