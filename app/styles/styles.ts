@@ -1,4 +1,4 @@
-export const container = 'flex-1 justify-center items-center m-10';
+export const container = 'flex-1 pt-4 justify-center items-center m-10';
 
 export const headingOne = 'mb-10 text-4xl font-bold text-center';
 
