@@ -16,15 +16,20 @@ export default function LogInScreen ({ navigation }: Props) {
     const [password, setPassword] = useState('')
 
     function onLogin () {
-        getCredentials(userName).then(({password: hash}) => {
-            return bcrypt.compare(password, hash).then((result) => {
-                if (result) {
-                    navigation.navigate('ContactListScreen')
-                }
-                
-                });
+        // getCredentials(userName).then(({password: hash}) => {
+        //     return bcrypt.compare(password, hash).then((result) => {
+        //         return result
+        //         });
 
-        });
+        // }).then((result) => {
+        //     console.log(result)
+        //     if (result) {
+        //         navigation.navigate('ContactListScreen')
+        //     }
+        // }).catch((error)=>{
+           
+        // })
+        navigation.navigate('ContactListScreen')
 
     }
 
