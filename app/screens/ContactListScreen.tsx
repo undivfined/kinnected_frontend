@@ -1,18 +1,31 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
-import { ScrollView, Text, View, TextInput } from "react-native";
+import { ScrollView, Text, View, TextInput, FlatList } from "react-native";
 import { contactsContainer, container, headingThree,  inputLabel, profileImage, textInput, userContainer } from "../styles/styles";
-import { Profiler, useState } from "react";
+import { Profiler, useEffect, useState } from "react";
 import ImageViewer from "../components/ImageViewer";
 import ContactTile from "../components/ContactTile";
+import { getContacts } from "../../api";
+import { contact } from "../../types/databaseTypes";
 const blankProfileImg = require('../../assets/freepik-basic-placeholder-profile-picture.png')
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ContactListScreen'>;
 
 export default function ContactListScreen({ navigation } : Props) {
-    const [userName, setUserName] = useState("Chantelle")
+    const [userName, setUserName] = useState("barbara38")
     const [selectedImage, setSelectedImage] = useState<"string" | undefined>(undefined)
+    const [contacts, setContacts] = useState([]);
 
+   
+
+    useEffect(() => {
+
+        getContacts(userName).then((newContacts)=>{
+            console.log(newContacts)
+            setContacts(newContacts)
+        })
+
+    },[])
 
     return (
       
@@ -25,13 +38,9 @@ export default function ContactListScreen({ navigation } : Props) {
                 <Text className={headingThree}>{`${userName}`}</Text>
                 <Text className={headingThree}>Your Kinnections List</Text>
 
-                <ContactTile/>
-                <ContactTile/>
-                <ContactTile/>
-                <ContactTile/>
-                <ContactTile/>
-                <ContactTile/>
-                <ContactTile/>
+                
+
+                <FlatList data={contacts} renderItem={({item}) => <ContactTile contact={item} />} keyExtractor={(item : contact) => item.contact_id}/>
 
             
             </View>

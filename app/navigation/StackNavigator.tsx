@@ -6,7 +6,7 @@ import TabNavigator from './TabNavigator';
 
 import ContactListScreen from '../screens/ContactListScreen';
 import ConnectAfterSignUp from '../screens/ConnectAfterSignUp';
-import ContactCardScreen from '../screens/ViewContactScreen';
+import UserProfileScreen from '../screens/UserProfileScreen';
 import ViewContactScreen from '../screens/ViewContactScreen';
 
 export type RootStackParamList = {
@@ -15,6 +15,7 @@ export type RootStackParamList = {
   LandingScreen: undefined;
   LogInScreen: undefined;
   SignUpScreen: undefined;
+  UserProfileScreen: undefined
   ContactListScreen: undefined
 	ConnectAfterSignUp: undefined;
   ViewContactScreen: undefined;
@@ -29,7 +30,7 @@ export default function StackNavigator() {
       <Stack.Navigator screenOptions={{headerShown: true}} initialRouteName="LandingScreen">
         <Stack.Screen name="LandingScreen" component={LandingScreen} />
         <Stack.Screen name="LogInScreen" component={LogInScreen} />
-
+        <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} />
         {/* note: component, as a prop, refers to which screen the stack navigator points to, NOT UI components*/}
         <Stack.Screen name="ContactListScreen" component={ContactListScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
