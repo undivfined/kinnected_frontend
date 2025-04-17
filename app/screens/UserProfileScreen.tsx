@@ -22,7 +22,7 @@ export default function UserProfileScreen({ navigation } : Props) {
 
 const { selectedImage, setSelectedImage } = useContext(ImageContext)
 
-const { userDetails, setUserDetails } = useContext(UserContext)
+// const { userDetails, setUserDetails } = useContext(UserContext)
 
   const [date, setDate] = useState(new Date("1992-5-5"))
   const [showCalender, setShowCalender] = useState(false);

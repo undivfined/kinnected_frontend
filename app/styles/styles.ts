@@ -11,20 +11,21 @@ export const contactsContainer = "flex-1 justify-center items-center ml-10 mr-10
 
 export const headingOne = "mb-10 text-4xl font-bold text-center"
 
+export const headingTwo = 'mb-10 text-3xl font-bold';
+
+export const headingThree = "mb-10 text-xl font-bold text-left w-[300px]"
+
+export const headingFour = "text-xl font-bold"
+
+
 export const enterBorder = 'rounded-full p-4 border border-gray-400 border-2';
 
 export const strapLine = 'mt-10 text-lg pb-4';
 
-export const enterPressable =
-	'w-40 h-40 bg-gray-400 rounded-full items-center justify-center';
-
-export const headingTwo = 'mb-10 text-3xl font-bold';
-
-export const headingThree = "text-xl font-bold"
+export const enterPressable = 'w-40 h-40 bg-gray-400 rounded-full items-center justify-center';
 
 export const imageViewer = ""
 
-export const headingThree = "mb-10 text-xl font-bold text-left w-[300px]"
 
 export const logInLabel = "text-m font-bold mb-3"
 

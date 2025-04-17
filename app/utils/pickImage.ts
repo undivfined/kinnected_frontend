@@ -1,7 +1,7 @@
 
 import * as ImagePicker from "expo-image-picker"
 
-export default function pickImage() {
+export default function pickImage(setSelectedImage: Function) {
     ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: true,
