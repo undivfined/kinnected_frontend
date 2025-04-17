@@ -17,7 +17,10 @@ export const headingThree = "mb-10 text-xl font-bold text-left w-[300px]";
 
 export const headingFour = "text-xl font-bold";
 
+export const headingFive = "items-center"
+
 export const enterBorder = "rounded-full p-4 border border-gray-400 border-2";
+
 
 export const strapLine = "mt-10 text-lg pb-4";
 
@@ -34,6 +37,7 @@ export const textInput =
   "border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5";
 
 export const pickerInput =
+
   "border border-black rounded-md w-[300px] h-[50px] px-3 justify-center bg-white mb-5";
 
 export const logIn =
@@ -41,6 +45,22 @@ export const logIn =
 
 export const contactTile =
   "flex-row justify-between border border-black rounded-md w-[300px] h-[70px] pt-[10px] pl-[10px] text-center mb-5 mt-5";
+
+
+export const logIn = "rounded-md w-3/5 px-4 py-2 text-center mb-10 mt-10 bg-black items-center "
+
+export const contactTile = "flex-row justify-between border border-black rounded-md w-[260px] h-[100px] pt-[10px] pl-[10px] text-center mb-5 mt-5"
+
+export const lastContacted = "flex-1 justify-center items-center"
+
+export const lastContactedTile = "relative border border-black rounded-md w-[300px] h-[70px] bg-white mb-5 mt-5"
+
+
+export const localTime = "flex-1 justify-center items-center"
+
+export const contactInfo = "flex-1 justify-center items-center w-[70px] h-[65px]"
+
+export const contactTileImage = "rounded-full border border-black-400 border-2 w-[50px] h-[50px]"
 
 export const lastContacted = "";
 

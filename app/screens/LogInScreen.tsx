@@ -34,7 +34,7 @@ export default function LogInScreen({ navigation }: Props) {
             setPassword("");
             Alert.alert("OOPS!", "Incorrect!", [{ text: "Understood" }]);
           }
-        });
+        })
       })
       .catch((error) => {
         setPassword("");

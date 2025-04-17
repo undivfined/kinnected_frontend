@@ -228,4 +228,5 @@ export default function SignUpScreen({ navigation }: Props) {
       </View>
     </ScrollView>
   );
+
 }

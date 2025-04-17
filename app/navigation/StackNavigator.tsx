@@ -6,8 +6,10 @@ import TabNavigator from './TabNavigator';
 
 import ContactListScreen from '../screens/ContactListScreen';
 import ConnectAfterSignUp from '../screens/ConnectAfterSignUp';
-import ContactCardScreen from '../screens/ContactCardScreen';
 import UserProfileScreen from '../screens/UserProfileScreen';
+import ViewContactScreen from '../screens/ViewContactScreen';
+import MessagingScreen from '../screens/MessagingScreen';
+import { contact } from '../../types/databaseTypes';
 
 export type RootStackParamList = {
    // undefined means this screen takes no parameters when being navigated to
@@ -18,7 +20,8 @@ export type RootStackParamList = {
   UserProfileScreen: undefined
   ContactListScreen: undefined
 	ConnectAfterSignUp: undefined;
-  ContactCardScreen: undefined;
+  ViewContactScreen: { contact: contact };
+  MessagingScreen: undefined;
   TabNavigator: undefined;
 };
 
@@ -35,7 +38,8 @@ export default function StackNavigator() {
         <Stack.Screen name="ContactListScreen" component={ContactListScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name='ConnectAfterSignUp' component={ConnectAfterSignUp} />
-        <Stack.Screen name="ContactCardScreen" component={ContactCardScreen} />
+        <Stack.Screen name="ViewContactScreen" component={ViewContactScreen} />
+        <Stack.Screen name="MessagingScreen" component={MessagingScreen} />
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
       </Stack.Navigator>
   );
