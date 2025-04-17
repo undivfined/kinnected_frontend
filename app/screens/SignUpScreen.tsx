@@ -1,139 +1,232 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
-	View,
-	StyleSheet,
-	Pressable,
-	Text,
-	TextInput,
-	ScrollView,
-} from 'react-native';
+  View,
+  Pressable,
+  Text,
+  TextInput,
+  ScrollView,
+  Alert,
+} from "react-native";
 import DateTimePicker, {
-	DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
-import { RootStackParamList } from '../navigation/StackNavigator';
-
-import { Picker } from '@react-native-picker/picker';
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
+import { RootStackParamList } from "../navigation/StackNavigator";
+import { Picker } from "@react-native-picker/picker";
 import {
-	container,
-	headingTwo,
-	inputLabel,
-	logIn,
-	pickerInput,
-	textInput,
-} from '../styles/styles';
-import { useContext, useState } from 'react';
-import { UserContext } from '../context/UserContext';
-const PlaceholderImage = require('../../assets/freepik-basic-placeholder-profile-picture.png');
+  container,
+  headingTwo,
+  inputLabel,
+  logIn,
+  pickerInput,
+  textInput,
+} from "../styles/styles";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
+import bcrypt from "react-native-bcrypt";
 
-type Props = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
+import { NewUser } from "../../types/NewUserType";
+import countriesData from "../../countriesData";
+import { postNewUser } from "../../api";
+type Props = NativeStackScreenProps<RootStackParamList, "SignUpScreen">;
 
 export default function SignUpScreen({ navigation }: Props) {
-	const { setUserDetails } = useContext(UserContext);
+  const { setUserDetails } = useContext(UserContext);
+  const [newUserDetails, setNewUserDetails] = useState<NewUser>({
+    username: "",
+    password: "",
+    first_name: "",
+    last_name: "",
+    date_of_birth: new Date(Date.now()).toISOString(),
+    timezone: "",
+  });
 
-	const [date, setDate] = useState(new Date('1992-5-5'));
-	const [showCalender, setShowCalender] = useState(false);
-	const [country, setCountry] = useState<string | null>(null);
-	const [timezone, setTimezone] = useState<string | null>(null);
+  const [showCalender, setShowCalender] = useState<boolean>(false);
+  const [country, setCountry] = useState<string>("");
 
-	function onDateChange(event: DateTimePickerEvent, selectedDate?: Date) {
-		if (event.type === 'set' && selectedDate) {
-			setDate(selectedDate);
-		}
-		setShowCalender(false);
-	}
+  function onDateChange(
+    event: DateTimePickerEvent,
+    selectedDate: Date | undefined
+  ) {
+    if (event.type === "set" && selectedDate) {
+      setNewUserDetails((current) => {
+        const newUser = {
+          ...current,
+          date_of_birth: selectedDate.toISOString(),
+        };
+        return newUser;
+      });
+    }
+    setShowCalender(false);
+  }
 
-	return (
-		<ScrollView>
-			<View className={container}>
-				<Text className={headingTwo}>Sign Up</Text>
+  function handleUsername(e: string) {
+    setNewUserDetails((current) => {
+      return { ...current, username: e };
+    });
+  }
 
-				<Text className={inputLabel}>Username</Text>
-				<TextInput className={textInput} />
+  function handlePassword(e: string) {
+    setNewUserDetails((current) => {
+      return { ...current, password: e };
+    });
+  }
 
-				<Text className={inputLabel}>Password</Text>
-				<TextInput className={textInput} />
+  function handleFirstName(e: string) {
+    setNewUserDetails((current) => {
+      return { ...current, first_name: e };
+    });
+  }
 
-				<Text className={inputLabel}>Full Name</Text>
-				<TextInput className={textInput} />
+  function handleLastName(e: string) {
+    setNewUserDetails((current) => {
+      return { ...current, last_name: e };
+    });
+  }
 
-				<Text className={inputLabel}>Date of Birth</Text>
-				<Pressable
-					className={textInput}
-					onPress={() => {
-						setShowCalender(true);
-					}}
-				>
-					<Text>{date.toLocaleDateString()}</Text>
-				</Pressable>
+  function handleSignup() {
+    let allValues = true;
+    Object.values(newUserDetails).forEach((value) => {
+      if (!value) {
+        allValues = false;
+      }
+    });
+    if (allValues) {
+      bcrypt.hash(newUserDetails.password, 10, function (err, hash) {
+        if (err) {
+          Alert.alert("OOPS!", "Something went wrong", [
+            { text: "Not again..." },
+          ]);
+        }
 
-				{showCalender && (
-					<DateTimePicker
-						value={date}
-						mode='date'
-						onChange={(event, selectedDate) => {
-							onDateChange(event, selectedDate);
-						}}
-					/>
-				)}
+        postNewUser({
+          ...newUserDetails,
+          password: hash || "",
+        })
+          .then((newUser) => {
+            const { password, ...rest } = newUser;
+            setUserDetails(rest);
+            navigation.navigate("ConnectAfterSignUp");
+          })
+          .catch((error) => {
+            if (
+              error.response.data.message ===
+              "A user with this username already exists"
+            ) {
+              Alert.alert("OOPS!", error.response.data.message, [
+                { text: "OK" },
+              ]);
+            } else {
+              Alert.alert("OOPS!", "Something went wrong", [
+                { text: "Not again..." },
+              ]);
+            }
+          });
+      });
+    } else {
+      Alert.alert("OOPS!", "Please fill in all the fields", [{ text: "Fine" }]);
+    }
+  }
 
-				<Text className={inputLabel}>Country</Text>
+  return (
+    <ScrollView>
+      <View className={container}>
+        <Text className={headingTwo}>Sign Up</Text>
 
-				<View className={pickerInput}>
-					<Picker
-						selectedValue={country}
-						className={pickerInput}
-						onValueChange={(selected) => setCountry(selected)}
-						mode='dropdown'
-					>
-						<Picker.Item
-							label='Select your country'
-							value={null}
-							enabled={false}
-						/>
-						<Picker.Item label='England' value='england' />
-						<Picker.Item label='Belarus' value='belarus' />
-						<Picker.Item label='South Africa' value='south africa' />
-						<Picker.Item label='London' value='london' />
-					</Picker>
-				</View>
+        <Text className={inputLabel}>Username</Text>
+        <TextInput className={textInput} onChangeText={handleUsername} />
 
-				<Text className={inputLabel}>Timezone</Text>
+        <Text className={inputLabel}>Password</Text>
+        <TextInput
+          className={textInput}
+          onChangeText={handlePassword}
+          secureTextEntry={true}
+        />
 
-				<View className={pickerInput}>
-					<Picker
-						selectedValue={timezone}
-						onValueChange={(selected) => setTimezone(selected)}
-					>
-						<Picker.Item
-							label='Select your Timezone'
-							value={null}
-							enabled={false}
-						/>
-						<Picker.Item label='No idea' value='No idea' />
-						<Picker.Item label='hmmm' value='hmm' />
-					</Picker>
-				</View>
+        <Text className={inputLabel}>First Name</Text>
+        <TextInput className={textInput} onChangeText={handleFirstName} />
 
-				<Text className='underline'>Terms and conditions</Text>
+        <Text className={inputLabel}>Last Name</Text>
+        <TextInput className={textInput} onChangeText={handleLastName} />
 
-				<Pressable
-					className={logIn}
-					onPress={() => {
-						navigation.navigate('ConnectAfterSignUp');
-					}}
-				>
-					<Text className='text-white'>Create Account</Text>
-				</Pressable>
+        <Text className={inputLabel}>Date of Birth</Text>
+        <Pressable
+          className={textInput}
+          onPress={() => {
+            setShowCalender(true);
+          }}
+        >
+          <Text>{new Date(Date.now()).toLocaleDateString("en-GB")}</Text>
+        </Pressable>
 
-				<Pressable
-					className='underline'
-					onPress={() => {
-						navigation.navigate('LogInScreen');
-					}}
-				>
-					<Text className='underline'>Already have an account? Login</Text>
-				</Pressable>
-			</View>
-		</ScrollView>
-	);
+        {showCalender && (
+          <DateTimePicker
+            value={new Date(Date.now())}
+            mode="date"
+            onChange={(event, selectedDate) => {
+              onDateChange(event, selectedDate);
+            }}
+          />
+        )}
+
+        <Text className={inputLabel}>Country</Text>
+
+        <View>
+          <Picker
+            className={pickerInput}
+            selectedValue={country}
+            onValueChange={(selected) => setCountry(selected)}
+          >
+            <Picker.Item label="Select your country" value="" enabled={false} />
+            {Object.keys(countriesData).map((country) => {
+              return (
+                <Picker.Item label={country} value={country} key={country} />
+              );
+            })}
+          </Picker>
+        </View>
+
+        <Text className={inputLabel}>Timezone</Text>
+
+        <View>
+          <Picker
+            className={pickerInput}
+            selectedValue={newUserDetails.timezone}
+            onValueChange={(selected) =>
+              setNewUserDetails((current) => {
+                return { ...current, timezone: selected };
+              })
+            }
+          >
+            <Picker.Item
+              label="Select your Timezone"
+              value=""
+              enabled={false}
+            />
+            {country &&
+              countriesData[country].map((timezone: string, i: number) => {
+                return (
+                  <Picker.Item label={timezone} value={timezone} key={i} />
+                );
+              })}
+          </Picker>
+        </View>
+
+        <Text className="underline">Terms and conditions</Text>
+
+        <Pressable className={logIn} onPress={handleSignup}>
+          <Text className="text-white">Create Account</Text>
+        </Pressable>
+
+        <Pressable
+          className="underline"
+          onPress={() => {
+            navigation.navigate("LogInScreen");
+          }}
+        >
+          <Text className="underline">Already have an account? Login</Text>
+        </Pressable>
+      </View>
+    </ScrollView>
+  );
+
 }
