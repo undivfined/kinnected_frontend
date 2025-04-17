@@ -1,6 +1,7 @@
 
-import {Image, ImageSourcePropType } from 'react-native'
-import { StyleSheet } from 'react-native';
+import { Image as RNImage , ImageSourcePropType } from 'react-native'
+import { Platform } from 'react-native';
+import { Image as ExpoImage } from 'expo-image';
 
 type Props = {
   imgSource: ImageSourcePropType;
@@ -8,7 +9,9 @@ type Props = {
   className?: string
 };
 
+const MyImage = Platform.OS === 'web' ? ExpoImage : RNImage;
+
 export default function ImageViewer({ imgSource, selectedImage, className }: Props) {
     const imageSource = selectedImage ? { uri: selectedImage } : imgSource;
-    return <Image source={imageSource} className={className} />;
+    return <MyImage source={imageSource} className={className} />;
 }

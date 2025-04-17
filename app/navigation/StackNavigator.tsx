@@ -10,6 +10,8 @@ import UserProfileScreen from '../screens/UserProfileScreen';
 import ViewContactScreen from '../screens/ViewContactScreen';
 import MessagingScreen from '../screens/MessagingScreen';
 import { SearchedProfileScreen } from '../screens/SearchedProfileScreen';
+import { contact } from '../../types/databaseTypes';
+
 
 export type RootStackParamList = {
 	// undefined means this screen takes no parameters when being navigated to
@@ -20,10 +22,11 @@ export type RootStackParamList = {
 	UserProfileScreen: undefined;
 	ContactListScreen: undefined;
 	ConnectAfterSignUp: undefined;
-	ViewContactScreen: undefined;
+	ViewContactScreen: { contact: contact };
 	MessagingScreen: undefined;
 	TabNavigator: undefined;
 	SearchedProfileScreen: undefined;
+
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
