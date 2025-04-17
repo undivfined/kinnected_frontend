@@ -26,7 +26,7 @@ import { UserContext } from "../context/UserContext";
 const PlaceholderImage = require("../../assets/freepik-basic-placeholder-profile-picture.png");
 
 import { NewUser } from "../../types/NewUserType";
-
+import countriesData from "../../countriesData";
 type Props = NativeStackScreenProps<RootStackParamList, "SignUpScreen">;
 
 export default function SignUpScreen({ navigation }: Props) {
@@ -34,14 +34,14 @@ export default function SignUpScreen({ navigation }: Props) {
   const [newUserDetails, setNewUserDetails] = useState<NewUser>({
     username: "",
     password: "",
-    fist_name: "",
+    first_name: "",
     last_name: "",
-    date_of_birth: "",
+    date_of_birth: new Date(Date.now()).toLocaleDateString("en-GB"),
     timezone: "",
   });
 
-  const [showCalender, setShowCalender] = useState(false);
-  const [country, setCountry] = useState<string | null>(null);
+  const [showCalender, setShowCalender] = useState<boolean>(false);
+  const [country, setCountry] = useState<string>("");
 
   function onDateChange(
     event: DateTimePickerEvent,
@@ -66,7 +66,37 @@ export default function SignUpScreen({ navigation }: Props) {
     });
   }
 
-  console.log(newUserDetails);
+  function handlePassword(e: string) {
+    setNewUserDetails((current) => {
+      return { ...current, password: e };
+    });
+  }
+
+  function handleFirstName(e: string) {
+    setNewUserDetails((current) => {
+      return { ...current, first_name: e };
+    });
+  }
+
+  function handleLastName(e: string) {
+    setNewUserDetails((current) => {
+      return { ...current, last_name: e };
+    });
+  }
+
+  function handleSignup() {
+    let allValues = true;
+    Object.values(newUserDetails).forEach((value) => {
+      if (!value) {
+        allValues = false;
+      }
+    });
+    if (allValues) {
+      console.log(newUserDetails);
+    }
+  }
+
+  // console.log(newUserDetails);
   return (
     <ScrollView>
       <View className={container}>
@@ -76,10 +106,13 @@ export default function SignUpScreen({ navigation }: Props) {
         <TextInput className={textInput} onChangeText={handleUsername} />
 
         <Text className={inputLabel}>Password</Text>
-        <TextInput className={textInput} />
+        <TextInput className={textInput} onChangeText={handlePassword} />
 
-        <Text className={inputLabel}>Full Name</Text>
-        <TextInput className={textInput} />
+        <Text className={inputLabel}>First Name</Text>
+        <TextInput className={textInput} onChangeText={handleFirstName} />
+
+        <Text className={inputLabel}>Last Name</Text>
+        <TextInput className={textInput} onChangeText={handleLastName} />
 
         <Text className={inputLabel}>Date of Birth</Text>
         <Pressable
@@ -88,7 +121,7 @@ export default function SignUpScreen({ navigation }: Props) {
             setShowCalender(true);
           }}
         >
-          {/* <Text>{date.toLocaleDateString()}</Text> */}
+          <Text>{new Date(Date.now()).toLocaleDateString("en-GB")}</Text>
         </Pressable>
 
         {showCalender && (
@@ -108,17 +141,13 @@ export default function SignUpScreen({ navigation }: Props) {
             selectedValue={country}
             className={pickerInput}
             onValueChange={(selected) => setCountry(selected)}
-            mode="dropdown"
           >
-            <Picker.Item
-              label="Select your country"
-              value={null}
-              enabled={false}
-            />
-            <Picker.Item label="England" value="england" />
-            <Picker.Item label="Belarus" value="belarus" />
-            <Picker.Item label="South Africa" value="south africa" />
-            <Picker.Item label="London" value="london" />
+            <Picker.Item label="Select your country" value="" enabled={false} />
+            {Object.keys(countriesData).map((country) => {
+              return (
+                <Picker.Item label={country} value={country} key={country} />
+              );
+            })}
           </Picker>
         </View>
 
@@ -126,27 +155,30 @@ export default function SignUpScreen({ navigation }: Props) {
 
         <View className={pickerInput}>
           <Picker
-          // selectedValue={timezone}
-          // onValueChange={(selected) => setTimezone(selected)}
+            selectedValue={newUserDetails.timezone}
+            onValueChange={(selected) =>
+              setNewUserDetails((current) => {
+                return { ...current, timezone: selected };
+              })
+            }
           >
             <Picker.Item
               label="Select your Timezone"
-              value={null}
+              value=""
               enabled={false}
             />
-            <Picker.Item label="No idea" value="No idea" />
-            <Picker.Item label="hmmm" value="hmm" />
+            {country &&
+              countriesData[country].map((timezone: string, i: number) => {
+                return (
+                  <Picker.Item label={timezone} value={timezone} key={i} />
+                );
+              })}
           </Picker>
         </View>
 
         <Text className="underline">Terms and conditions</Text>
 
-        <Pressable
-          className={logIn}
-          onPress={() => {
-            console.log("do something log in y");
-          }}
-        >
+        <Pressable className={logIn} onPress={handleSignup}>
           <Text className="text-white">Create Account</Text>
         </Pressable>
 
