@@ -5,8 +5,7 @@ import {
   Text,
   TextInput,
   ScrollView,
-  NativeSyntheticEvent,
-  TextInputChangeEventData,
+  Alert,
 } from "react-native";
 import DateTimePicker, {
   DateTimePickerEvent,
@@ -23,10 +22,11 @@ import {
 } from "../styles/styles";
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
-const PlaceholderImage = require("../../assets/freepik-basic-placeholder-profile-picture.png");
+import bcrypt from "react-native-bcrypt";
 
 import { NewUser } from "../../types/NewUserType";
 import countriesData from "../../countriesData";
+import { postNewUser } from "../../api";
 type Props = NativeStackScreenProps<RootStackParamList, "SignUpScreen">;
 
 export default function SignUpScreen({ navigation }: Props) {
@@ -36,7 +36,7 @@ export default function SignUpScreen({ navigation }: Props) {
     password: "",
     first_name: "",
     last_name: "",
-    date_of_birth: new Date(Date.now()).toLocaleDateString("en-GB"),
+    date_of_birth: new Date(Date.now()).toISOString(),
     timezone: "",
   });
 
@@ -48,11 +48,10 @@ export default function SignUpScreen({ navigation }: Props) {
     selectedDate: Date | undefined
   ) {
     if (event.type === "set" && selectedDate) {
-      console.log(typeof selectedDate.toLocaleDateString());
       setNewUserDetails((current) => {
         const newUser = {
           ...current,
-          date_of_birth: selectedDate.toLocaleDateString(),
+          date_of_birth: selectedDate.toISOString(),
         };
         return newUser;
       });
@@ -92,11 +91,41 @@ export default function SignUpScreen({ navigation }: Props) {
       }
     });
     if (allValues) {
-      console.log(newUserDetails);
+      bcrypt.hash(newUserDetails.password, 10, function (err, hash) {
+        if (err) {
+          Alert.alert("OOPS!", "Something went wrong", [
+            { text: "Not again..." },
+          ]);
+        }
+
+        postNewUser({
+          ...newUserDetails,
+          password: hash || "",
+        })
+          .then((newUser) => {
+            const { password, ...rest } = newUser;
+            setUserDetails(rest);
+          })
+          .catch((error) => {
+            if (
+              error.response.data.message ===
+              "A user with this username already exists"
+            ) {
+              Alert.alert("OOPS!", error.response.data.message, [
+                { text: "OK" },
+              ]);
+            } else {
+              Alert.alert("OOPS!", "Something went wrong", [
+                { text: "Not again..." },
+              ]);
+            }
+          });
+      });
+    } else {
+      Alert.alert("OOPS!", "Please fill in all the fields", [{ text: "Fine" }]);
     }
   }
 
-  // console.log(newUserDetails);
   return (
     <ScrollView>
       <View className={container}>
