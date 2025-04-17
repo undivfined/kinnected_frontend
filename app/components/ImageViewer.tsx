@@ -10,6 +10,5 @@ type Props = {
 
 export default function ImageViewer({ imgSource, selectedImage, className }: Props) {
     const imageSource = selectedImage ? { uri: selectedImage } : imgSource;
-    console.log(imgSource, '<<')
     return <Image source={imageSource} className={className} />;
 }

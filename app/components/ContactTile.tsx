@@ -17,7 +17,6 @@ import { convertMilliseconds } from "../utils/milliseconds-day";
 
 const blankProfileImg = require('../../assets/freepik-basic-placeholder-profile-picture.png')
         
-console.log(blankProfileImg, 'blank')
 
 const getTime = (timezone: string) => {
     const event = new Date(Date.now()); 
