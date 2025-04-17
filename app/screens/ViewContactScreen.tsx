@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
-import { View } from "react-native";
-import { container, profileImage } from "../styles/styles";
+import { Text, View } from "react-native";
+import { container, lastContactedTile, profileImage } from "../styles/styles";
 import { useState } from "react";
 import ImageViewer from "../components/ImageViewer";
 import { ScrollView } from "react-native";
@@ -29,7 +29,11 @@ export default function ViewContactScreen({ navigation }: Props){
                 <View className={profileImage}>
                     <ImageViewer imgSource={blankProfileImg} selectedImage={selectedImage} className={profileImage}/>
                 </View>
-
+                <View className={lastContactedTile}>
+                    <Text className="absolute top-2 left-2 text-sm font-semibold text-gray-700">Last Contacted:
+                    </Text>
+                    <Text className="absolute bottom-2 right-2 text-xs text-gray-500">3 days ago</Text>
+                </View>
 
             </View>
         </ScrollView>
