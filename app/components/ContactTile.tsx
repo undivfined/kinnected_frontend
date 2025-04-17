@@ -46,7 +46,7 @@ export default function ContactTile({ contact } : { contact: contact  }) {
             <View className={contactInfo}>
 
 
-              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen")}}>
+              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}}>
 
                 <ImageViewer imgSource={blankProfileImg} selectedImage={contact.avatar_url} className={contactTileImage} />
 
