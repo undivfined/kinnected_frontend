@@ -43,6 +43,9 @@ export const logIn = "rounded-md w-3/5 px-4 py-2 text-center mb-10 mt-10 bg-blac
 
 export const contactTile = "flex-row justify-between border border-black rounded-md w-[300px] h-[70px] pt-[10px] pl-[10px] text-center mb-5 mt-5"
 
+export const lastContactedTile = "relative border border-black rounded-md w-[300px] h-[70px] bg-white mb-5 mt-5"
+
+
 export const lastContacted = ""
 
 export const localTime = ""
