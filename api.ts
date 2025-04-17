@@ -10,3 +10,9 @@ export const getCredentials = (userName: string) => {
     return response.data.credential;
   });
 };
+
+export const getContacts = (userName: string) => {
+  return api.get(`/users/${userName}/contacts`).then((response) => {
+    return response.data.contacts;
+  });
+};

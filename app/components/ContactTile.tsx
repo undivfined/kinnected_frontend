@@ -1,3 +1,4 @@
+
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
@@ -9,20 +10,41 @@ import {
   localTime,
 } from "../styles/styles";
 import ImageViewer from "./ImageViewer";
+import { contact } from "../../types/databaseTypes";
 
-const blankProfileImg = require("../../assets/freepik-basic-placeholder-profile-picture.png");
+const blankProfileImg = require('../../assets/freepik-basic-placeholder-profile-picture.png')
+        
+const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-export default function ContactTile() {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+const getTime = (timezone: string) => {
+    const event = new Date(Date.now()); 
+    const time = (event.toLocaleString("en-GB", { timeZone: timezone })); 
+
+    return time
+
+}
+
+
+export default function ContactTile({ contact } : { contact: contact  }) {
     
-  return (
+    return (
+      
     <Pressable onPress={()=>{navigation.navigate("LogInScreen")}}>
-      <View className={contactTile}>
-        <View className={contactInfo}>
-          <Pressable onPress={()=>{navigation.navigate("ContactCardScreen")}}>
-            <ImageViewer imgSource={blankProfileImg} className={contactInfo} />
-          </Pressable>
+        <View className={contactTile}>
+            <View className={contactInfo}>
+              <Pressable onPress={()=>{navigation.navigate("ContactCardScreen")}}>
+                <ImageViewer imgSource={blankProfileImg} className={contactInfo} />
+                <Text>{contact.name}</Text>
+              </Pressable>
+            </View>
+            <View className={lastContacted}>
+                <Text>Last Contacted</Text>
+                <Text>{contact.date_of_last_contact ? (new Date(contact.date_of_last_contact )).toLocaleDateString() : 'unknown'
+                }</Text>
+                </View>
+            <View className={localTime}><Text>{getTime(contact.timezone)}</Text></View>
+
+  
         </View>
         <View className={lastContacted}></View>
         <View className={localTime}></View>
