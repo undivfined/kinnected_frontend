@@ -1,5 +1,9 @@
+
 export const container = 'flex-1 pt-4 justify-center items-center m-10';
 
+export const imageContainer="flex-1 pt-7"
+
+export const scrollContainer="flex-1 items-center py-10 bg-white"
 
 export const userContainer = "flex-1 justify-center items-center mt-10"
 
@@ -19,6 +23,8 @@ export const headingTwo = 'mb-10 text-3xl font-bold';
 export const headingThree = "text-xl font-bold"
 
 export const imageViewer = ""
+
+export const headingThree = "mb-10 text-xl font-bold text-left w-[300px]"
 
 export const logInLabel = "text-m font-bold mb-3"
 
@@ -46,4 +52,5 @@ export const profileImage = "rounded-full w-[120px] h-[120px] mt-5 mb-5"
 
 
 export const skipPress = 'self-end text-2xl font-bold text-gray-400 pt-16 pr-8';
+
 
