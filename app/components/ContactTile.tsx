@@ -32,10 +32,10 @@ export default function ContactTile({ contact } : { contact: contact  }) {
     
     return (
       
-    <Pressable onPress={()=>{navigation.navigate("LogInScreen")}}>
+    <Pressable onPress={()=>{navigation.navigate("MessagingScreen")}}>
         <View className={contactTile}>
             <View className={contactInfo}>
-              <Pressable onPress={()=>{navigation.navigate("ContactCardScreen")}}>
+              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen")}}>
                 <ImageViewer imgSource={blankProfileImg} className={contactInfo} />
                 <Text>{contact.name}</Text>
               </Pressable>
