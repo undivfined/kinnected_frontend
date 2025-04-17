@@ -11,13 +11,15 @@ import {
   textInput,
 } from "../styles/styles";
 import bcrypt from "react-native-bcrypt";
-import { getCredentials } from "../../api";
-
+import { getCredentials, getUserByUsername } from "../../api";
+import { UserContext } from "../context/UserContext";
+import { UserDetails } from "../context/UserContext";
 type Props = NativeStackScreenProps<RootStackParamList, "LogInScreen">;
 
 export default function LogInScreen({ navigation }: Props) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const { userDetails, setUserDetails } = useContext(UserContext);
 
   function onLogin() {
     // getCredentials(userName)
@@ -25,17 +27,21 @@ export default function LogInScreen({ navigation }: Props) {
     //     bcrypt.compare(password, hash, (err, result) => {
     //       if (result) {
             navigation.navigate("ContactListScreen");
-      //     } else {
-      //       setPassword("");
-      //       Alert.alert("OOPS!", "Incorrect!", [{ text: "Understood" }]);
-      //     }
-      //   });
-      // })
-      // .catch((error) => {
-      //   setPassword("");
-      //   setUserName("");
-      //   Alert.alert("OOPS!", "Incorrect!", [{ text: "Understood" }]);
-      // });
+
+            getUserByUsername(userName).then((user) => {
+              setUserDetails(user);
+            });
+          } else {
+            setPassword("");
+            Alert.alert("OOPS!", "Incorrect!", [{ text: "Understood" }]);
+          }
+        });
+      })
+      .catch((error) => {
+        setPassword("");
+        setUserName("");
+        Alert.alert("OOPS!", "Incorrect!", [{ text: "Understood" }]);
+      });
   }
 
   return (

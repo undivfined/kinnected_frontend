@@ -1,12 +1,23 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import { ScrollView, Text, View, TextInput, FlatList } from "react-native";
-import { contactsContainer, container, headingFive, headingThree,  inputLabel, profileImage, textInput, userContainer } from "../styles/styles";
-import { Profiler, useEffect, useState } from "react";
+import {
+  contactsContainer,
+  container,
+   headingFive,
+  headingThree,
+  inputLabel,
+  profileImage,
+  textInput,
+  userContainer,
+} from "../styles/styles";
+import { Profiler, useContext, useEffect, useState } from "react";
+
 import ImageViewer from "../components/ImageViewer";
 import ContactTile from "../components/ContactTile";
 import { getContacts } from "../../api";
 import { contact } from "../../types/databaseTypes";
+
 const blankProfileImg = require('../../assets/freepik-basic-placeholder-profile-picture.png')
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ContactListScreen'>;

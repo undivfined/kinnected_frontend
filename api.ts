@@ -16,3 +16,9 @@ export const getContacts = (userName: string) => {
     return response.data.contacts;
   });
 };
+
+export const getUserByUsername = (userName: string) => {
+  return api.get(`/users/${userName}`).then(({ data: { user } }) => {
+    return user;
+  });
+};
