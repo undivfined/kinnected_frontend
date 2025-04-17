@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { container, profileImage } from "../styles/styles";
 import { useState } from "react";
 import ImageViewer from "../components/ImageViewer";
-import { ScrollView } from "react-native-reanimated/lib/typescript/Animated";
+import { ScrollView } from "react-native";
 
 const blankProfileImg = require('../../assets/freepik-basic-placeholder-profile-picture.png')
 
