@@ -7,4 +7,5 @@ export  interface contact {
         date_of_last_contact: string | undefined,
         isCard: Boolean,
         messaging_link: String | undefined,
+        avatar_url: string
     }

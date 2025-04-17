@@ -4,6 +4,7 @@ import { ScrollView, Text, View, TextInput, FlatList } from "react-native";
 import {
   contactsContainer,
   container,
+   headingFive,
   headingThree,
   inputLabel,
   profileImage,
@@ -11,50 +12,50 @@ import {
   userContainer,
 } from "../styles/styles";
 import { Profiler, useContext, useEffect, useState } from "react";
+
 import ImageViewer from "../components/ImageViewer";
 import ContactTile from "../components/ContactTile";
 import { getContacts } from "../../api";
 import { contact } from "../../types/databaseTypes";
-import { UserContext } from "../context/UserContext";
-const blankProfileImg = require("../../assets/freepik-basic-placeholder-profile-picture.png");
 
-type Props = NativeStackScreenProps<RootStackParamList, "ContactListScreen">;
+const blankProfileImg = require('../../assets/freepik-basic-placeholder-profile-picture.png')
 
-export default function ContactListScreen({ navigation }: Props) {
-  const [userName, setUserName] = useState("barbara38");
-  const [selectedImage, setSelectedImage] = useState<"string" | undefined>(
-    undefined
-  );
-  const [contacts, setContacts] = useState([]);
-  const { userDetails, setUserDetails } = useContext(UserContext);
+type Props = NativeStackScreenProps<RootStackParamList, 'ContactListScreen'>;
 
-  useEffect(() => {
-    getContacts(userName).then((newContacts) => {
-      console.log(newContacts);
-      setContacts(newContacts);
-    });
-  }, []);
+export default function ContactListScreen({ navigation } : Props) {
+    const [userName, setUserName] = useState("barbara38")
+    const [selectedImage, setSelectedImage] = useState<"string" | undefined>(undefined)
+    const [contacts, setContacts] = useState([]);
 
-  return (
-    <ScrollView>
-      <View className={contactsContainer}>
-        <View className={profileImage}>
-          <ImageViewer
-            imgSource={blankProfileImg}
-            selectedImage={selectedImage}
-            className={profileImage}
-          />
-        </View>
+   
 
-        <Text className={headingThree}>{`${userDetails.username}`}</Text>
-        <Text className={headingThree}>Your Kinnections List</Text>
+    useEffect(() => {
+        getContacts(userName).then((newContacts)=>{
+    
+            setContacts(newContacts)
+        })
 
-        <FlatList
-          data={contacts}
-          renderItem={({ item }) => <ContactTile contact={item} />}
-          keyExtractor={(item: contact) => item.contact_id}
-        />
-      </View>
-    </ScrollView>
-  );
-}
+    },[])
+
+    return (
+
+            
+            <View className={contactsContainer}>
+
+                <View className={profileImage}>
+                    <ImageViewer imgSource={blankProfileImg} selectedImage={selectedImage} className={profileImage}/>
+                </View>
+        
+                    <Text className={headingFive}>{`${userName}`}</Text>
+                    <Text className={headingFive}>Your Kinnections List</Text>
+    
+
+                
+                <FlatList data={contacts} renderItem={({item}) => <ContactTile contact={item} />} keyExtractor={(item : contact) => item.contact_id}/>
+
+            
+            </View>
+       
+        
+    )
+}   
