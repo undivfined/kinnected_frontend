@@ -22,12 +22,11 @@ export default function LogInScreen({ navigation }: Props) {
   const { userDetails, setUserDetails } = useContext(UserContext);
 
   function onLogin() {
-    // getCredentials(userName)
-    //   .then(({ password: hash }) => {
-    //     bcrypt.compare(password, hash, (err, result) => {
-    //       if (result) {
+    getCredentials(userName)
+      .then(({ password: hash }) => {
+        bcrypt.compare(password, hash, (err, result) => {
+          if (result) {
             navigation.navigate("ContactListScreen");
-
             getUserByUsername(userName).then((user) => {
               setUserDetails(user);
             });
