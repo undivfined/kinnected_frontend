@@ -78,7 +78,7 @@ export default function SignUpScreen({ navigation } : Props) {
             <Text className={inputLabel}>Timezone</Text>
          
             <View className={pickerInput} >
-              <Picker selectedValue={timezone} className={pickerInput} onValueChange={(selected) => setTimezone(selected)}>
+              <Picker selectedValue={timezone} onValueChange={(selected) => setTimezone(selected)}>
                 <Picker.Item label="Select your Timezone" value={null} enabled={false} />
                 <Picker.Item label="No idea" value="No idea" />
                 <Picker.Item label="hmmm" value="hmm" />
