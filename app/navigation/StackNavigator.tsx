@@ -4,25 +4,36 @@ import LogInScreen from '../screens/LogInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import TabNavigator from './TabNavigator';
 
+import ContactListScreen from '../screens/ContactListScreen';
+import ConnectAfterSignUp from '../screens/ConnectAfterSignUp';
+import ContactCardScreen from '../screens/ContactCardScreen';
+
 export type RootStackParamList = {
+   // undefined means this screen takes no parameters when being navigated to
+  // {} key-value means screen can take parameters of a specified type
   LandingScreen: undefined;
   LogInScreen: undefined;
-  Home: undefined;
-  // undefined means this screen takes no parameters when being navigated to
-  // {} key-value means screen can take parameters of a specified type
   SignUpScreen: undefined;
+  ContactListScreen: undefined
+	ConnectAfterSignUp: undefined;
+  ContactCardScreen: undefined;
   TabNavigator: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function StackNavigator() {
+
   return (
-      <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="LandingScreen">
+      <Stack.Navigator screenOptions={{headerShown: true}} initialRouteName="LandingScreen">
         <Stack.Screen name="LandingScreen" component={LandingScreen} />
         <Stack.Screen name="LogInScreen" component={LogInScreen} />
+
         {/* note: component, as a prop, refers to which screen the stack navigator points to, NOT UI components*/}
+        <Stack.Screen name="ContactListScreen" component={ContactListScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+        <Stack.Screen name='ConnectAfterSignUp' component={ConnectAfterSignUp} />
+        <Stack.Screen name="ContactCardScreen" component={ContactCardScreen} />
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
       </Stack.Navigator>
   );

@@ -1,7 +1,17 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, StyleSheet, Pressable, Text, TextInput, ScrollView, } from 'react-native';
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import {
+	View,
+	StyleSheet,
+	Pressable,
+	Text,
+	TextInput,
+	ScrollView,
+} from 'react-native';
+import DateTimePicker, {
+	DateTimePickerEvent,
+} from '@react-native-community/datetimepicker';
 import { RootStackParamList } from '../navigation/StackNavigator';
+
 import {Picker } from "@react-native-picker/picker"
 import {  container, headingTwo, inputLabel, logIn, pickerInput, textInput } from '../styles/styles';
 import { useContext, useState } from 'react';
