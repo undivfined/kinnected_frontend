@@ -173,7 +173,6 @@ export default function SignUpScreen({ navigation }: Props) {
         <View className={pickerInput}>
           <Picker
             selectedValue={country}
-            className={pickerInput}
             onValueChange={(selected) => setCountry(selected)}
           >
             <Picker.Item label="Select your country" value="" enabled={false} />
