@@ -52,7 +52,7 @@ export default function ViewContactScreen({ navigation, route }: Props) {
     });
   };
 
-  console.log(contact);
+ 
 
   if (contact.isCard) {
     return (
