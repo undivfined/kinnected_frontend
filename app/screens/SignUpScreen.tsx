@@ -136,7 +136,11 @@ export default function SignUpScreen({ navigation }: Props) {
         <TextInput className={textInput} onChangeText={handleUsername} />
 
         <Text className={inputLabel}>Password</Text>
-        <TextInput className={textInput} onChangeText={handlePassword} />
+        <TextInput
+          className={textInput}
+          onChangeText={handlePassword}
+          secureTextEntry={true}
+        />
 
         <Text className={inputLabel}>First Name</Text>
         <TextInput className={textInput} onChangeText={handleFirstName} />
