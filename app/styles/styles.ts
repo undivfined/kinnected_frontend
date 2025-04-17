@@ -34,7 +34,7 @@ export const textInput =
   "border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5";
 
 export const pickerInput =
-  "border border-black rounded-md w-[300px] h-[45px] pb-[40px] pt-0 text-center mb-5 text-black";
+  "border border-black rounded-md w-[300px] h-[50px] px-3 justify-center bg-white mb-5";
 
 export const logIn =
   "rounded-md w-3/5 px-4 py-2 text-center mb-10 mt-10 bg-black items-center ";

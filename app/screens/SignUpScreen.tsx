@@ -170,8 +170,9 @@ export default function SignUpScreen({ navigation }: Props) {
 
         <Text className={inputLabel}>Country</Text>
 
-        <View className={pickerInput}>
+        <View>
           <Picker
+            className={pickerInput}
             selectedValue={country}
             onValueChange={(selected) => setCountry(selected)}
           >
@@ -186,8 +187,9 @@ export default function SignUpScreen({ navigation }: Props) {
 
         <Text className={inputLabel}>Timezone</Text>
 
-        <View className={pickerInput}>
+        <View>
           <Picker
+            className={pickerInput}
             selectedValue={newUserDetails.timezone}
             onValueChange={(selected) =>
               setNewUserDetails((current) => {
