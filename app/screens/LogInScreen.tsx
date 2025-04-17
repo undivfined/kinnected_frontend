@@ -27,7 +27,6 @@ export default function LogInScreen({ navigation }: Props) {
         bcrypt.compare(password, hash, (err, result) => {
           if (result) {
             navigation.navigate("ContactListScreen");
-
             getUserByUsername(userName).then((user) => {
               setUserDetails(user);
             });
