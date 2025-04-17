@@ -105,6 +105,7 @@ export default function SignUpScreen({ navigation }: Props) {
           .then((newUser) => {
             const { password, ...rest } = newUser;
             setUserDetails(rest);
+            navigation.navigate("ConnectAfterSignUp");
           })
           .catch((error) => {
             if (
