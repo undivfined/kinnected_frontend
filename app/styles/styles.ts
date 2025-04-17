@@ -42,8 +42,9 @@ export const pickerInput =
 
 export const logIn = "rounded-md w-3/5 px-4 py-2 text-center mb-10 mt-10 bg-black items-center "
 
-export const contactTile = "flex-row justify-between border border-black rounded-md w-[260px] h-[90px] pt-[10px] pl-[10px] text-center mb-5 mt-5"
+export const contactTile = "flex-row justify-between border border-black rounded-md w-[300px] h-[70px] pt-[10px] pl-[10px] text-center mb-5 mt-5"
 
+export const lastContactedTile = "flex-row justify-between border border-black rounded-md w-[300px] h-[70px] pt-[10px] pl-[10px] text-center mb-5 mt-5"
 
 export const lastContacted = "flex-1 justify-center items-center"
 
