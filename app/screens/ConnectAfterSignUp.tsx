@@ -7,14 +7,18 @@ import {
 	strapLine,
 	textInput,
 } from '../styles/styles';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/StackNavigator';
 
-export default function ConnectAfterSignUp() {
+type Props = NativeStackScreenProps<RootStackParamList, 'ConnectAfterSignUp'>;
+
+export default function ConnectAfterSignUp({ navigation }: Props) {
 	return (
 		<>
 			<View>
 				<Pressable
 					onPress={() => {
-						console.log('ContactListPage');
+						navigation.navigate('ContactListScreen');
 					}}
 				>
 					<Text className={skipPress}>SKIP</Text>
