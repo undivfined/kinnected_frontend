@@ -20,22 +20,22 @@ export default function LogInScreen({ navigation }: Props) {
   const [password, setPassword] = useState("");
 
   function onLogin() {
-    getCredentials(userName)
-      .then(({ password: hash }) => {
-        bcrypt.compare(password, hash, (err, result) => {
-          if (result) {
+    // getCredentials(userName)
+    //   .then(({ password: hash }) => {
+    //     bcrypt.compare(password, hash, (err, result) => {
+    //       if (result) {
             navigation.navigate("ContactListScreen");
-          } else {
-            setPassword("");
-            Alert.alert("OOPS!", "Incorrect!", [{ text: "Understood" }]);
-          }
-        });
-      })
-      .catch((error) => {
-        setPassword("");
-        setUserName("");
-        Alert.alert("OOPS!", "Incorrect!", [{ text: "Understood" }]);
-      });
+      //     } else {
+      //       setPassword("");
+      //       Alert.alert("OOPS!", "Incorrect!", [{ text: "Understood" }]);
+      //     }
+      //   });
+      // })
+      // .catch((error) => {
+      //   setPassword("");
+      //   setUserName("");
+      //   Alert.alert("OOPS!", "Incorrect!", [{ text: "Understood" }]);
+      // });
   }
 
   return (
