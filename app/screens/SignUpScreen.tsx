@@ -4,7 +4,8 @@ import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/dat
 import { RootStackParamList } from '../navigation/StackNavigator';
 import {Picker } from "@react-native-picker/picker"
 import {  container, headingTwo, inputLabel, logIn, pickerInput, textInput } from '../styles/styles';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../context/UserContext';
 const PlaceholderImage = require("../../assets/freepik-basic-placeholder-profile-picture.png");
 
 
@@ -13,6 +14,8 @@ type Props = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
 
 
 export default function SignUpScreen({ navigation } : Props) {
+
+  const { setUserDetails } = useContext(UserContext)
 
   const [date, setDate] = useState(new Date("1992-5-5"))
   const [showCalender, setShowCalender] = useState(false);
@@ -51,7 +54,7 @@ export default function SignUpScreen({ navigation } : Props) {
             <Text className={inputLabel}>Country</Text>
            
             <View className={pickerInput} >
-              <Picker selectedValue={country}  onValueChange={(selected) => setCountry(selected)} mode="dropdown">
+              <Picker selectedValue={country} className={pickerInput} onValueChange={(selected) => setCountry(selected)} mode="dropdown">
                 <Picker.Item label="Select your country" value={null} enabled={false} />
                 <Picker.Item label="England" value="england" />
                 <Picker.Item label="Belarus" value="belarus" />
