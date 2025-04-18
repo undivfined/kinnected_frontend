@@ -177,7 +177,14 @@ export default function SignUpScreen({ navigation }: Props) {
           newUserDetails={newUserDetails}
         />
 
-        <Text className="underline">Terms and conditions</Text>
+        <Text
+          className="underline"
+          onPress={() => {
+            navigation.navigate("ConnectAfterSignUp");
+          }}
+        >
+          Terms and conditions
+        </Text>
 
         <Pressable className={logIn} onPress={handleSignup}>
           <Text className="text-white">Create Account</Text>
