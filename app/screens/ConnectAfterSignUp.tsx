@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, Text, TextInput, Pressable, ScrollView } from "react-native";
 import {
   container,
   headingOne,
@@ -13,24 +13,29 @@ import { UserContext } from "../context/UserContext";
 import { useContext, useState } from "react";
 import { getUsers } from "../../api";
 
+import SearchedUserTile from "../components/SearchedUserTile";
+import { User } from "../../types/databaseTypes";
+
 type Props = NativeStackScreenProps<RootStackParamList, "ConnectAfterSignUp">;
 
 export default function ConnectAfterSignUp({ navigation }: Props) {
   const { userDetails } = useContext(UserContext);
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleSearch() {
     if (searchTerm) {
+      setIsLoading(true);
       getUsers(searchTerm).then((usersFromApi) => {
         setUsers(usersFromApi);
+        setIsLoading(false);
       });
     }
   }
 
-  console.log(users);
   return (
-    <>
+    <ScrollView>
       <View>
         <Pressable
           onPress={() => {
@@ -60,6 +65,13 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
           <Text className="text-white">Search</Text>
         </Pressable>
       </View>
-    </>
+
+      <View className={container}>
+        {users &&
+          users.map((user: User) => {
+            return <SearchedUserTile user={user} key={user.username} />;
+          })}
+      </View>
+    </ScrollView>
   );
 }

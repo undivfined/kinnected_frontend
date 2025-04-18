@@ -32,7 +32,6 @@ export const postNewUser = (newUser: NewUser) => {
 
 export const getUsers = (search: string) => {
   return api.get(`/users?search=${search}`).then(({ data: { users } }) => {
-    console.log(users);
     return users;
   });
 };

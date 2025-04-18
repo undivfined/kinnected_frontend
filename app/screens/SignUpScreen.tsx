@@ -108,7 +108,7 @@ export default function SignUpScreen({ navigation }: Props) {
       Alert.alert("OOPS!", "Please fill in all the fields", [{ text: "Fine" }]);
     }
   }
-  console.log(newUserDetails);
+
   return (
     <ScrollView>
       <View className={container}>
