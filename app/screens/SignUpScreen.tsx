@@ -10,13 +10,12 @@ import {
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { Picker } from "@react-native-picker/picker";
+
 import {
   container,
   headingTwo,
   inputLabel,
   logIn,
-  pickerInput,
   textInput,
 } from "../styles/styles";
 import { useContext, useState } from "react";
@@ -24,9 +23,11 @@ import bcrypt from "react-native-bcrypt";
 
 import { UserContext } from "../context/UserContext";
 import { NewUser } from "../../types/NewUserType";
-import countriesData from "../../countriesData";
+
 import { postNewUser } from "../../api";
 import { RootStackParamList } from "../navigation/StackNavigator";
+import CountryDropdown from "../components/CountryDropdown";
+import TimezonesDropdown from "../components/TimezonesDropdown";
 type Props = NativeStackScreenProps<RootStackParamList, "SignUpScreen">;
 
 export default function SignUpScreen({ navigation }: Props) {
@@ -36,12 +37,12 @@ export default function SignUpScreen({ navigation }: Props) {
     password: "",
     first_name: "",
     last_name: "",
-    date_of_birth: new Date(Date.now()).toISOString(),
+    date_of_birth: new Date("1992-5-5").toISOString(),
     timezone: "",
   });
 
   const [showCalender, setShowCalender] = useState<boolean>(false);
-  const [country, setCountry] = useState<string>("");
+  const [countryTimezones, setCountryTimezones] = useState<string[]>([]);
 
   function onDateChange(
     event: DateTimePickerEvent,
@@ -107,7 +108,7 @@ export default function SignUpScreen({ navigation }: Props) {
       Alert.alert("OOPS!", "Please fill in all the fields", [{ text: "Fine" }]);
     }
   }
-
+  console.log(newUserDetails);
   return (
     <ScrollView>
       <View className={container}>
@@ -158,7 +159,7 @@ export default function SignUpScreen({ navigation }: Props) {
 
         {showCalender && (
           <DateTimePicker
-            value={new Date(Date.now())}
+            value={new Date(newUserDetails.date_of_birth)}
             mode="date"
             onChange={(event, selectedDate) => {
               onDateChange(event, selectedDate);
@@ -167,43 +168,14 @@ export default function SignUpScreen({ navigation }: Props) {
         )}
 
         <Text className={inputLabel}>Country</Text>
-
-        <View className={pickerInput}>
-          <Picker
-            selectedValue={country}
-            onValueChange={(selected) => setCountry(selected)}
-          >
-            <Picker.Item label="Select your country" value="" enabled={false} />
-            {Object.keys(countriesData).map((country) => {
-              return (
-                <Picker.Item label={country} value={country} key={country} />
-              );
-            })}
-          </Picker>
-        </View>
+        <CountryDropdown setCountryTimezones={setCountryTimezones} />
 
         <Text className={inputLabel}>Timezone</Text>
-
-        <View className={pickerInput}>
-          <Picker
-            selectedValue={newUserDetails.timezone}
-            onValueChange={(value) => {
-              handleChange(value, "timezone");
-            }}
-          >
-            <Picker.Item
-              label="Select your Timezone"
-              value=""
-              enabled={false}
-            />
-            {country &&
-              countriesData[country].map((timezone: string, i: number) => {
-                return (
-                  <Picker.Item label={timezone} value={timezone} key={i} />
-                );
-              })}
-          </Picker>
-        </View>
+        <TimezonesDropdown
+          setNewUserDetails={setNewUserDetails}
+          countryTimezones={countryTimezones}
+          newUserDetails={newUserDetails}
+        />
 
         <Text className="underline">Terms and conditions</Text>
 
