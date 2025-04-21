@@ -27,7 +27,7 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
   function handleSearch() {
     if (searchTerm) {
       setIsLoading(true);
-      getUsers(searchTerm).then((usersFromApi) => {
+      getUsers(searchTerm.replace(" ", "")).then((usersFromApi) => {
         setUsers(usersFromApi);
         setIsLoading(false);
       });
