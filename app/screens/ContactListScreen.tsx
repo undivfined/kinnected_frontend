@@ -8,16 +8,7 @@ import {
 	FlatList,
 	Pressable,
 } from 'react-native';
-import {
-	contactsContainer,
-	container,
-	headingFive,
-	headingThree,
-	inputLabel,
-	profileImage,
-	textInput,
-	userContainer,
-} from '../styles/styles';
+import { styles } from '../styles/styles';
 import { Profiler, useContext, useEffect, useState } from 'react';
 
 import ImageViewer from '../components/ImageViewer';
@@ -43,17 +34,17 @@ export default function ContactListScreen({ navigation }: Props) {
 	}, []);
 
 	return (
-		<View className={contactsContainer}>
-			<View className={profileImage}>
+		<View className={styles.contactsContainer}>
+			<View className={styles.profileImage}>
 				<ImageViewer
 					imgSource={blankProfileImg}
 					selectedImage={selectedImage}
-					className={profileImage}
+					className={styles.profileImage}
 				/>
 			</View>
 
-			<Text className={headingFive}>{`${userName}`}</Text>
-			<Text className={headingFive}>Your Kinnections List</Text>
+			<Text className={styles.headingFive}>{`${userName}`}</Text>
+			<Text className={styles.headingFive}>Your Kinnections List</Text>
 
 			<Pressable
 				onPress={() => {

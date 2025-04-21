@@ -1,32 +1,26 @@
 import { Pressable, Text, TextInput, View } from 'react-native';
-import {
-	container,
-	headingTwo,
-	inputLabel,
-	logIn,
-	textInput,
-} from '../styles/styles';
+import { styles } from '../styles/styles';
 
 export function SearchedProfileScreen() {
 	return (
 		<>
-			<View className={container}>
-				<Text className={headingTwo}>Kinnected User</Text>
+			<View className={styles.container}>
+				<Text className={styles.headingTwo}>Kinnected User</Text>
 			</View>
 
-			<View className={container}>
-				<Text className={inputLabel}>Fullname</Text>
-				<TextInput className={textInput} />
+			<View className={styles.container}>
+				<Text className={styles.inputLabel}>Fullname</Text>
+				<TextInput className={styles.textInput} />
 
-				<Text className={inputLabel}>Birthday</Text>
-				<TextInput className={textInput} />
+				<Text className={styles.inputLabel}>Birthday</Text>
+				<TextInput className={styles.textInput} />
 
-				<Text className={inputLabel}>City</Text>
-				<TextInput className={textInput} />
+				<Text className={styles.inputLabel}>City</Text>
+				<TextInput className={styles.textInput} />
 			</View>
 
-			<Pressable className={logIn}>
-				<Text className='text-white'>Add Connection</Text>
+			<Pressable className={styles.logIn}>
+				<Text className={styles.submitButtonText}>Add Connection</Text>
 			</Pressable>
 		</>
 	);

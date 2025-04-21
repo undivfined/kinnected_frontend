@@ -1,12 +1,5 @@
 import { View, Text, TextInput, Pressable } from 'react-native';
-import {
-	container,
-	headingOne,
-	logIn,
-	skipPress,
-	strapLine,
-	textInput,
-} from '../styles/styles';
+import { styles } from '../styles/styles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/StackNavigator';
 
@@ -21,27 +14,27 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
 						navigation.navigate('ContactListScreen');
 					}}
 				>
-					<Text className={skipPress}>SKIP</Text>
+					<Text className={styles.skipPress}>SKIP</Text>
 				</Pressable>
 			</View>
-			<View className={container}>
-				<Text className={headingOne}>
+			<View className={styles.container}>
+				<Text className={styles.headingOne}>
 					Would you like to kinnect to an existing user?
 				</Text>
 				{/* change to h2 style label later */}
-				<Text className={strapLine}>find someone you know</Text>
+				<Text className={styles.strapLine}>find someone you know</Text>
 				<TextInput
-					className={textInput}
+					className={styles.textInput}
 					placeholder='enter your their username or their full name'
 				/>
 				{/* change to submit button later vv */}
 				<Pressable
-					className={logIn}
+					className={styles.logIn}
 					onPress={() => {
 						console.log('Finding your Kinnections...');
 					}}
 				>
-					<Text className='text-white'>Let's Kinnect</Text>
+					<Text className={styles.submitButtonText}>Let's Kinnect</Text>
 				</Pressable>
 			</View>
 		</>
