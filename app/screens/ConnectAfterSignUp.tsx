@@ -11,10 +11,10 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import { UserContext } from "../context/UserContext";
 import { useContext, useState } from "react";
-import { getUsers } from "../../api";
+import { getContacts, getUsers } from "../../api";
 
 import SearchedUserTile from "../components/SearchedUserTile";
-import { User } from "../../types/databaseTypes";
+import { contact, User } from "../../types/databaseTypes";
 
 type Props = NativeStackScreenProps<RootStackParamList, "ConnectAfterSignUp">;
 
@@ -25,10 +25,22 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
   const [isLoading, setIsLoading] = useState(false);
 
   function handleSearch() {
-    if (searchTerm) {
+    if (searchTerm && userDetails.username) {
       setIsLoading(true);
-      getUsers(searchTerm.replace(" ", "")).then((usersFromApi) => {
-        setUsers(usersFromApi);
+      Promise.all([
+        getUsers(searchTerm.replace(" ", "")),
+        getContacts(userDetails.username),
+      ]).then(([usersFromApi, contactsFromApi]) => {
+        const existingContacts = contactsFromApi
+          .map((contact: contact) => contact.username)
+          .filter((username: string | null) => username);
+        const searchResults = usersFromApi.filter(
+          (user: User) =>
+            !existingContacts.includes(user.username) &&
+            user.username !== userDetails.username
+        );
+        console.log(searchResults);
+        setUsers(searchResults);
         setIsLoading(false);
       });
     }
