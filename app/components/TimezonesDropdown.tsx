@@ -1,7 +1,6 @@
 import { View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { pickerInput } from "../styles/styles";
-import { NewUser } from "../../types/NewUserType";
 
 function TimezonesDropdown({
   countryTimezones,
@@ -10,7 +9,7 @@ function TimezonesDropdown({
 }: {
   setNewUserDetails: Function;
   countryTimezones: string[];
-  newUserDetails: NewUser;
+  newUserDetails: { [key: string]: string };
 }) {
   const timezonesMapped = countryTimezones.map((timezone) => {
     return { timezone: timezone };
@@ -26,7 +25,7 @@ function TimezonesDropdown({
         placeholder="Select your timezone"
         value={newUserDetails.timezone}
         onChange={(item) => {
-          setNewUserDetails((current: NewUser) => {
+          setNewUserDetails((current: { [key: string]: string }) => {
             return { ...current, timezone: item.timezone };
           });
         }}
