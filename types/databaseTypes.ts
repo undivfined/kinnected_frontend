@@ -8,6 +8,7 @@ export interface contact {
   isCard: Boolean;
   messaging_link: String | undefined;
   avatar_url: string;
+  username: string | null;
 }
 
 export interface User {
