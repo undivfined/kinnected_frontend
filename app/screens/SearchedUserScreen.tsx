@@ -7,6 +7,9 @@ import { useContext, useState } from "react";
 import RelationshipDropdown from "../components/RelationshipDropdown";
 import LastContactDatePicker from "../components/LastContactDatePicker";
 import { postConnection } from "../../api";
+import ImageViewer from "../components/ImageViewer";
+
+const blankProfileImg = require('../../assets/freepik-basic-placeholder-profile-picture.png')
 
 type Props = NativeStackScreenProps<RootStackParamList, "SearchedUserScreen">;
 
@@ -64,6 +67,7 @@ export default function SearchedUserScreen({ navigation, route }: Props) {
         <Text className={styles.headingTwo}>
           {user.first_name + " " + user.last_name}
         </Text>
+        <ImageViewer imgSource={blankProfileImg} selectedImage={user.avatar_url} className={styles.profileImage} />
       </View>
 
       <View className={styles.container}>
@@ -71,7 +75,7 @@ export default function SearchedUserScreen({ navigation, route }: Props) {
           Birthday: {new Date(user.date_of_birth).toLocaleDateString("en-GB")}
         </Text>
 
-        <Text>Timezone: {user.timezone}</Text>
+        <Text className="mb-10">Timezone: {user.timezone}</Text>
         <Text className={styles.inputLabel}>
           Who is {user.first_name} to you? (Optional)
         </Text>
