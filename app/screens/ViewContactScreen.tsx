@@ -144,17 +144,19 @@ export default function ViewContactScreen({ navigation, route }: Props) {
             </View>
           </View>
           <View className="flex-row justify-between items-end p-4 bg-white">
-            <View className="flex-1 items-center">
-              <Pressable
-                className="items-center"
-                onPress={() => {
-                  navigation.navigate("MessagingScreen");
-                }}
-              >
-                <Ionicons name="chatbox-ellipses" size={30} />
-                <Text className="mt-1 text-sm text-center">Chat</Text>
-              </Pressable>
-            </View>
+            {contact.isCard ? null : (
+              <View className="flex-1 items-center">
+                <Pressable
+                  className="items-center"
+                  onPress={() => {
+                    navigation.navigate("MessagingScreen");
+                  }}
+                >
+                  <Ionicons name="chatbox-ellipses" size={30} />
+                  <Text className="mt-1 text-sm text-center">Chat</Text>
+                </Pressable>
+              </View>
+            )}
 
             <View className="flex-1 items-center">
               <Pressable className="items-center">
