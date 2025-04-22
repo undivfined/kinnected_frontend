@@ -39,7 +39,7 @@ export default function SearchedUserScreen({ navigation, route }: Props) {
               {
                 text: "OK",
                 onPress: () => {
-                  navigation.navigate("ConnectAfterSignUp");
+                  navigation.navigate("ContactListScreen");
                 },
               },
             ]
