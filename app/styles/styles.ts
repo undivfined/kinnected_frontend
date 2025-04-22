@@ -47,13 +47,13 @@ export const styles = {
 
 
 	contactTile:
-		'flex-row justify-between border border-black rounded-md  h-[90px] w-full p-[10px] text-center mb-3 mt-5',
+		'flex-row justify-between rounded-md  h-[90px] w-full p-[10px] text-center mb-3 mt-5',
 
 	logIn:
 		'rounded-md w-3/5 px-4 py-2 text-center font-bold mb-10 mt-10 bg-black items-center self-center',
 
 	contactListScreenButton:
-		'rounded-md w-[120px] px-4 py-2  content-center font-bold mb-1 mt-2 bg-black items-center self-center',
+		'rounded-md w-[120px] px-4 py-2  content-center font-bold mb-1 mt-2 bg-black items-center self-center text-xs',
 
 	lastContacted: 'flex-1 justify-center items-center',
 
@@ -67,7 +67,7 @@ export const styles = {
 	contactTileImage:
 		'rounded-full border border-black-400 border-2 w-[50px] h-[50px]',
 
-	profileImage: 'rounded-full w-[120px] h-[120px] mt-1 mb-1',
+	profileImage: 'rounded-full w-[110px] h-[110px]',
 
 	skipPress: 'self-end text-2xl font-bold text-gray-400 pt-16 pr-8',
 
@@ -85,6 +85,10 @@ export const styles = {
 
 	submitButtonText: 'text-white font-bold text-center',
 
-	smallText: 'text-sm'
+	contactListButtonText: 'text-white font-bold text-center text-sm',
+
+	smallText: 'text-sm',
+
+	contactTileRelationship: 'bg-gray-400 p-1 text-white mt-1 text-xs',
 };
 
