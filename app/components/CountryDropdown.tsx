@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { pickerInput } from "../styles/styles";
+import { styles } from "../styles/styles";
 import countryData from "../../countriesData";
 
 function CountryDropdown({
@@ -12,7 +12,7 @@ function CountryDropdown({
   const [country, setCountry] = useState("");
 
   return (
-    <View className={pickerInput}>
+    <View className={styles.pickerInput}>
       <Dropdown
         mode="modal"
         data={countryData}
