@@ -106,9 +106,9 @@ export default function SignUpScreen({ navigation }: Props) {
   }
 
   return (
-    <DismissKeyboardView>
 
     <ScrollView>
+      <DismissKeyboardView>
       <View className={styles.container}>
         <Text className={styles.headingTwo}>Sign Up</Text>
 
@@ -197,8 +197,8 @@ export default function SignUpScreen({ navigation }: Props) {
           <Text className={styles.underline}>Already have an account? Login</Text>
         </Pressable>
       </View>
-    </ScrollView>
     </DismissKeyboardView>
+    </ScrollView>
   );
 
 }

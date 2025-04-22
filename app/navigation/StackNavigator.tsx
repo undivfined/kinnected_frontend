@@ -9,7 +9,6 @@ import ConnectAfterSignUp from "../screens/ConnectAfterSignUp";
 import UserProfileScreen from "../screens/UserProfileScreen";
 import ViewContactScreen from "../screens/ViewContactScreen";
 import MessagingScreen from "../screens/MessagingScreen";
-import { SearchedProfileScreen } from "../screens/SearchedProfileScreen";
 import { contact, User } from "../../types/databaseTypes";
 import SearchedUserScreen from "../screens/SearchedUserScreen";
 import CreateCardScreen from "../screens/CreateCardScreen";

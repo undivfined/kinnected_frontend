@@ -48,9 +48,8 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
   }
 
   return (
-    <DismissKeyboardView>
-
     <ScrollView>
+    <DismissKeyboardView>
       <View>
         <Pressable
           onPress={() => {
@@ -88,8 +87,8 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
             return <SearchedUserTile user={user} key={user.username} />;
           })}
       </View>
-    </ScrollView>
     </DismissKeyboardView>
+    </ScrollView>
   );
 
 }
