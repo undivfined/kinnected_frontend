@@ -12,13 +12,6 @@ import { convertMilliseconds } from "../utils/milliseconds-day";
 const blankProfileImg = require('../../assets/freepik-basic-placeholder-profile-picture.png')
         
 
-const getTime = (timezone: string) => {
-    const event = new Date(Date.now()); 
-    const time = (event.toLocaleString("en-GB", { timeZone: timezone, hour: '2-digit', minute: '2-digit' })); 
-
-    return time
-
-}
 
 const getDaysSinceLastContact = (date_of_last_contact: string) => {
 
@@ -31,12 +24,39 @@ const getDaysSinceLastContact = (date_of_last_contact: string) => {
 
 export default function ContactTile({ contact } : { contact: contact  }) {
 
+
+  const getTime = (timezone: string) => {
+    const event = new Date(Date.now()); 
+    const time = (event.toLocaleString("en-GB", { timeZone: timezone, hour: '2-digit', minute: '2-digit' })); 
+
+    return time
+
+  }
+
+  const isWithinDaytimeHours = () => {
+  const now = new Date();
+  const hourString = now.toLocaleString(undefined, {
+    timeZone: contact.timezone,
+    hour: "2-digit",
+    hour12: false,
+  });
+
+  const hour = parseInt(hourString, 10);
+  return hour >= 8 && hour < 20;
+  };
+
+  const tileStyle = `border ${
+  isWithinDaytimeHours() ? "border-green-500" : "border-red-500"
+  } rounded-md w-[300px] bg-white`;
+
+
+
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     
     return (
       
     <Pressable onPress={()=>{navigation.navigate("MessagingScreen")}}>
-        <View className={styles.contactTile}>
+        <View className={styles.contactTile+ " " + tileStyle}>
             <View className={styles.contactInfo}>
 
 
@@ -52,16 +72,17 @@ export default function ContactTile({ contact } : { contact: contact  }) {
             </View>
             
             <View className={styles.lastContacted}>
-                <Text className="">Last Contacted</Text>
+                <Text className="text-xs mb-3">Last Contacted</Text>
                 <Text>
-                  {contact.date_of_last_contact ? `${getDaysSinceLastContact(contact.date_of_last_contact)} days` : 'Not Contacted'}
+                  {contact.date_of_last_contact ? `${getDaysSinceLastContact(contact.date_of_last_contact)}    days` : ''}
                 </Text>
 
             </View>
 
             <View className={styles.localTime}>
+            <Text>{contact.timezone.split('/')[1].replace('_', ' ')}</Text>
               <Text>{getTime(contact.timezone)}</Text>
-              <Text>{contact.timezone.split('/')[1].replace('_', ' ')}</Text>
+              <Text className={styles.contactTileRelationship}>{contact.type_of_relationship ? contact.type_of_relationship: 'Not set'}</Text>
             </View>
 
   
