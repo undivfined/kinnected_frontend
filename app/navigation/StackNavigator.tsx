@@ -9,7 +9,6 @@ import ConnectAfterSignUp from "../screens/ConnectAfterSignUp";
 import UserProfileScreen from "../screens/UserProfileScreen";
 import ViewContactScreen from "../screens/ViewContactScreen";
 import MessagingScreen from "../screens/MessagingScreen";
-import { SearchedProfileScreen } from "../screens/SearchedProfileScreen";
 import { contact, User } from "../../types/databaseTypes";
 import SearchedUserScreen from "../screens/SearchedUserScreen";
 import CreateCardScreen from "../screens/CreateCardScreen";
@@ -47,10 +46,6 @@ export default function StackNavigator() {
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       <Stack.Screen name="ConnectAfterSignUp" component={ConnectAfterSignUp} />
       <Stack.Screen name="ViewContactScreen" component={ViewContactScreen} />
-      <Stack.Screen
-        name="SearchedProfileScreen"
-        component={SearchedProfileScreen}
-      />
       <Stack.Screen name="MessagingScreen" component={MessagingScreen} />
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
       <Stack.Screen name="SearchedUserScreen" component={SearchedUserScreen} />

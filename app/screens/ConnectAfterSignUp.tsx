@@ -12,6 +12,7 @@ import { contact, User } from '../../types/databaseTypes';
 import { FlatList } from 'react-native-reanimated/lib/typescript/Animated';
 import ContactTile from '../components/ContactTile';
 
+
 type Props = NativeStackScreenProps<RootStackParamList, 'ConnectAfterSignUp'>;
 
 export default function ConnectAfterSignUp({ navigation }: Props) {
@@ -44,6 +45,7 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
 
 	return (
 		<ScrollView>
+      <DismissKeyboardView>
 			<View>
 				<Pressable
 					onPress={() => {
@@ -82,6 +84,7 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
 						})}
 				</View>
 			</View>
+     </DismissKeyboardView>
 		</ScrollView>
 	);
 }

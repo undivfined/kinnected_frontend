@@ -1,11 +1,14 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
-import { Text, View } from "react-native";
-import { styles } from "../styles/styles";
-import { useState } from "react";
+import { Pressable, Text, View } from "react-native";
+import {
+  styles
+} from "../styles/styles";
 import ImageViewer from "../components/ImageViewer";
 import { ScrollView } from "react-native";
 import { convertMilliseconds } from "../utils/milliseconds-day";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 type Props = NativeStackScreenProps<RootStackParamList, "ViewContactScreen">;
 
@@ -46,87 +49,113 @@ export default function ViewContactScreen({ navigation, route }: Props) {
     });
   };
 
-  if (contact.isCard) {
-    return (
-      <ScrollView>
-        <View className={styles.container}>
-          <Text className={styles.headingFour}>Kinnect Card</Text>
-          <View className={styles.profileImage}>
-            <ImageViewer
-              imgSource={
-                contact.avatar_url
-                  ? { uri: contact.avatar_url.trim() }
-                  : require("../../assets/freepik-basic-placeholder-profile-picture.png")
-              }
-              className={styles.profileImage}
-            />
-          </View>
-          <Text className={styles.headingFive}>{contact.name}</Text>
-          <View className={tileStyle}>
-            <View className="flex-row justify-between mb-2">
-              <Text className="text-sm font-semibold text-gray-700">
-                Last Contacted:
-              </Text>
-              <Text className="text-sm text-gray-500">
-                {contact.date_of_last_contact
-                  ? `${getDaysSinceLastContact(
-                      contact.date_of_last_contact
-                    )} days ago`
-                  : "Not Contacted"}
-              </Text>
+  return (
+    <View className="flex-1">
+      <ScrollView contentContainerClassName="flex-grow">
+        <View className="flex-1 justify-between">
+          <View className={styles.container}>
+            <Text className={styles.headingFour}>
+              {contact.isCard ? "Kinnect Card" : "Kinnected User"}
+            </Text>
+            <View className={styles.profileImage}>
+              <ImageViewer
+                imgSource={
+                  contact.avatar_url.trim()
+                    ? { uri: contact.avatar_url }
+                    : require("../../assets/freepik-basic-placeholder-profile-picture.png")
+                }
+                className={styles.profileImage}
+              />
+            </View>
+            <Text className='text-xl pt-8'>{contact.name}</Text>
+            <View className={tileStyle}>
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-sm font-semibold text-gray-700">
+                  Last Contacted:
+                </Text>
+                <Text className="text-sm text-gray-500">
+                  {contact.date_of_last_contact
+                    ? `${getDaysSinceLastContact(
+                        contact.date_of_last_contact
+                      )} days ago`
+                    : "Not Contacted"}
+                </Text>
+              </View>
+
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-sm font-semibold text-gray-700">
+                  Timezone:
+                </Text>
+                <Text className="text-sm text-gray-500">
+                  {contact.timezone}
+                </Text>
+              </View>
+
+              <View className="flex-row justify-between">
+                <Text className="text-sm font-semibold text-gray-700">
+                  Current Time:
+                </Text>
+                <Text className="text-sm text-gray-500">
+                  {getCurrentTime(contact.timezone)}
+                </Text>
+              </View>
             </View>
 
-            <View className={styles.contactCardContainer}>
-              <Text className={styles.fontTwo}>Current Time:</Text>
-              <Text className={styles.fontThree}>
-                {getCurrentTime(contact.timezone)}
-              </Text>
+            <View>
+              <Text className={styles.inputLabel}>Birthday</Text>
+              <View className="bg-white w-[300px] h-[45px] border border-black rounded-md mb-5 flex items-center justify-center">
+                <Text className="text-center">
+                  {contact.date_of_birth
+                    ? new Date(contact.date_of_birth).toLocaleDateString(
+                        "en-GB"
+                      )
+                    : "No Birthday"}
+                </Text>
+              </View>
+            </View>
+
+            <View>
+              <Text className={styles.inputLabel}>City</Text>
+              <View className="bg-white w-[300px] h-[45px] border border-black rounded-md mb-5 flex items-center justify-center">
+                <Text className="text-center">{contact.timezone}</Text>
+              </View>
+            </View>
+
+            <View>
+              <Text className={styles.inputLabel}>Relationship Type</Text>
+              <View className="bg-white w-[300px] h-[45px] border border-black rounded-md mb-5 flex items-center justify-center">
+                <Text className="text-center">
+                  {contact.type_of_relationship
+                    ? contact.type_of_relationship
+                    : "Not Set"}
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View className="flex-row justify-between items-end p-4 bg-white">
+            <View className="flex-1 items-center">
+              <Pressable className="items-center" onPress={()=>{navigation.navigate("MessagingScreen")}}>
+                <Ionicons name="chatbox-ellipses" size={30} />
+                <Text className="mt-1 text-sm text-center">Chat</Text>
+              </Pressable>
+            </View>
+
+            <View className="flex-1 items-center">
+              <Pressable className="items-center">
+                <MaterialIcons name="edit" size={30} />
+                <Text className="mt-1 text-sm text-center">Edit</Text>
+              </Pressable>
+            </View>
+
+            <View className="flex-1 items-center">
+              <Pressable className="items-center">
+                <MaterialIcons name="delete-forever" size={30} />
+                <Text className="mt-1 text-sm text-center">Disconnect</Text>
+              </Pressable>
             </View>
           </View>
         </View>
       </ScrollView>
-    );
-  } else {
-    return (
-      <ScrollView>
-        <View className={styles.container}>
-          <Text className={styles.headingFour}>Kinnected User</Text>
-          <View className={styles.profileImage}>
-            <ImageViewer
-              imgSource={
-                contact.avatar_url
-                  ? { uri: contact.avatar_url.trim() }
-                  : require("../../assets/freepik-basic-placeholder-profile-picture.png")
-              }
-              className={styles.profileImage}
-            />
-          </View>
-          <Text className={styles.headingFive}>{contact.name}</Text>
-          <View className={tileStyle}>
-            <View className={styles.gap}>
-              <Text className={styles.contactCardContainer}>
-                Last Contacted:
-              </Text>
-              <Text className={styles.fontThree}>
-                {contact.date_of_last_contact
-                  ? `${getDaysSinceLastContact(
-                      contact.date_of_last_contact
-                    )} days ago`
-                  : "Not Contacted"}
-              </Text>
-            </View>
-
-            <View className="flex-row justify-between">
-              <Text className="text-sm font-semibold text-gray-700">
-                Current Time:
-              </Text>
-              <Text className="text-sm text-gray-500">
-                {getCurrentTime(contact.timezone)}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
-    );
-  }
+    </View>
+  );
 }
