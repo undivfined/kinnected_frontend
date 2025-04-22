@@ -52,7 +52,7 @@ export const styles = {
 	lastContactedTile:
 		'relative border border-black rounded-md w-[300px] h-[70px] bg-white mb-5 mt-5',
 
-	localTime: 'flex-1 justify-center items-center',
+	localTime: 'flex-1 justify-center items-center align-middle',
 
 	contactInfo: 'flex-1 justify-center items-center w-[200px] h-[65px]',
 
@@ -71,9 +71,14 @@ export const styles = {
 
 	fontThree: 'text-sm text-gray-500',
 
-	contactCardContainer: 'flex-row justify-between mb-2',
+	contactCardContainer: 'flex-row justify-between mb-2 self-center',
 
 	submitButtonText: 'text-white font-bold text-center',
 
 	smallText: 'text-sm',
+
+	kinnectWithUserBtn:
+		'rounded-md h-15 w-20 text-center bg-black text-white font-bold p-1',
+
+	kinnectWithUserBtnTxt: ' text-2xl text-white text-center font-bold  ',
 };
