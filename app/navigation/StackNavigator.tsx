@@ -19,8 +19,7 @@ export type RootStackParamList = {
   ContactListScreen: undefined
 	ConnectAfterSignUp: undefined;
   ContactCardScreen: undefined;
-  MessagingScreen: { recipientUserId: string
-  }
+  MessagingScreen: undefined;
   TabNavigator: undefined;
 };
 
