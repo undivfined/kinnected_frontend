@@ -59,7 +59,7 @@ export default function SearchedUserScreen({ navigation, route }: Props) {
   }
 
   return (
-    <View>
+    <>
       <View className={styles.container}>
         <Text className={styles.headingTwo}>
           {user.first_name + " " + user.last_name}
@@ -93,6 +93,6 @@ export default function SearchedUserScreen({ navigation, route }: Props) {
           Add Connection
         </Text>
       </Pressable>
-    </View>
+    </>
   );
 }
