@@ -39,13 +39,13 @@ export const styles = {
 		'border border-black rounded-md w-[300px] h-[50px] px-3 justify-center mb-5',
 
 	contactTile:
-		'flex-row justify-between rounded-md  h-[90px] w-full p-[10px] text-center mb-3 mt-5',
+		'flex-row justify-between rounded-md border border-black h-[90px] w-full p-[10px] text-center mb-3 mt-5',
 
 	logIn:
 		'rounded-md w-3/5 px-4 py-2 text-center font-bold mb-10 mt-10 bg-black items-center self-center',
 
 	contactListScreenButton:
-		'rounded-md w-[120px] px-4 py-2  content-center font-bold mb-1 mt-2 bg-black items-center self-center text-xs',
+		'rounded-md w-[120px] px-2 py-2  content-center font-bold mb-1 mt-2 bg-black items-center self-center text-xs',
 
 	lastContacted: 'flex-1 justify-center items-center',
 
@@ -71,7 +71,7 @@ export const styles = {
 
 	fontThree: 'text-sm text-gray-500',
 
-	contactCardContainer: 'flex-row justify-between mb-2 self-center',
+	contactCardContainer: 'flex-row justify-between mb-2 self-center p-3',
 
 	submitButtonText: 'text-white font-bold text-center',
 

@@ -13,7 +13,6 @@ import { FlatList } from 'react-native-reanimated/lib/typescript/Animated';
 import ContactTile from '../components/ContactTile';
 import DismissKeyboardView from '../utils/dismissKeyboardView';
 
-
 type Props = NativeStackScreenProps<RootStackParamList, 'ConnectAfterSignUp'>;
 
 export default function ConnectAfterSignUp({ navigation }: Props) {
@@ -46,46 +45,44 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
 
 	return (
 		<ScrollView>
-      <DismissKeyboardView>
-			<View>
-				<Pressable
-					onPress={() => {
-						navigation.navigate('ContactListScreen');
-					}}
-				>
-					<Text className={styles.skipPress}>View kinnections</Text>
-				</Pressable>
-			</View>
-
-			<View className={styles.container}>
-				<Text className={styles.headingOne}>
-					Welcome, {userDetails.first_name}!
-				</Text>
-				<Text className={styles.headingFive}>
-					Would you like to kinnect to an existing user?
-				</Text>
-				<Text className={styles.strapLine}>Find someone you know</Text>
-				<TextInput
-					className={styles.textInput}
-					placeholder='Type their name'
-					onChangeText={(text) => {
-						setSearchTerm(text);
-					}}
-				/>
-				<Pressable className={styles.logIn} onPress={handleSearch}>
-					<Text className={styles.submitButtonText}>Let's Kinnect</Text>
-				</Pressable>
-			</View>
-
-			<View className={styles.contactCardContainer}>
+			<DismissKeyboardView>
 				<View>
-					{users &&
-						users.map((user: User) => {
-							return <SearchedUserTile user={user} key={user.username} />;
-						})}
+					<Pressable
+						onPress={() => {
+							navigation.navigate('ContactListScreen');
+						}}
+					>
+						<Text className={styles.skipPress}>View kinnections</Text>
+					</Pressable>
 				</View>
-			</View>
-     </DismissKeyboardView>
+
+				<View className={styles.contactsContainer}>
+					<Text className={styles.headingFive}>
+						Would you like to kinnect to an existing user,{' '}
+						{userDetails.first_name}?
+					</Text>
+					<Text className={styles.strapLine}>Find someone you know</Text>
+					<TextInput
+						className={styles.textInput}
+						placeholder='Type their name'
+						onChangeText={(text) => {
+							setSearchTerm(text);
+						}}
+					/>
+					<Pressable className={styles.logIn} onPress={handleSearch}>
+						<Text className={styles.submitButtonText}>Let's Kinnect</Text>
+					</Pressable>
+				</View>
+
+				<View className={styles.contactCardContainer}>
+					<View>
+						{users &&
+							users.map((user: User) => {
+								return <SearchedUserTile user={user} key={user.username} />;
+							})}
+					</View>
+				</View>
+			</DismissKeyboardView>
 		</ScrollView>
 	);
 }
