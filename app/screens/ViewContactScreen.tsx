@@ -52,8 +52,6 @@ export default function ViewContactScreen({ navigation, route }: Props) {
     });
   };
 
- 
-
   if (contact.isCard) {
     return (
       <ScrollView>
@@ -62,8 +60,8 @@ export default function ViewContactScreen({ navigation, route }: Props) {
           <View className={profileImage}>
             <ImageViewer
               imgSource={
-                contact.avatar_url.trim()
-                  ? { uri: contact.avatar_url }
+                contact.avatar_url
+                  ? { uri: contact.avatar_url.trim() }
                   : require("../../assets/freepik-basic-placeholder-profile-picture.png")
               }
               className={profileImage}
@@ -111,8 +109,8 @@ export default function ViewContactScreen({ navigation, route }: Props) {
           <View className={profileImage}>
             <ImageViewer
               imgSource={
-                contact.avatar_url.trim()
-                  ? { uri: contact.avatar_url }
+                contact.avatar_url
+                  ? { uri: contact.avatar_url.trim() }
                   : require("../../assets/freepik-basic-placeholder-profile-picture.png")
               }
               className={profileImage}
