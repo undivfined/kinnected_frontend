@@ -54,7 +54,8 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
             navigation.navigate("ContactListScreen");
           }}
         >
-          <Text className={styles.skipPress}>SKIP</Text>
+          <Text className={styles.skipPress}>View kinnections</Text>
+
         </Pressable>
       </View>
 
@@ -74,7 +75,7 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
         />
         {/* change to submit button later vv */}
         <Pressable className={styles.logIn} onPress={handleSearch}>
-          <Text className="text-white">Search</Text>
+          <Text className={styles.submitButtonText}>Search</Text>
         </Pressable>
       </View>
 

@@ -25,9 +25,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "ContactListScreen">;
 
 export default function ContactListScreen({ navigation }: Props) {
   const { userDetails } = useContext(UserContext);
-  const [selectedImage, setSelectedImage] = useState<"string" | undefined>(
-    undefined
-  );
+
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -41,27 +39,46 @@ export default function ContactListScreen({ navigation }: Props) {
 
 	return (
 		<View className={styles.contactsContainer}>
-			<View className={styles.profileImage}>
+
+      <Text className={styles.headingFive}>My Kinnections List</Text>
+
+      <Pressable 
+          onPress={() => {
+            navigation.navigate("UserProfileScreen");
+          }}>
+			<View >
+      
 				<ImageViewer
 					imgSource={blankProfileImg}
-					selectedImage={selectedImage}
+					selectedImage={userDetails.avatar_url}
 					className={styles.profileImage}
 				/>
+        
 			</View>
-
-			<Text className={styles.headingFive}>{userDetails.username}</Text>
-			<Text className={styles.headingFive}>Your Kinnections List</Text>
-
-
-      <Pressable
-        onPress={() => {
-          navigation.navigate("SearchedProfileScreen");
-        }}
-      >
-        <View>
-          <Text className="underline">SearchForUsers</Text>
-        </View>
       </Pressable>
+
+			<Text className={styles.headingSix}>{`Welcome ${userDetails.username}`}</Text>
+			
+
+
+      <View className='flex-row gap-4'>
+        <Pressable className={styles.contactListScreenButton}
+          onPress={() => {
+            navigation.navigate("ConnectAfterSignUp");
+          }}>
+          
+            <Text className={styles.submitButtonText}>Search for Users</Text>
+          
+        </Pressable>
+        <Pressable className={styles.contactListScreenButton}
+          onPress={() => {
+            navigation.navigate("CreateCardScreen");
+          }}>
+          <View>
+            <Text className={styles.submitButtonText}>Create Kinnect Card</Text>
+          </View>
+        </Pressable>
+      </View>
 
       <FlatList
         data={contacts}

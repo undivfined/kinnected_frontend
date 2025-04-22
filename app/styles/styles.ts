@@ -1,6 +1,6 @@
 
 export const styles = {
-	container: 'flex-1 pt-4 justify-center items-center m-10',
+	container: 'flex-1 pt-4 justify-center items-center m-5',
 
 	imageContainer: 'flex-1 pt-7',
 
@@ -8,7 +8,7 @@ export const styles = {
 
 	userContainer: 'flex-1 justify-center items-center mt-10',
 
-	contactsContainer: 'flex-1 justify-center items-center ml-10 mr-10',
+	contactsContainer: 'flex-1 justify-center items-center ml-5 mr-5',
 
 	headingOne: 'mb-10 text-4xl font-bold text-center',
 
@@ -19,7 +19,9 @@ export const styles = {
 
 	headingFour: 'text-xl font-bold',
 
-	headingFive: 'items-center',
+	headingFive: 'text-center mb-5 text-3xl font-bold pt-5',
+	
+	headingSix: 'text-center  text-xl  pt-5',
 
 
 	enterBorder: 'rounded-full p-4 border border-gray-400 border-2',
@@ -45,11 +47,13 @@ export const styles = {
 
 
 	contactTile:
-		'flex-row justify-between border border-black rounded-md w-[300px] h-[70px] pt-[10px] pl-[10px] text-center mb-5 mt-5',
+		'flex-row justify-between border border-black rounded-md  h-[90px] w-full p-[10px] text-center mb-3 mt-5',
 
 	logIn:
 		'rounded-md w-3/5 px-4 py-2 text-center font-bold mb-10 mt-10 bg-black items-center self-center',
 
+	contactListScreenButton:
+		'rounded-md w-[120px] px-4 py-2  content-center font-bold mb-1 mt-2 bg-black items-center self-center',
 
 	lastContacted: 'flex-1 justify-center items-center',
 
@@ -58,12 +62,12 @@ export const styles = {
 
 	localTime: 'flex-1 justify-center items-center',
 
-	contactInfo: 'flex-1 justify-center items-center w-[70px] h-[65px]',
+	contactInfo: 'flex-1 justify-center items-center w-[200px] h-[65px]',
 
 	contactTileImage:
 		'rounded-full border border-black-400 border-2 w-[50px] h-[50px]',
 
-	profileImage: 'rounded-full w-[120px] h-[120px] mt-5 mb-5',
+	profileImage: 'rounded-full w-[120px] h-[120px] mt-1 mb-1',
 
 	skipPress: 'self-end text-2xl font-bold text-gray-400 pt-16 pr-8',
 
@@ -79,6 +83,8 @@ export const styles = {
 
 	contactCardContainer: 'flex-row justify-between mb-2',
 
-	submitButtonText: 'text-white font-bold',
+	submitButtonText: 'text-white font-bold text-center',
+
+	smallText: 'text-sm'
 };
 

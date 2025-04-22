@@ -12,6 +12,7 @@ import MessagingScreen from "../screens/MessagingScreen";
 import { SearchedProfileScreen } from "../screens/SearchedProfileScreen";
 import { contact, User } from "../../types/databaseTypes";
 import SearchedUserScreen from "../screens/SearchedUserScreen";
+import CreateCardScreen from "../screens/CreateCardScreen";
 
 export type RootStackParamList = {
   // undefined means this screen takes no parameters when being navigated to
@@ -26,6 +27,7 @@ export type RootStackParamList = {
   MessagingScreen: undefined;
   TabNavigator: undefined;
   SearchedProfileScreen: undefined;
+  CreateCardScreen: undefined;
   SearchedUserScreen: { user: User };
 };
 
@@ -52,6 +54,7 @@ export default function StackNavigator() {
       <Stack.Screen name="MessagingScreen" component={MessagingScreen} />
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
       <Stack.Screen name="SearchedUserScreen" component={SearchedUserScreen} />
+      <Stack.Screen name="CreateCardScreen" component={CreateCardScreen} />
     </Stack.Navigator>
   );
 }

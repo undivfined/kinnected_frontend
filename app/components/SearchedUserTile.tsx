@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Pressable, View } from "react-native";
-import { contactTileImage, logIn } from "../styles/styles";
+import { styles } from "../styles/styles";
 import ImageViewer from "./ImageViewer";
 import { User } from "../../types/databaseTypes";
 import { Text } from "react-native";
@@ -13,14 +13,18 @@ export default function SearchedUserTile({ user }: { user: User }) {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
-    <View>
-      <View>
+    <View className={styles.contactTile}>
+      
+      <View className={styles.contactInfo}>
         <ImageViewer
           imgSource={blankProfileImg}
           selectedImage={user.avatar_url}
-          className={contactTileImage}
+          className={styles.contactTileImage}
         />
         <Text>{user.first_name + " " + user.last_name}</Text>
+      </View>
+
+      <View>
         <Text>
           {moment(user.date_of_birth)
             .fromNow()
@@ -29,15 +33,19 @@ export default function SearchedUserTile({ user }: { user: User }) {
             .join(" ") + " old"}
         </Text>
         <Text>Timezone: {user.timezone.split("/")[1].replace("_", " ")} </Text>
+        </View>
+        <View>
         <Pressable
-          className={logIn}
+          className={styles.logIn}
           onPress={() => {
             navigation.navigate("SearchedUserScreen", { user });
           }}
         >
           <Text className="text-white">Kinnect with {user.first_name}</Text>
         </Pressable>
-      </View>
+
+        </View>
+      
     </View>
   );
 }

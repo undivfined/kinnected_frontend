@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { pickerInput } from "../styles/styles";
+import { styles } from "../styles/styles";
 
 function RelationshipDropdown({
   value,
@@ -18,7 +18,7 @@ function RelationshipDropdown({
   ];
 
   return (
-    <View className={pickerInput}>
+    <View className={styles.pickerInput}>
       <Dropdown
         mode="auto"
         data={data}

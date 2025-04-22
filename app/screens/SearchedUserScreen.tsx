@@ -1,5 +1,5 @@
 import { Alert, Pressable, Text, TextInput, View } from "react-native";
-import { container, headingTwo, inputLabel, logIn } from "../styles/styles";
+import { styles } from "../styles/styles";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import { UserContext } from "../context/UserContext";
@@ -60,26 +60,26 @@ export default function SearchedUserScreen({ navigation, route }: Props) {
 
   return (
     <>
-      <View className={container}>
-        <Text className={headingTwo}>
+      <View className={styles.container}>
+        <Text className={styles.headingTwo}>
           {user.first_name + " " + user.last_name}
         </Text>
       </View>
 
-      <View className={container}>
+      <View className={styles.container}>
         <Text>
           Birthday: {new Date(user.date_of_birth).toLocaleDateString("en-GB")}
         </Text>
 
         <Text>Timezone: {user.timezone}</Text>
-        <Text className={inputLabel}>
+        <Text className={styles.inputLabel}>
           Who is {user.first_name} to you? (Optional)
         </Text>
         <RelationshipDropdown
           setter={handleConnectionChange}
           value={newConnection}
         />
-        <Text className={inputLabel}>
+        <Text className={styles.inputLabel}>
           When were you last in touch with {user.first_name}? (Optional)
         </Text>
         <LastContactDatePicker
@@ -88,7 +88,7 @@ export default function SearchedUserScreen({ navigation, route }: Props) {
         />
       </View>
 
-      <Pressable className={logIn}>
+      <Pressable className={styles.logIn}>
         <Text className="text-white" onPress={handleAddConnection}>
           Add Connection
         </Text>
