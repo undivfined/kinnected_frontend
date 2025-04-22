@@ -11,6 +11,7 @@ import SearchedUserTile from '../components/SearchedUserTile';
 import { contact, User } from '../../types/databaseTypes';
 import { FlatList } from 'react-native-reanimated/lib/typescript/Animated';
 import ContactTile from '../components/ContactTile';
+import DismissKeyboardView from '../utils/dismissKeyboardView';
 
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ConnectAfterSignUp'>;
