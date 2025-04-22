@@ -67,7 +67,7 @@ export default function ContactListScreen({ navigation }: Props) {
             navigation.navigate("ConnectAfterSignUp");
           }}>
           
-            <Text className={styles.submitButtonText}>Search for Users</Text>
+            <Text className={styles.contactListButtonText}>Search for Users</Text>
           
         </Pressable>
         <Pressable className={styles.contactListScreenButton}
@@ -75,7 +75,7 @@ export default function ContactListScreen({ navigation }: Props) {
             navigation.navigate("CreateCardScreen");
           }}>
           <View>
-            <Text className={styles.submitButtonText}>Create Kinnect Card</Text>
+            <Text className={styles.contactListButtonText}>Create Kinnect Card</Text>
           </View>
         </Pressable>
       </View>
