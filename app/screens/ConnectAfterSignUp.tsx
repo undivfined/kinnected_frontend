@@ -14,6 +14,7 @@ import { getContacts, getUsers } from "../../api";
 
 import SearchedUserTile from "../components/SearchedUserTile";
 import { contact, User } from "../../types/databaseTypes";
+import DismissKeyboardView from '../utils/dismissKeyboardView';
 
 type Props = NativeStackScreenProps<RootStackParamList, "ConnectAfterSignUp">;
 
@@ -47,6 +48,8 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
   }
 
   return (
+    <DismissKeyboardView>
+
     <ScrollView>
       <View>
         <Pressable
@@ -86,6 +89,7 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
           })}
       </View>
     </ScrollView>
+    </DismissKeyboardView>
   );
 
 }

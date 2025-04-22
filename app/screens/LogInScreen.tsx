@@ -7,6 +7,7 @@ import bcrypt from 'react-native-bcrypt';
 import { getCredentials, getUserByUsername } from '../../api';
 import { UserContext } from '../context/UserContext';
 import { UserDetails } from '../context/UserContext';
+import DismissKeyboardView from '../utils/dismissKeyboardView';
 type Props = NativeStackScreenProps<RootStackParamList, 'LogInScreen'>;
 
 export default function LogInScreen({ navigation }: Props) {
@@ -37,6 +38,8 @@ export default function LogInScreen({ navigation }: Props) {
 	}
 
 	return (
+		<DismissKeyboardView>
+
 		<View className={styles.container}>
 			<Text className={styles.headingTwo}>Kinnected</Text>
 			<Text className={styles.logInLabel}>Log in</Text>
@@ -77,5 +80,6 @@ export default function LogInScreen({ navigation }: Props) {
 				<Text className={styles.underline}>Sign Up Here</Text>
 			</Pressable>
 		</View>
+		</DismissKeyboardView>
 	);
 }

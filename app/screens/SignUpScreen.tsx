@@ -23,6 +23,7 @@ import { postNewUser } from "../../api";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import CountryDropdown from "../components/CountryDropdown";
 import TimezonesDropdown from "../components/TimezonesDropdown";
+import DismissKeyboardView from '../utils/dismissKeyboardView';
 type Props = NativeStackScreenProps<RootStackParamList, "SignUpScreen">;
 
 export default function SignUpScreen({ navigation }: Props) {
@@ -105,6 +106,8 @@ export default function SignUpScreen({ navigation }: Props) {
   }
 
   return (
+    <DismissKeyboardView>
+
     <ScrollView>
       <View className={styles.container}>
         <Text className={styles.headingTwo}>Sign Up</Text>
@@ -195,6 +198,7 @@ export default function SignUpScreen({ navigation }: Props) {
         </Pressable>
       </View>
     </ScrollView>
+    </DismissKeyboardView>
   );
 
 }
