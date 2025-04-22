@@ -7,221 +7,194 @@ import {
 	ScrollView,
 	Alert,
 } from 'react-native';
-import DateTimePicker, {
-	DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
-import { RootStackParamList } from '../navigation/StackNavigator';
-import { Picker } from '@react-native-picker/picker';
-import { styles } from '../styles/styles';
-import { useContext, useState } from 'react';
-import { UserContext } from '../context/UserContext';
-import bcrypt from 'react-native-bcrypt';
+import DateTimePicker, {	
 
-import { NewUser } from '../../types/NewUserType';
-import countriesData from '../../countriesData';
-import { postNewUser } from '../../api';
-type Props = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
+import { styles } from '../styles/styles';
+
+import { useContext, useState } from "react";
+import bcrypt from "react-native-bcrypt";
+
+import { UserContext } from "../context/UserContext";
+import { NewUser } from "../../types/NewUserType";
+
+import { postNewUser } from "../../api";
+import { RootStackParamList } from "../navigation/StackNavigator";
+import CountryDropdown from "../components/CountryDropdown";
+import TimezonesDropdown from "../components/TimezonesDropdown";
+type Props = NativeStackScreenProps<RootStackParamList, "SignUpScreen">;
 
 export default function SignUpScreen({ navigation }: Props) {
-	const { setUserDetails } = useContext(UserContext);
-	const [newUserDetails, setNewUserDetails] = useState<NewUser>({
-		username: '',
-		password: '',
-		first_name: '',
-		last_name: '',
-		date_of_birth: new Date(Date.now()).toISOString(),
-		timezone: '',
-	});
+  const { setUserDetails } = useContext(UserContext);
+  const [newUserDetails, setNewUserDetails] = useState<NewUser>({
+    username: "",
+    password: "",
+    first_name: "",
+    last_name: "",
+    date_of_birth: new Date("1992-5-5").toISOString(),
+    timezone: "",
+  });
 
-	const [showCalender, setShowCalender] = useState<boolean>(false);
-	const [country, setCountry] = useState<string>('');
+  const [showCalender, setShowCalender] = useState<boolean>(false);
+  const [countryTimezones, setCountryTimezones] = useState<string[]>([]);
 
-	function onDateChange(
-		event: DateTimePickerEvent,
-		selectedDate: Date | undefined
-	) {
-		if (event.type === 'set' && selectedDate) {
-			setNewUserDetails((current) => {
-				const newUser = {
-					...current,
-					date_of_birth: selectedDate.toISOString(),
-				};
-				return newUser;
-			});
-		}
-		setShowCalender(false);
-	}
+  function onDateChange(
+    event: DateTimePickerEvent,
+    selectedDate: Date | undefined
+  ) {
+    if (event.type === "set" && selectedDate) {
+      setNewUserDetails((current) => {
+        const newUser = {
+          ...current,
+          date_of_birth: selectedDate.toISOString(),
+        };
+        return newUser;
+      });
+    }
+    setShowCalender(false);
+  }
+  function handleChange(value: string, property: string) {
+    setNewUserDetails((current) => {
+      return { ...current, [property]: value };
+    });
+  }
 
-	function handleUsername(e: string) {
-		setNewUserDetails((current) => {
-			return { ...current, username: e };
-		});
-	}
+  function handleSignup() {
+    let allValues = true;
+    Object.values(newUserDetails).forEach((value) => {
+      if (!value) {
+        allValues = false;
+      }
+    });
+    if (allValues) {
+      bcrypt.hash(newUserDetails.password, 10, function (err, hash) {
+        if (err) {
+          Alert.alert("OOPS!", "Something went wrong", [
+            { text: "Not again..." },
+          ]);
+        }
 
-	function handlePassword(e: string) {
-		setNewUserDetails((current) => {
-			return { ...current, password: e };
-		});
-	}
+        postNewUser({
+          ...newUserDetails,
+          password: hash || "",
+        })
+          .then((newUser) => {
+            const { password, ...rest } = newUser;
+            setUserDetails(rest);
+            navigation.navigate("ConnectAfterSignUp");
+          })
+          .catch((error) => {
+            if (
+              error.response.data.message ===
+              "A user with this username already exists"
+            ) {
+              Alert.alert("OOPS!", error.response.data.message, [
+                { text: "OK" },
+              ]);
+            } else {
+              Alert.alert("OOPS!", "Something went wrong", [
+                { text: "Not again..." },
+              ]);
+            }
+          });
+      });
+    } else {
+      Alert.alert("OOPS!", "Please fill in all the fields", [{ text: "Fine" }]);
+    }
+  }
 
-	function handleFirstName(e: string) {
-		setNewUserDetails((current) => {
-			return { ...current, first_name: e };
-		});
-	}
+  return (
+    <ScrollView>
+      <View className={styles.container}>
+        <Text className={styles.headingTwo}>Sign Up</Text>
 
-	function handleLastName(e: string) {
-		setNewUserDetails((current) => {
-			return { ...current, last_name: e };
-		});
-	}
+        <Text className={styles.inputLabel}>Username</Text>
+        <TextInput
+          className={styles.textInput}
+          onChangeText={(value) => {
+            handleChange(value, "username");
+          }}
+        />
 
-	function handleSignup() {
-		let allValues = true;
-		Object.values(newUserDetails).forEach((value) => {
-			if (!value) {
-				allValues = false;
-			}
-		});
-		if (allValues) {
-			bcrypt.hash(newUserDetails.password, 10, function (err, hash) {
-				if (err) {
-					Alert.alert('OOPS!', 'Something went wrong', [
-						{ text: 'Not again...' },
-					]);
-				}
+        <Text className={styles.inputLabel}>Password</Text>
+        <TextInput
+          className={styles.textInput}
+          onChangeText={(value) => {
+            handleChange(value, "password");
+          }}
+          secureTextEntry={true}
+        />
 
-				postNewUser({
-					...newUserDetails,
-					password: hash || '',
-				})
-					.then((newUser) => {
-						const { password, ...rest } = newUser;
-						setUserDetails(rest);
-						navigation.navigate('ConnectAfterSignUp');
-					})
-					.catch((error) => {
-						if (
-							error.response.data.message ===
-							'A user with this username already exists'
-						) {
-							Alert.alert('OOPS!', error.response.data.message, [
-								{ text: 'OK' },
-							]);
-						} else {
-							Alert.alert('OOPS!', 'Something went wrong', [
-								{ text: 'Not again...' },
-							]);
-						}
-					});
-			});
-		} else {
-			Alert.alert('OOPS!', 'Please fill in all the fields', [{ text: 'Fine' }]);
-		}
-	}
+        <Text className={styles.inputLabel}>First Name</Text>
+        <TextInput
+          className={styles.textInput}
+          onChangeText={(value) => {
+            handleChange(value, "first_name");
+          }}
+        />
 
-	return (
-		<ScrollView>
-			<View className={styles.container}>
-				<Text className={styles.headingTwo}>Sign Up</Text>
+        <Text className={styles.inputLabel}>Last Name</Text>
+        <TextInput
+          className={styles.textInput}
+          onChangeText={(value) => {
+            handleChange(value, "last_name");
+          }}
+        />
 
-				<Text className={styles.inputLabel}>Username</Text>
-				<TextInput className={styles.textInput} onChangeText={handleUsername} />
+        <Text className={styles.inputLabel}>Date of Birth</Text>
+        <Pressable
+          className={styles.textInput}
+          onPress={() => {
+            setShowCalender(true);
+          }}
+        >
+          <Text>{new Date("1992-5-5").toLocaleDateString("en-GB")}</Text>
+        </Pressable>
 
-				<Text className={styles.inputLabel}>Password</Text>
-				<TextInput
-					className={styles.textInput}
-					onChangeText={handlePassword}
-					secureTextEntry={true}
-				/>
+        {showCalender && (
+          <DateTimePicker
+            value={new Date(newUserDetails.date_of_birth)}
+            mode="date"
+            onChange={(event, selectedDate) => {
+              onDateChange(event, selectedDate);
+            }}
+          />
+        )}
 
-				<Text className={styles.inputLabel}>First Name</Text>
-				<TextInput
-					className={styles.textInput}
-					onChangeText={handleFirstName}
-				/>
+        <Text className={styles.inputLabel}>Country</Text>
+        <CountryDropdown setCountryTimezones={setCountryTimezones} />
 
-				<Text className={styles.inputLabel}>Last Name</Text>
-				<TextInput className={styles.textInput} onChangeText={handleLastName} />
+        <Text className={styles.inputLabel}>Timezone</Text>
+        <TimezonesDropdown
+          setNewUserDetails={setNewUserDetails}
+          countryTimezones={countryTimezones}
+          newUserDetails={newUserDetails}
+        />
 
-				<Text className={styles.inputLabel}>Date of Birth</Text>
-				<Pressable
-					className={styles.textInput}
-					onPress={() => {
-						setShowCalender(true);
-					}}
-				>
-					<Text>{new Date(Date.now()).toLocaleDateString('en-GB')}</Text>
-				</Pressable>
+        <Text
+          className={styles.underline}
+          onPress={() => {
+            navigation.navigate("ConnectAfterSignUp");
+          }}
+        >
+          Terms and conditions
+        </Text>
 
-				{showCalender && (
-					<DateTimePicker
-						value={new Date(Date.now())}
-						mode='date'
-						onChange={(event, selectedDate) => {
-							onDateChange(event, selectedDate);
-						}}
-					/>
-				)}
+        <Pressable className={styles.logIn} onPress={handleSignup}>
+          <Text className={styles.submitButtonText}>Create Account</Text>
+        </Pressable>
 
-				<Text className={styles.inputLabel}>Country</Text>
+        <Pressable
+          className={styles.underline}
+          onPress={() => {
+            navigation.navigate("LogInScreen");
+          }}
+        >
+          <Text className={styles.underline}>Already have an account? Login</Text>
+        </Pressable>
+      </View>
+    </ScrollView>
+  );
 
-				<View>
-					<Picker
-						className={styles.pickerInput}
-						selectedValue={country}
-						onValueChange={(selected) => setCountry(selected)}
-					>
-						<Picker.Item label='Select your country' value='' enabled={false} />
-						{Object.keys(countriesData).map((country) => {
-							return (
-								<Picker.Item label={country} value={country} key={country} />
-							);
-						})}
-					</Picker>
-				</View>
-
-				<Text className={styles.inputLabel}>Timezone</Text>
-
-				<View>
-					<Picker
-						className={styles.pickerInput}
-						selectedValue={newUserDetails.timezone}
-						onValueChange={(selected) =>
-							setNewUserDetails((current) => {
-								return { ...current, timezone: selected };
-							})
-						}
-					>
-						<Picker.Item
-							label='Select your Timezone'
-							value=''
-							enabled={false}
-						/>
-						{country &&
-							countriesData[country].map((timezone: string, i: number) => {
-								return (
-									<Picker.Item label={timezone} value={timezone} key={i} />
-								);
-							})}
-					</Picker>
-				</View>
-
-				<Text className='underline'>Terms and conditions</Text>
-
-				<Pressable className={styles.logIn} onPress={handleSignup}>
-					<Text className={styles.submitButtonText}>Create Account</Text>
-				</Pressable>
-
-				<Pressable
-					className='underline'
-					onPress={() => {
-						navigation.navigate('LogInScreen');
-					}}
-				>
-					<Text className='underline'>Already have an account? Login</Text>
-				</Pressable>
-			</View>
-		</ScrollView>
-	);
 }

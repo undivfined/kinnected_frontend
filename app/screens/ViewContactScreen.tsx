@@ -46,38 +46,37 @@ export default function ViewContactScreen({ navigation, route }: Props) {
 		});
 	};
 
-	if (contact.isCard) {
-		return (
-			<ScrollView>
-				<View className={styles.container}>
-					<Text className={styles.headingFour}>Kinnect Card</Text>
-					<View className={styles.profileImage}>
-						<ImageViewer
-							imgSource={
-								contact.avatar_url.trim()
-									? { uri: contact.avatar_url }
-									: require('../../assets/freepik-basic-placeholder-profile-picture.png')
-							}
-							className={styles.profileImage}
-						/>
-					</View>
-					<Text className={styles.headingFive}>{contact.name}</Text>
-					<View className={tileStyle}>
-						<View className={styles.gap}>
-							<Text className={styles.fontTwo}>Last Contacted:</Text>
-							<Text className={styles.contactCardContainer}>
-								{contact.date_of_last_contact
-									? `${getDaysSinceLastContact(
-											contact.date_of_last_contact
-									  )} days ago`
-									: 'Not Contacted'}
-							</Text>
-						</View>
 
-						<View className={styles.contactCardContainer}>
-							<Text className={styles.fontTwo}>Timezone:</Text>
-							<Text className={styles.fontThree}>{contact.timezone}</Text>
-						</View>
+  if (contact.isCard) {
+    return (
+      <ScrollView>
+        <View className={container}>
+          <Text className={headingFour}>Kinnect Card</Text>
+          <View className={profileImage}>
+            <ImageViewer
+              imgSource={
+                contact.avatar_url
+                  ? { uri: contact.avatar_url.trim() }
+                  : require("../../assets/freepik-basic-placeholder-profile-picture.png")
+              }
+              className={profileImage}
+            />
+          </View>
+          <Text className={headingFive}>{contact.name}</Text>
+          <View className={tileStyle}>
+            <View className="flex-row justify-between mb-2">
+              <Text className="text-sm font-semibold text-gray-700">
+                Last Contacted:
+              </Text>
+              <Text className="text-sm text-gray-500">
+                {contact.date_of_last_contact
+                  ? `${getDaysSinceLastContact(
+                      contact.date_of_last_contact
+                    )} days ago`
+                  : "Not Contacted"}
+              </Text>
+            </View>
+
 
 						<View className={styles.contactCardContainer}>
 							<Text className={styles.fontTwo}>Current Time:</Text>
@@ -119,10 +118,49 @@ export default function ViewContactScreen({ navigation, route }: Props) {
 							</Text>
 						</View>
 
-						<View className={styles.contactCardContainer}>
-							<Text className={styles.fontTwo}>Timezone:</Text>
-							<Text className={styles.fontThree}>{contact.timezone}</Text>
-						</View>
+
+            <View className="flex-row justify-between">
+              <Text className="text-sm font-semibold text-gray-700">
+                Current Time:
+              </Text>
+              <Text className="text-sm text-gray-500">
+                {getCurrentTime(contact.timezone)}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    );
+  } else {
+    return (
+      <ScrollView>
+        <View className={container}>
+          <Text className={headingFour}>Kinnected User</Text>
+          <View className={profileImage}>
+            <ImageViewer
+              imgSource={
+                contact.avatar_url
+                  ? { uri: contact.avatar_url.trim() }
+                  : require("../../assets/freepik-basic-placeholder-profile-picture.png")
+              }
+              className={profileImage}
+            />
+          </View>
+          <Text className={headingFive}>{contact.name}</Text>
+          <View className={tileStyle}>
+            <View className="flex-row justify-between mb-2">
+              <Text className="text-sm font-semibold text-gray-700">
+                Last Contacted:
+              </Text>
+              <Text className="text-sm text-gray-500">
+                {contact.date_of_last_contact
+                  ? `${getDaysSinceLastContact(
+                      contact.date_of_last_contact
+                    )} days ago`
+                  : "Not Contacted"}
+              </Text>
+            </View>
+
 
 						<View className={styles.contactCardContainer}>
 							<Text className={styles.fontTwo}>Current Time:</Text>
