@@ -1,23 +1,18 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
-  View,
-  Pressable,
-  Text,
-  TextInput,
-  ScrollView,
-  Alert,
-} from "react-native";
-import DateTimePicker, {
+	View,
+	Pressable,
+	Text,
+	TextInput,
+	ScrollView,
+	Alert,
+} from 'react-native';
+import DateTimePicker, {	
+
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
+import { styles } from '../styles/styles';
 
-import {
-  container,
-  headingTwo,
-  inputLabel,
-  logIn,
-  textInput,
-} from "../styles/styles";
 import { useContext, useState } from "react";
 import bcrypt from "react-native-bcrypt";
 
@@ -111,45 +106,45 @@ export default function SignUpScreen({ navigation }: Props) {
 
   return (
     <ScrollView>
-      <View className={container}>
-        <Text className={headingTwo}>Sign Up</Text>
+      <View className={styles.container}>
+        <Text className={styles.headingTwo}>Sign Up</Text>
 
-        <Text className={inputLabel}>Username</Text>
+        <Text className={styles.inputLabel}>Username</Text>
         <TextInput
-          className={textInput}
+          className={styles.textInput}
           onChangeText={(value) => {
             handleChange(value, "username");
           }}
         />
 
-        <Text className={inputLabel}>Password</Text>
+        <Text className={styles.inputLabel}>Password</Text>
         <TextInput
-          className={textInput}
+          className={styles.textInput}
           onChangeText={(value) => {
             handleChange(value, "password");
           }}
           secureTextEntry={true}
         />
 
-        <Text className={inputLabel}>First Name</Text>
+        <Text className={styles.inputLabel}>First Name</Text>
         <TextInput
-          className={textInput}
+          className={styles.textInput}
           onChangeText={(value) => {
             handleChange(value, "first_name");
           }}
         />
 
-        <Text className={inputLabel}>Last Name</Text>
+        <Text className={styles.inputLabel}>Last Name</Text>
         <TextInput
-          className={textInput}
+          className={styles.textInput}
           onChangeText={(value) => {
             handleChange(value, "last_name");
           }}
         />
 
-        <Text className={inputLabel}>Date of Birth</Text>
+        <Text className={styles.inputLabel}>Date of Birth</Text>
         <Pressable
-          className={textInput}
+          className={styles.textInput}
           onPress={() => {
             setShowCalender(true);
           }}
@@ -167,10 +162,10 @@ export default function SignUpScreen({ navigation }: Props) {
           />
         )}
 
-        <Text className={inputLabel}>Country</Text>
+        <Text className={styles.inputLabel}>Country</Text>
         <CountryDropdown setCountryTimezones={setCountryTimezones} />
 
-        <Text className={inputLabel}>Timezone</Text>
+        <Text className={styles.inputLabel}>Timezone</Text>
         <TimezonesDropdown
           setNewUserDetails={setNewUserDetails}
           countryTimezones={countryTimezones}
@@ -178,7 +173,7 @@ export default function SignUpScreen({ navigation }: Props) {
         />
 
         <Text
-          className="underline"
+          className={styles.underline}
           onPress={() => {
             navigation.navigate("ConnectAfterSignUp");
           }}
@@ -186,19 +181,20 @@ export default function SignUpScreen({ navigation }: Props) {
           Terms and conditions
         </Text>
 
-        <Pressable className={logIn} onPress={handleSignup}>
-          <Text className="text-white">Create Account</Text>
+        <Pressable className={styles.logIn} onPress={handleSignup}>
+          <Text className={styles.submitButtonText}>Create Account</Text>
         </Pressable>
 
         <Pressable
-          className="underline"
+          className={styles.underline}
           onPress={() => {
             navigation.navigate("LogInScreen");
           }}
         >
-          <Text className="underline">Already have an account? Login</Text>
+          <Text className={styles.underline}>Already have an account? Login</Text>
         </Pressable>
       </View>
     </ScrollView>
   );
+
 }

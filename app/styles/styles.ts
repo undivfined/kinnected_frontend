@@ -1,60 +1,84 @@
-export const container = "flex-1 pt-4 justify-center items-center m-10";
 
-export const imageContainer = "flex-1 pt-7";
+export const styles = {
+	container: 'flex-1 pt-4 justify-center items-center m-10',
 
-export const scrollContainer = "flex-1 items-center py-10 bg-white";
+	imageContainer: 'flex-1 pt-7',
 
-export const userContainer = "flex-1 justify-center items-center mt-10";
+	scrollContainer: 'flex-1 items-center py-10 bg-white',
 
-export const contactsContainer =
-  "flex-1 justify-center items-center ml-10 mr-10";
+	userContainer: 'flex-1 justify-center items-center mt-10',
 
-export const headingOne = "mb-10 text-4xl font-bold text-center";
+	contactsContainer: 'flex-1 justify-center items-center ml-10 mr-10',
 
-export const headingTwo = "mb-10 text-3xl font-bold";
+	headingOne: 'mb-10 text-4xl font-bold text-center',
 
-export const headingThree = "mb-10 text-xl font-bold text-left w-[300px]";
+	headingTwo: 'mb-10 text-3xl font-bold',
 
-export const headingFour = "text-xl font-bold";
 
-export const headingFive = "items-center";
+	headingThree: 'mb-10 text-xl font-bold text-left w-[300px]',
 
-export const enterBorder = "rounded-full p-4 border border-gray-400 border-2";
+	headingFour: 'text-xl font-bold',
 
-export const strapLine = "mt-10 text-lg pb-4";
+	headingFive: 'items-center',
 
-export const enterPressable =
-  "w-40 h-40 bg-gray-400 rounded-full items-center justify-center";
 
-export const logInLabel = "text-m font-bold mb-3";
+	enterBorder: 'rounded-full p-4 border border-gray-400 border-2',
 
-export const inputLabel = "text-m font-bold mb-3 text-left w-[300px]";
 
-export const textInput =
-  "border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5";
+	strapLine: 'mt-10 text-lg pb-4',
 
-export const pickerInput =
-  "border border-black rounded-md w-[300px] h-[50px] px-3 justify-center mb-5";
 
-export const contactTile =
-  "flex-row justify-between border border-black rounded-md w-[300px] h-[70px] pt-[10px] pl-[10px] text-center mb-5 mt-5";
+	enterPressable:
+		'w-40 h-40 bg-gray-400 rounded-full items-center justify-center',
 
-export const logIn =
-  "rounded-md w-3/5 px-4 py-2 text-center mb-10 mt-10 bg-black items-center self-center";
+	logInLabel: 'text-m font-bold mb-3',
 
-export const lastContacted = "flex-1 justify-center items-center";
 
-export const lastContactedTile =
-  "relative border border-black rounded-md w-[300px] h-[70px] bg-white mb-5 mt-5";
+	inputLabel: 'text-m font-bold mb-3 text-left w-[300px]',
 
-export const localTime = "flex-1 justify-center items-center";
 
-export const contactInfo =
-  "flex-1 justify-center items-center w-[70px] h-[65px]";
+	textInput:
+		'border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5',
 
-export const contactTileImage =
-  "rounded-full border border-black-400 border-2 w-[50px] h-[50px]";
+	pickerInput:
+		'border border-black rounded-md w-[300px] h-[50px] px-3 justify-center mb-5',
 
-export const profileImage = "rounded-full w-[120px] h-[120px] mt-5 mb-5";
 
-export const skipPress = "self-end text-2xl font-bold text-gray-400 pt-16 pr-8";
+	contactTile:
+		'flex-row justify-between border border-black rounded-md w-[300px] h-[70px] pt-[10px] pl-[10px] text-center mb-5 mt-5',
+
+	logIn:
+		'rounded-md w-3/5 px-4 py-2 text-center font-bold mb-10 mt-10 bg-black items-center self-center',
+
+
+	lastContacted: 'flex-1 justify-center items-center',
+
+	lastContactedTile:
+		'relative border border-black rounded-md w-[300px] h-[70px] bg-white mb-5 mt-5',
+
+	localTime: 'flex-1 justify-center items-center',
+
+	contactInfo: 'flex-1 justify-center items-center w-[70px] h-[65px]',
+
+	contactTileImage:
+		'rounded-full border border-black-400 border-2 w-[50px] h-[50px]',
+
+	profileImage: 'rounded-full w-[120px] h-[120px] mt-5 mb-5',
+
+	skipPress: 'self-end text-2xl font-bold text-gray-400 pt-16 pr-8',
+
+	underline: 'mt-20 underline',
+
+	gap: 'flex-row justify-between mb-2',
+
+	fontTwo: 'text-sm font-semibold text-gray-700',
+
+
+	fontThree: 'text-sm text-gray-500',
+
+
+	contactCardContainer: 'flex-row justify-between mb-2',
+
+	submitButtonText: 'text-white font-bold',
+};
+

@@ -1,24 +1,17 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import {
-  ScrollView,
-  Text,
-  View,
-  TextInput,
-  FlatList,
-  Pressable,
-} from "react-native";
-import {
-  contactsContainer,
-  container,
-  headingFive,
-  headingThree,
-  inputLabel,
-  profileImage,
-  textInput,
-  userContainer,
-} from "../styles/styles";
-import { Profiler, useContext, useEffect, useState } from "react";
+
+	ScrollView,
+	Text,
+	View,
+	TextInput,
+	FlatList,
+	Pressable,
+} from 'react-native';
+import { styles } from '../styles/styles';
+import { Profiler, useContext, useEffect, useState } from 'react';
+
 
 import ImageViewer from "../components/ImageViewer";
 import ContactTile from "../components/ContactTile";
@@ -45,18 +38,20 @@ export default function ContactListScreen({ navigation }: Props) {
     }
   }, [userDetails]);
 
-  return (
-    <View className={contactsContainer}>
-      <View className={profileImage}>
-        <ImageViewer
-          imgSource={blankProfileImg}
-          selectedImage={selectedImage}
-          className={profileImage}
-        />
-      </View>
 
-      <Text className={headingFive}>{userDetails.username}</Text>
-      <Text className={headingFive}>Your Kinnections List</Text>
+	return (
+		<View className={styles.contactsContainer}>
+			<View className={styles.profileImage}>
+				<ImageViewer
+					imgSource={blankProfileImg}
+					selectedImage={selectedImage}
+					className={styles.profileImage}
+				/>
+			</View>
+
+			<Text className={styles.headingFive}>{userDetails.username}</Text>
+			<Text className={styles.headingFive}>Your Kinnections List</Text>
+
 
       <Pressable
         onPress={() => {
