@@ -35,7 +35,7 @@ export const postNewUser = (newUser: NewUser) => {
 export const postNewCard = (newCard: NewCard) => {
   return api.post("/cards", newCard).then(({ data: { card } }) => {
     return card;
-  })
+  });
 };
 
 export const getUsers = (search: string) => {
@@ -49,7 +49,7 @@ export const postConnection = (connection: NewConnectionType) => {
     .post(`/connections`, connection)
     .then(({ data: { createdConnection } }) => {
       return createdConnection;
-    })
+    });
 };
 
 export const deleteConnection = (connection_id: number) => {
@@ -58,4 +58,15 @@ export const deleteConnection = (connection_id: number) => {
 
 export const deleteCard = (card_id: number) => {
   return api.delete(`/cards/${card_id}`);
+};
+
+export const editConnection = (
+  connection_id: number,
+  body: { [key: string]: string | undefined }
+) => {
+  return api
+    .patch(`/connections/${connection_id}`, body)
+    .then(({ data: { updatedConnection } }) => {
+      console.log(updatedConnection);
+    });
 };

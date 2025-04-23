@@ -159,7 +159,12 @@ export default function ViewContactScreen({ navigation, route }: Props) {
             )}
 
             <View className="flex-1 items-center">
-              <Pressable className="items-center">
+              <Pressable
+                className="items-center"
+                onPress={() => {
+                  navigation.navigate("EditConnectionScreen", { contact });
+                }}
+              >
                 <MaterialIcons name="edit" size={30} />
                 <Text className="mt-1 text-sm text-center">Edit</Text>
               </Pressable>
