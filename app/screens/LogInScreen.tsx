@@ -28,6 +28,7 @@ export default function LogInScreen({ navigation }: Props) {
 							setUserDetails(user);
 						});
 					} else {
+						setIsLoggingIn(false)
 						setPassword('');
 						Alert.alert('OOPS!', 'Incorrect!', [{ text: 'Understood' }]);
 					}
