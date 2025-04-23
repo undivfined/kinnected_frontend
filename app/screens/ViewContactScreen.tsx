@@ -62,10 +62,10 @@ export default function ViewContactScreen({ navigation, route }: Props) {
 
   return (
     <View className="flex-1">
-      <ScrollView contentContainerClassName="flex-grow">
+      <View className="flex-grow">
         <View className="flex-1 justify-between">
           <View className={styles.container}>
-            <Text className={styles.headingFour}>
+            <Text className={styles.headingTwo}>
               {contact.isCard ? "Kinnect Card" : "Kinnected User"}
             </Text>
             <View className={styles.profileImage}>
@@ -98,7 +98,7 @@ export default function ViewContactScreen({ navigation, route }: Props) {
                   Timezone:
                 </Text>
                 <Text className="text-sm text-gray-500">
-                  {contact.timezone}
+                {contact.timezone.split('/')[1].replace('_', ' ')}
                 </Text>
               </View>
 
@@ -122,13 +122,6 @@ export default function ViewContactScreen({ navigation, route }: Props) {
                       )
                     : "No Birthday"}
                 </Text>
-              </View>
-            </View>
-
-            <View>
-              <Text className={styles.inputLabel}>City</Text>
-              <View className="bg-white w-[300px] h-[45px] border border-black rounded-md mb-5 flex items-center justify-center">
-                <Text className="text-center">{contact.timezone}</Text>
               </View>
             </View>
 
@@ -175,7 +168,7 @@ export default function ViewContactScreen({ navigation, route }: Props) {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 }

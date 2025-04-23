@@ -109,11 +109,11 @@ export default function CreateCardScreen({ navigation, route }: Props) {
 
   return (
     <View className="flex-1">
-      <ScrollView contentContainerClassName="flex-grow">
+      <View className="flex-grow">
         <DismissKeyboardView>
           <View className="flex-1 justify-between">
             <View className={styles.container}>
-              <Text className={styles.headingFour}>Create Card</Text>
+              <Text className="mb-5 text-2xl font-bold">Create Card</Text>
               <View className={styles.profileImage}>
                 <ImageViewer
                   imgSource={PlaceholderImage}
@@ -122,7 +122,7 @@ export default function CreateCardScreen({ navigation, route }: Props) {
               </View>
 
               <View>
-                <Text className={styles.inputLabel}>Full Name</Text>
+                <Text className={styles.inputLabel}>Full Name *</Text>
                 <TextInput
                   className="bg-white w-[300px] h-[50px] border border-black rounded-md mb-5 flex items-center justify-center px-3"
                   placeholder="Enter full name"
@@ -141,7 +141,7 @@ export default function CreateCardScreen({ navigation, route }: Props) {
 
                 <Pressable
                   onPress={() => setShowCalender(true)}
-                  className="bg-white w-[300px] h-[50px] border border-black rounded-md justify-center mb-5 px-3"
+                  className="bg-white w-[300px] h-[50px] border border-black rounded-md mb-5 flex justify-center px-3"
                 >
                   <Text>
                     {newCardDetails.date_of_birth
@@ -164,10 +164,10 @@ export default function CreateCardScreen({ navigation, route }: Props) {
                 )}
               </View>
 
-              <Text className={styles.inputLabel}>Country</Text>
+              <Text className={styles.inputLabel}>Country *</Text>
               <CountryDropdown setCountryTimezones={setCountryTimezones} />
 
-              <Text className={styles.inputLabel}>Timezone</Text>
+              <Text className={styles.inputLabel}>Timezone *</Text>
               <TimezonesDropdown
                 setNewUserDetails={setNewCardDetails}
                 countryTimezones={countryTimezones}
@@ -182,7 +182,7 @@ export default function CreateCardScreen({ navigation, route }: Props) {
                 />
               </View>
 
-              <View className="mb-5">
+              <View>
                 <Text className={styles.inputLabel}>Date of Last Contact</Text>
 
                 <LastContactDatePicker
@@ -190,6 +190,8 @@ export default function CreateCardScreen({ navigation, route }: Props) {
                   value={newCardDetails}
                 />
               </View>
+
+              <Text className="text-m font-bold text-left w-[300px]">* Required Fields</Text>
 
               <View>
                 <Pressable className={styles.logIn}>
@@ -201,7 +203,7 @@ export default function CreateCardScreen({ navigation, route }: Props) {
             </View>
           </View>
         </DismissKeyboardView>
-      </ScrollView>
+      </View>
     </View>
   );
 }
