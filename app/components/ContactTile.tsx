@@ -106,11 +106,11 @@ export default function ContactTile({ contact } : { contact: contact  }) {
             <View className={styles.contactInfo}>
 
 
-              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}}>
+              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}} className="flex-column items-center">
 
                 <ImageViewer imgSource={blankProfileImg} selectedImage={contact.avatar_url} className={styles.contactTileImage} />
 
-                <Text>{contact.name.split(' ')[0]}</Text>
+                <Text>{contact.name}</Text>
 
 
               </Pressable>
@@ -120,7 +120,7 @@ export default function ContactTile({ contact } : { contact: contact  }) {
             <View className={styles.lastContacted}>
                 <Text className="text-xs mb-3">Last Contacted</Text>
                 <Text>
-                  {contact.date_of_last_contact ? `${getDaysSinceLastContact(contact.date_of_last_contact)}    days` : ''}
+                  {contact.date_of_last_contact ? `${getDaysSinceLastContact(contact.date_of_last_contact)} days ago` : 'Not Contacted'}
                 </Text>
 
             </View>
@@ -128,7 +128,7 @@ export default function ContactTile({ contact } : { contact: contact  }) {
             <View className={styles.localTime}>
             <Text>{contact.timezone.split('/')[1].replace('_', ' ')}</Text>
               <Text>{getTime(contact.timezone)}</Text>
-              <Text className={styles.contactTileRelationship}>{contact.type_of_relationship ? contact.type_of_relationship: 'Not set'}</Text>
+              <Text className={styles.contactTileRelationship}>{contact.type_of_relationship ? contact.type_of_relationship: 'Not Set'}</Text>
             </View>
 
   
