@@ -40,10 +40,10 @@ export const styles = {
 
 
 	textInput:
-		'border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5',
+		'bg-white border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5',
 
 	pickerInput:
-		'border border-black rounded-md w-[300px] h-[50px] px-3 justify-center mb-5',
+		'bg-white border border-black rounded-md w-[300px] h-[50px] px-3 justify-center mb-5',
 
 
 	contactTile:

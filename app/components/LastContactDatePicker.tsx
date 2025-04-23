@@ -27,7 +27,7 @@ function LastContactDatePicker({
   return (
     <View>
       <Pressable
-        className={styles.textInput}
+        className={styles.pickerInput}
         onPress={() => {
           setShowCalender(true);
         }}

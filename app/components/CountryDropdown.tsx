@@ -19,7 +19,7 @@ function CountryDropdown({
         search
         labelField="country"
         valueField="timezones"
-        placeholder={country ? country : "Select your country"}
+        placeholder={country ? country : "Select country"}
         searchPlaceholder="Search..."
         value={country}
         onChange={(item) => {
