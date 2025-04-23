@@ -68,7 +68,7 @@ export default function ContactTile({ contact } : { contact: contact  }) {
             <View className={styles.contactInfo}>
 
 
-              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}}>
+              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}} className={'items-center'}>
 
                 <ImageViewer imgSource={blankProfileImg} selectedImage={contact.avatar_url} className={styles.contactTileImage} />
 
@@ -106,11 +106,11 @@ export default function ContactTile({ contact } : { contact: contact  }) {
             <View className={styles.contactInfo}>
 
 
-              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}} className="flex-column items-center">
+              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}} className={'items-center'}>
 
                 <ImageViewer imgSource={blankProfileImg} selectedImage={contact.avatar_url} className={styles.contactTileImage} />
 
-                <Text>{contact.name}</Text>
+                <Text>{contact.name.split(' ')[0]}</Text>
 
 
               </Pressable>
