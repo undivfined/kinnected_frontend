@@ -4,6 +4,7 @@ import LogInScreen from "../screens/LogInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import TabNavigator from "./TabNavigator";
 
+
 import ContactListScreen from "../screens/ContactListScreen";
 import ConnectAfterSignUp from "../screens/ConnectAfterSignUp";
 import UserProfileScreen from "../screens/UserProfileScreen";
@@ -19,6 +20,7 @@ export type RootStackParamList = {
   LandingScreen: undefined;
   LogInScreen: undefined;
   SignUpScreen: undefined;
+
   UserProfileScreen: undefined;
   ContactListScreen: undefined;
   ConnectAfterSignUp: undefined;
@@ -34,6 +36,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function StackNavigator() {
   return (
+
     <Stack.Navigator
       screenOptions={{ headerShown: true }}
       initialRouteName="LandingScreen"

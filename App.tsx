@@ -1,3 +1,6 @@
+
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+
 import * as React from "react";
 import StackNavigator from "./app/navigation/StackNavigator";
 import { NavigationContainer } from "@react-navigation/native";
@@ -5,8 +8,10 @@ import "./global.css";
 import { ImageProvider } from "./app/context/ImageContext";
 import { UserProvider } from "./app/context/UserContext";
 
+
 export default function App() {
   return (
+    <GestureHandlerRootView>
     <UserProvider>
       <ImageProvider>
         <NavigationContainer>
@@ -14,5 +19,6 @@ export default function App() {
         </NavigationContainer>
       </ImageProvider>
     </UserProvider>
+    </GestureHandlerRootView>
   );
 }
