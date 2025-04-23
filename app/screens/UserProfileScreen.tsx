@@ -29,7 +29,6 @@ const [lastName, setLastName] = useState(userDetails.last_name);
 const [firstName, setFirstName] = useState(userDetails.first_name);
 const [date, setDate] = useState<Date>(userDetails.date_of_birth? new Date(userDetails.date_of_birth) : new Date());
 const [showCalender, setShowCalender] = useState(false);
-const [country, setCountry] = useState(userDetails.country);
 const [timezone, setTimezone] = useState(userDetails.timezone);
 
 
@@ -49,7 +48,6 @@ const [timezone, setTimezone] = useState(userDetails.timezone);
         first_name: firstName,
         last_name: lastName,
         date_of_birth: date,
-        country,
         timezone,
       });
       setIsEditing(false);
@@ -64,11 +62,11 @@ const [timezone, setTimezone] = useState(userDetails.timezone);
           
 
           <View>
-            <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} className={styles.profileImage}/>
+            <ImageViewer imgSource={PlaceholderImage} selectedImage={userDetails.avatar_url} className={styles.profileImage}/>
           </View>
 
             <View className={styles.pictureButton}>
-              <Button title="Choose a photo" color="black" onPress={() => pickImage(setSelectedImage)}/>
+              <Button title="Choose a photo" color="black" onPress={() => pickImage(setUserDetails)}/>
             </View>
             
 
@@ -120,7 +118,7 @@ const [timezone, setTimezone] = useState(userDetails.timezone);
             )}
             
 
-            <Text className={styles.inputLabel}>Country</Text>
+            {/* <Text className={styles.inputLabel}>Country</Text>
             <View className={styles.pickerInput} >
               <Picker selectedValue={country}  onValueChange={(selected) => setCountry(selected)} mode="dropdown" enabled={isEditing}>
                 <Picker.Item label="Select your country" value={null} enabled={false} />
@@ -129,7 +127,7 @@ const [timezone, setTimezone] = useState(userDetails.timezone);
                 <Picker.Item label="South Africa" value="south africa" />
                 <Picker.Item label="London" value="london" />
               </Picker>
-            </View>
+            </View> */}
             
              
             <Text className={styles.inputLabel}>Timezone</Text>
