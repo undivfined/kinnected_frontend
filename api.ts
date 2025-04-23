@@ -1,6 +1,7 @@
 import axios from "axios";
 import { NewUser } from "./types/NewUserType";
 import { NewConnectionType } from "./types/NewConnectionType";
+import { NewCard } from "./types/NewCardType";
 
 const api = axios.create({
   baseURL: "https://kinnected-server.onrender.com/api",
@@ -31,6 +32,12 @@ export const postNewUser = (newUser: NewUser) => {
   });
 };
 
+export const postNewCard = (newCard: NewCard) => {
+  return api.post("/cards", newCard).then(({ data: { card } }) => {
+    return card;
+  })
+};
+
 export const getUsers = (search: string) => {
   return api.get(`/users?search=${search}`).then(({ data: { users } }) => {
     return users;
@@ -42,7 +49,7 @@ export const postConnection = (connection: NewConnectionType) => {
     .post(`/connections`, connection)
     .then(({ data: { createdConnection } }) => {
       return createdConnection;
-    });
+    })
 };
 
 export const deleteConnection = (connection_id: number) => {

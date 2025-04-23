@@ -9,7 +9,7 @@ function TimezonesDropdown({
 }: {
   setNewUserDetails: Function;
   countryTimezones: string[];
-  newUserDetails: { [key: string]: string };
+  newUserDetails: { [key: string]: string | null };
 }) {
   const timezonesMapped = countryTimezones.map((timezone) => {
     return { timezone: timezone };
@@ -22,7 +22,7 @@ function TimezonesDropdown({
         data={timezonesMapped}
         labelField="timezone"
         valueField="timezone"
-        placeholder="Select your timezone"
+        placeholder="Select timezone"
         value={newUserDetails.timezone}
         onChange={(item) => {
           setNewUserDetails((current: { [key: string]: string }) => {

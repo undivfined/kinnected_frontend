@@ -32,11 +32,10 @@ export const styles = {
 
 	inputLabel: 'text-m font-bold mb-3 text-left w-[300px]',
 
-	textInput:
-		'border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5 self-center',
+	textInput: 'bg-white border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5',
 
 	pickerInput:
-		'border border-black rounded-md w-[300px] h-[50px] px-3 justify-center mb-5',
+		'bg-white border border-black rounded-md w-[300px] h-[50px] px-3 justify-center mb-5',
 
 	contactTile:
 		'flex-row justify-between rounded-md border border-black h-[90px] w-full p-[10px] text-center mb-3 mt-5',
