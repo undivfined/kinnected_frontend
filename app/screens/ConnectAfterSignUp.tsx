@@ -20,9 +20,11 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
 	const [users, setUsers] = useState([]);
 	const [searchTerm, setSearchTerm] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
+	const [isLoggingIn, setIsLoggingIn] = useState(false);
 
 	function handleSearch() {
 		if (searchTerm && userDetails.username) {
+			setIsLoggingIn(true)
 			setIsLoading(true);
 			Promise.all([
 				getUsers(searchTerm.replace(' ', '')),
@@ -39,6 +41,7 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
 				console.log(searchResults);
 				setUsers(searchResults);
 				setIsLoading(false);
+				setIsLoggingIn(false)
 			});
 		}
 	}
@@ -69,8 +72,8 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
 							setSearchTerm(text);
 						}}
 					/>
-					<Pressable className={styles.logIn} onPress={handleSearch}>
-						<Text className={styles.submitButtonText}>Let's Kinnect</Text>
+					<Pressable className={styles.logIn} disabled={isLoggingIn} onPress={handleSearch}>
+						<Text className={styles.submitButtonText}>{isLoggingIn ? "Searching..." : "Let's Kinnect"}</Text>
 					</Pressable>
 				</View>
 
