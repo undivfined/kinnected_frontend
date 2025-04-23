@@ -73,7 +73,7 @@ export default function ContactListScreen({ navigation }: Props) {
         >
           <View>
             <Text className={styles.contactListButtonText}>
-              Create Kinnect Card
+              Card Kinnection
             </Text>
           </View>
         </Pressable>
