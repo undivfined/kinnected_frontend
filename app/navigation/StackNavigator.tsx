@@ -13,6 +13,7 @@ import { contact, User } from "../../types/databaseTypes";
 import SearchedUserScreen from "../screens/SearchedUserScreen";
 import CreateCardScreen from "../screens/CreateCardScreen";
 import EditConnectionScreen from "../screens/EditConnectionScreen";
+import EditCardScreen from "../screens/EditCardScreen";
 
 export type RootStackParamList = {
   // undefined means this screen takes no parameters when being navigated to
@@ -30,6 +31,7 @@ export type RootStackParamList = {
   CreateCardScreen: undefined;
   SearchedUserScreen: { user: User };
   EditConnectionScreen: { contact: contact };
+  EditCardScreen: { contact: contact };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -56,6 +58,7 @@ export default function StackNavigator() {
         name="EditConnectionScreen"
         component={EditConnectionScreen}
       />
+      <Stack.Screen name="EditCardScreen" component={EditCardScreen} />
     </Stack.Navigator>
   );
 }

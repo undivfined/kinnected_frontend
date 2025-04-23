@@ -67,6 +67,15 @@ export const editConnection = (
   return api
     .patch(`/connections/${connection_id}`, body)
     .then(({ data: { updatedConnection } }) => {
-      console.log(updatedConnection);
+      return updatedConnection;
     });
+};
+
+export const editCard = (
+  card_id: number,
+  body: { [key: string]: string | undefined }
+) => {
+  return api.patch(`/cards/${card_id}`, body).then(({ data: { card } }) => {
+    return card;
+  });
 };

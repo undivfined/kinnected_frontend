@@ -98,7 +98,7 @@ export default function ViewContactScreen({ navigation, route }: Props) {
                   Timezone:
                 </Text>
                 <Text className="text-sm text-gray-500">
-                {contact.timezone.split('/')[1].replace('_', ' ')}
+                  {contact.timezone.split("/")[1].replace("_", " ")}
                 </Text>
               </View>
 
@@ -155,7 +155,10 @@ export default function ViewContactScreen({ navigation, route }: Props) {
               <Pressable
                 className="items-center"
                 onPress={() => {
-                  navigation.navigate("EditConnectionScreen", { contact });
+                  navigation.navigate(
+                    contact.isCard ? "EditCardScreen" : "EditConnectionScreen",
+                    { contact }
+                  );
                 }}
               >
                 <MaterialIcons name="edit" size={30} />
