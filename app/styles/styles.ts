@@ -13,7 +13,7 @@ export const styles = {
 
 	headingTwo: 'mb-10 text-3xl font-bold',
 
-	headingThree: 'mb-10 text-xl font-bold text-left w-[300px]',
+	headingThree: 'text-xl font-bold text-center w-[300px]',
 
 	headingFour: 'text-xl font-bold',
 
@@ -43,6 +43,11 @@ export const styles = {
 
 	logIn:
 		'rounded-md w-3/5 px-4 py-2 text-center font-bold mb-10 mt-10 bg-black items-center self-center',
+
+	pictureButton:
+	"rounded-md border-1 overflow-hidden m-2.5 mb-10",
+
+	deleteButton: "hover:bg-red-700 rounded-md w-3/5 px-4 py-2 mb-10 mt-5 bg-black items-center",
 
 	contactListScreenButton:
 		'rounded-md w-[120px] px-2 py-2  content-center font-bold mb-1 mt-2 bg-black items-center self-center text-xs',
