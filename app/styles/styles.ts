@@ -49,7 +49,7 @@ export const styles = {
 	deleteButton: "hover:bg-red-700 rounded-md w-3/5 px-4 py-2 mb-10 mt-5 bg-black items-center",
 
 	contactListScreenButton:
-		'rounded-md w-[120px] px-2 py-2  content-center font-bold mb-1 mt-2 bg-black items-center self-center text-xs',
+		'flex-1 rounded-md w-[120px] px-3 py-3  content-center font-bold mb-1 mt-2 bg-black items-center self-center text-xs ',
 
 	lastContacted: 'flex-1 justify-center items-center',
 
@@ -84,7 +84,7 @@ export const styles = {
 	kinnectWithUserBtn:
 		'rounded-md h-15 w-20 text-center bg-black text-white font-bold p-1',
 
-	contactListButtonText: 'text-white font-bold text-center text-sm',
+	contactListButtonText: 'text-white font-bold text-center text-sm align-bottom',
 
 	contactTileRelationship: 'bg-gray-400 p-1 text-white mt-1 text-xs',
 

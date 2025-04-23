@@ -2,7 +2,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
-import { Pressable, View } from "react-native";
+import { Alert, Pressable, View } from "react-native";
 import { styles } from "../styles/styles";
 import ImageViewer from "./ImageViewer";
 import { contact } from "../../types/databaseTypes";
@@ -49,13 +49,59 @@ export default function ContactTile({ contact } : { contact: contact  }) {
   isWithinDaytimeHours() ? "border-green-500" : "border-red-500"
   } rounded-md w-[300px] bg-white`;
 
-
+  
 
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-    
+
+  if(contact.isCard) {
     return (
-      
-    <Pressable onPress={()=>{navigation.navigate("MessagingScreen")}}>
+      <Pressable onPress={()=>  {  Alert.alert("Sorry", "This contact is not currently on the Kinnected app", [
+                  {
+                    text: "OK",
+                    onPress: () => {
+                      
+                    },
+                  },
+                ]);
+                } }> 
+        <View className={styles.contactTile+ " " + tileStyle}>
+            <View className={styles.contactInfo}>
+
+
+              <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}}>
+
+                <ImageViewer imgSource={blankProfileImg} selectedImage={contact.avatar_url} className={styles.contactTileImage} />
+
+                <Text>{contact.name.split(' ')[0]}</Text>
+
+
+              </Pressable>
+
+            </View>
+            
+            <View className={styles.lastContacted}>
+                <Text className="text-xs mb-3">Last Contacted</Text>
+                <Text>
+                  {contact.date_of_last_contact ? `${getDaysSinceLastContact(contact.date_of_last_contact)}    days` : ''}
+                </Text>
+
+            </View>
+
+            <View className={styles.localTime}>
+            <Text>{contact.timezone.split('/')[1].replace('_', ' ')}</Text>
+              <Text>{getTime(contact.timezone)}</Text>
+              <Text className={styles.contactTileRelationship}>{contact.type_of_relationship ? contact.type_of_relationship: 'Not set'}</Text>
+            </View>
+
+  
+        </View>
+       
+    </Pressable>
+    )
+  }
+    
+  return (
+    <Pressable onPress={()=>{navigation.navigate("MessagingScreen")}}> 
         <View className={styles.contactTile+ " " + tileStyle}>
             <View className={styles.contactInfo}>
 
