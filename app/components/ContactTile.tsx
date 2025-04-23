@@ -101,7 +101,7 @@ export default function ContactTile({ contact } : { contact: contact  }) {
   }
     
   return (
-    <Pressable onPress={()=>{navigation.navigate("MessagingScreen")}}> 
+    <Pressable onPress={()=>{navigation.navigate("MessagingScreen", {username: contact.username!})}}> 
         <View className={styles.contactTile+ " " + tileStyle}>
             <View className={styles.contactInfo}>
 

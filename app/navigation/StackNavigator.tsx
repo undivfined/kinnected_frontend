@@ -25,7 +25,7 @@ export type RootStackParamList = {
   ContactListScreen: undefined;
   ConnectAfterSignUp: undefined;
   ViewContactScreen: { contact: contact };
-  MessagingScreen: undefined;
+  MessagingScreen: {username: string };
   TabNavigator: undefined;
   SearchedProfileScreen: undefined;
   CreateCardScreen: undefined;
@@ -39,7 +39,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function StackNavigator() {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: true }}
+      screenOptions={{ headerShown: true, headerTitle: "Kinnected"}}
       initialRouteName="LandingScreen"
     >
       <Stack.Screen name="LandingScreen" component={LandingScreen} />
