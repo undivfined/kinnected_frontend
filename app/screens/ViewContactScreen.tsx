@@ -85,11 +85,7 @@ export default function ViewContactScreen({ navigation, route }: Props) {
                   Last Contacted:
                 </Text>
                 <Text className="text-sm text-gray-500">
-                  {contact.date_of_last_contact
-                    ? `${getDaysSinceLastContact(
-                        contact.date_of_last_contact
-                      )} days ago`
-                    : "Not Contacted"}
+                 {contact.date_of_last_contact ? getDaysSinceLastContact(contact.date_of_last_contact) ===  0 ? 'Today' :`${getDaysSinceLastContact(contact.date_of_last_contact)} days ago` : 'Not Contacted'}
                 </Text>
               </View>
 

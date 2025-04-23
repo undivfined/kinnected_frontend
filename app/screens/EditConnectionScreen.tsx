@@ -107,7 +107,7 @@ export default function EditConnectionScreen({ navigation, route }: Props) {
                   Timezone:
                 </Text>
                 <Text className="text-sm text-gray-500">
-                  {contact.timezone}
+                {contact.timezone.split("/")[1].replace("_", " ")}
                 </Text>
               </View>
 
