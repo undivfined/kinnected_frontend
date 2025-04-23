@@ -1,11 +1,11 @@
 export interface contact {
-  contact_id: "Number";
-  name: String;
-  type_of_relationship: String | undefined;
+  contact_id: number;
+  name: string;
+  type_of_relationship: string | undefined;
   timezone: string;
   date_of_birth: string | undefined;
   date_of_last_contact: string | undefined;
-  isCard: Boolean;
+  isCard: boolean;
   messaging_link: String | undefined;
   avatar_url: string;
   username: string | null;

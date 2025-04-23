@@ -51,3 +51,11 @@ export const postConnection = (connection: NewConnectionType) => {
       return createdConnection;
     })
 };
+
+export const deleteConnection = (connection_id: number) => {
+  return api.delete(`/connections/${connection_id}`);
+};
+
+export const deleteCard = (card_id: number) => {
+  return api.delete(`/cards/${card_id}`);
+};

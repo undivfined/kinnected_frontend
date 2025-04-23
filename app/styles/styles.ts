@@ -1,4 +1,3 @@
-
 export const styles = {
 	container: 'flex-1 pt-4 justify-center items-center m-5',
 
@@ -14,60 +13,57 @@ export const styles = {
 
 	headingTwo: 'mb-10 text-3xl font-bold',
 
-
-	headingThree: 'mb-10 text-xl font-bold text-left w-[300px]',
+	headingThree: 'text-xl font-bold text-center w-[300px]',
 
 	headingFour: 'text-xl font-bold',
 
 	headingFive: 'text-center mb-5 text-3xl font-bold pt-5',
-	
-	headingSix: 'text-center  text-xl  pt-5',
 
+	headingSix: 'text-center  text-xl  pt-5',
 
 	enterBorder: 'rounded-full p-4 border border-gray-400 border-2',
 
-
 	strapLine: 'mt-10 text-lg pb-4',
-
 
 	enterPressable:
 		'w-40 h-40 bg-gray-400 rounded-full items-center justify-center',
 
 	logInLabel: 'text-m font-bold mb-3',
 
-
 	inputLabel: 'text-m font-bold mb-3 text-left w-[300px]',
 
-
-	textInput:
-		'bg-white border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5',
+	textInput: 'bg-white border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5',
 
 	pickerInput:
 		'bg-white border border-black rounded-md w-[300px] h-[50px] px-3 justify-center mb-5',
 
-
 	contactTile:
-		'flex-row justify-between border border-black rounded-md  h-[90px] w-full p-[10px] text-center mb-3 mt-5',
+		'flex-row justify-between rounded-md border border-black h-[90px] w-full p-[10px] text-center mb-3 mt-5',
 
 	logIn:
 		'rounded-md w-3/5 px-4 py-2 text-center font-bold mb-10 mt-10 bg-black items-center self-center',
 
+	pictureButton:
+	"rounded-md border-1 overflow-hidden m-2.5 mb-10",
+
+	deleteButton: "hover:bg-red-700 rounded-md w-3/5 px-4 py-2 mb-10 mt-5 bg-black items-center",
+
 	contactListScreenButton:
-		'rounded-md w-[120px] px-4 py-2  content-center font-bold mb-1 mt-2 bg-black items-center self-center',
+		'rounded-md w-[120px] px-2 py-2  content-center font-bold mb-1 mt-2 bg-black items-center self-center text-xs',
 
 	lastContacted: 'flex-1 justify-center items-center',
 
 	lastContactedTile:
 		'relative border border-black rounded-md w-[300px] h-[70px] bg-white mb-5 mt-5',
 
-	localTime: 'flex-1 justify-center items-center',
+	localTime: 'flex-1 justify-center items-center align-middle',
 
 	contactInfo: 'flex-1 justify-center items-center w-[200px] h-[65px]',
 
 	contactTileImage:
 		'rounded-full border border-black-400 border-2 w-[50px] h-[50px]',
 
-	profileImage: 'rounded-full w-[120px] h-[120px] mt-1 mb-1',
+	profileImage: 'rounded-full w-[110px] h-[110px]',
 
 	skipPress: 'self-end text-2xl font-bold text-gray-400 pt-16 pr-8',
 
@@ -77,14 +73,20 @@ export const styles = {
 
 	fontTwo: 'text-sm font-semibold text-gray-700',
 
-
 	fontThree: 'text-sm text-gray-500',
 
-
-	contactCardContainer: 'flex-row justify-between mb-2',
+	contactCardContainer: 'flex-row justify-between mb-2 self-center p-3',
 
 	submitButtonText: 'text-white font-bold text-center',
 
-	smallText: 'text-sm'
-};
+	smallText: 'text-sm',
 
+	kinnectWithUserBtn:
+		'rounded-md h-15 w-20 text-center bg-black text-white font-bold p-1',
+
+	contactListButtonText: 'text-white font-bold text-center text-sm',
+
+	contactTileRelationship: 'bg-gray-400 p-1 text-white mt-1 text-xs',
+
+	kinnectWithUserBtnTxt: ' text-2xl text-white text-center font-bold  ',
+};

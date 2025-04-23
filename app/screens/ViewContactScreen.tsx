@@ -1,19 +1,30 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import { Pressable, Text, View } from "react-native";
-import {
-  styles
-} from "../styles/styles";
+import { styles } from "../styles/styles";
 import ImageViewer from "../components/ImageViewer";
 import { ScrollView } from "react-native";
 import { convertMilliseconds } from "../utils/milliseconds-day";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { deleteCard, deleteConnection } from "../../api";
 
 type Props = NativeStackScreenProps<RootStackParamList, "ViewContactScreen">;
 
 export default function ViewContactScreen({ navigation, route }: Props) {
   const { contact } = route.params;
+
+  const handleDelete = () => {
+    if (contact.isCard) {
+      return deleteCard(contact.contact_id).then(() => {
+        navigation.navigate("ContactListScreen");
+      });
+    } else {
+      return deleteConnection(contact.contact_id).then(() => {
+        navigation.navigate("ContactListScreen");
+      });
+    }
+  };
 
   const isWithinDaytimeHours = () => {
     const now = new Date();
@@ -60,14 +71,14 @@ export default function ViewContactScreen({ navigation, route }: Props) {
             <View className={styles.profileImage}>
               <ImageViewer
                 imgSource={
-                  contact.avatar_url.trim()
-                    ? { uri: contact.avatar_url }
+                  contact.avatar_url
+                    ? { uri: contact.avatar_url.trim() }
                     : require("../../assets/freepik-basic-placeholder-profile-picture.png")
                 }
                 className={styles.profileImage}
               />
             </View>
-            <Text className='text-xl pt-8'>{contact.name}</Text>
+            <Text className="text-xl pt-8">{contact.name}</Text>
             <View className={tileStyle}>
               <View className="flex-row justify-between mb-2">
                 <Text className="text-sm font-semibold text-gray-700">
@@ -133,12 +144,19 @@ export default function ViewContactScreen({ navigation, route }: Props) {
             </View>
           </View>
           <View className="flex-row justify-between items-end p-4 bg-white">
-            <View className="flex-1 items-center">
-              <Pressable className="items-center" onPress={()=>{navigation.navigate("MessagingScreen")}}>
-                <Ionicons name="chatbox-ellipses" size={30} />
-                <Text className="mt-1 text-sm text-center">Chat</Text>
-              </Pressable>
-            </View>
+            {contact.isCard ? null : (
+              <View className="flex-1 items-center">
+                <Pressable
+                  className="items-center"
+                  onPress={() => {
+                    navigation.navigate("MessagingScreen");
+                  }}
+                >
+                  <Ionicons name="chatbox-ellipses" size={30} />
+                  <Text className="mt-1 text-sm text-center">Chat</Text>
+                </Pressable>
+              </View>
+            )}
 
             <View className="flex-1 items-center">
               <Pressable className="items-center">
@@ -148,9 +166,11 @@ export default function ViewContactScreen({ navigation, route }: Props) {
             </View>
 
             <View className="flex-1 items-center">
-              <Pressable className="items-center">
+              <Pressable className="items-center" onPress={handleDelete}>
                 <MaterialIcons name="delete-forever" size={30} />
-                <Text className="mt-1 text-sm text-center">Disconnect</Text>
+                <Text className="mt-1 text-sm text-center">
+                  {contact.isCard ? "Delete" : "Disconnect"}
+                </Text>
               </Pressable>
             </View>
           </View>
