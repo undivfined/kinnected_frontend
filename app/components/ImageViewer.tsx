@@ -1,25 +1,17 @@
-import { StyleSheet } from 'react-native';
-import { Image, type ImageSource } from 'expo-image';
+
+import { Image as RNImage , ImageSourcePropType } from 'react-native'
+import { Platform } from 'react-native';
+import { Image as ExpoImage } from 'expo-image';
 
 type Props = {
-  imgSource: ImageSource;
+  imgSource: ImageSourcePropType;
   selectedImage?: string;
   className?: string
 };
 
+const MyImage = Platform.OS === 'web' ? ExpoImage : RNImage;
+
 export default function ImageViewer({ imgSource, selectedImage, className }: Props) {
     const imageSource = selectedImage ? { uri: selectedImage } : imgSource;
-    
-    return <Image source={imageSource} className={className} />;
+    return <MyImage source={imageSource} className={className} />;
 }
-
-// const styles = StyleSheet.create({
-//   image: {
-//     width: 120,
-//     height: 120,
-//     borderRadius: 200,
-//     borderWidth: 3,
-//     marginTop: 10,
-    
-//   },
-// });
