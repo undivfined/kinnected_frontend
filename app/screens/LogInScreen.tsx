@@ -78,14 +78,6 @@ export default function LogInScreen({ navigation }: Props) {
       >
         <Text className="underline">Sign Up Here</Text>
       </Pressable>
-
-      <Pressable
-        onPress={() => {
-          navigation.navigate("MessagingScreen");
-        }}
-      >
-        <Text className="underline">MessagingScreen</Text>
-      </Pressable>
     </View>
   );
 }
