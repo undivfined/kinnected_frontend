@@ -17,6 +17,7 @@ import {
   Button,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
 import { styles } from "../styles/styles";
 
@@ -60,6 +61,14 @@ export default function UserProfileScreen({ navigation }: Props) {
       date_of_birth: date,
       timezone: timezone.timezone,
     });
+    Alert.alert("Success", "New details have been saved", [
+              {
+                text: "OK",
+                onPress: () => {
+                  navigation.navigate("UserProfileScreen");
+                },
+              },
+            ]);
     setIsEditing(false);
   };
 
@@ -166,7 +175,7 @@ export default function UserProfileScreen({ navigation }: Props) {
                   }
                 }}
               >
-                <MaterialIcons name="edit" size={30} />
+                <MaterialIcons name={isEditing ? "save" : "edit"} size={30} />
                 <Text className="mt-1 text-sm text-center">
                   {isEditing ? "Save" : "Edit"}
                 </Text>
