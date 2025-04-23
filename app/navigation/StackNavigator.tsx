@@ -4,7 +4,6 @@ import LogInScreen from "../screens/LogInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import TabNavigator from "./TabNavigator";
 
-
 import ContactListScreen from "../screens/ContactListScreen";
 import ConnectAfterSignUp from "../screens/ConnectAfterSignUp";
 import UserProfileScreen from "../screens/UserProfileScreen";
@@ -13,6 +12,7 @@ import ViewContactScreen from "../screens/ViewContactScreen";
 import { contact, User } from "../../types/databaseTypes";
 import SearchedUserScreen from "../screens/SearchedUserScreen";
 import CreateCardScreen from "../screens/CreateCardScreen";
+import EditConnectionScreen from "../screens/EditConnectionScreen";
 
 export type RootStackParamList = {
   // undefined means this screen takes no parameters when being navigated to
@@ -20,7 +20,6 @@ export type RootStackParamList = {
   LandingScreen: undefined;
   LogInScreen: undefined;
   SignUpScreen: undefined;
-
   UserProfileScreen: undefined;
   ContactListScreen: undefined;
   ConnectAfterSignUp: undefined;
@@ -30,13 +29,13 @@ export type RootStackParamList = {
   SearchedProfileScreen: undefined;
   CreateCardScreen: undefined;
   SearchedUserScreen: { user: User };
+  EditConnectionScreen: { contact: contact };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function StackNavigator() {
   return (
-
     <Stack.Navigator
       screenOptions={{ headerShown: true }}
       initialRouteName="LandingScreen"
@@ -53,6 +52,10 @@ export default function StackNavigator() {
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
       <Stack.Screen name="SearchedUserScreen" component={SearchedUserScreen} />
       <Stack.Screen name="CreateCardScreen" component={CreateCardScreen} />
+      <Stack.Screen
+        name="EditConnectionScreen"
+        component={EditConnectionScreen}
+      />
     </Stack.Navigator>
   );
 }
