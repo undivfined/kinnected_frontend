@@ -14,6 +14,7 @@ import DateTimePicker, {
 } from "@react-native-community/datetimepicker";
 import CountryDropdown from "../components/CountryDropdown";
 import TimezonesDropdown from "../components/TimezonesDropdown";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 type Props = NativeStackScreenProps<RootStackParamList, "EditCardScreen">;
 
@@ -163,9 +164,14 @@ export default function EditCardScreen({ navigation, route }: Props) {
               />
             </View>
 
-            <Pressable onPress={sendChanges}>
-              <Text>Save</Text>
-            </Pressable>
+            <View className="flex-row justify-between items-end p-4 bg-white">
+              <View className="flex-1 items-center">
+                <Pressable className="items-center" onPress={sendChanges}>
+                  <MaterialIcons name="save" size={30} />
+                  <Text className="mt-1 text-sm text-center">Save</Text>
+                </Pressable>
+              </View>
+            </View>
           </View>
         </View>
       </ScrollView>
