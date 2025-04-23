@@ -1,10 +1,11 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import { useContext, useState } from "react";
-import { Picker } from "@react-native-picker/picker";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 import ImageViewer from "../components/ImageViewer";
 import pickImage from "../utils/pickImage";
@@ -63,104 +64,137 @@ export default function UserProfileScreen({ navigation }: Props) {
   };
 
   return (
-    <ScrollView>
-      <View className={styles.container}>
-        <Text className={styles.headingTwo}>My Profile</Text>
-        <View>
-          <ImageViewer
-            imgSource={PlaceholderImage}
-            selectedImage={userDetails.avatar_url}
-            className={styles.profileImage}
-          />
-        </View>
-        <View className={styles.pictureButton}>
-          <Button
-            title="Choose a photo"
-            color="black"
-            onPress={() => pickImage(setUserDetails)}
-          />
-        </View>
-        <Text className={styles.headingThree}>My Details</Text>
-        <Pressable
-          className={styles.logIn}
-          onPress={() => {
-            if (isEditing) {
-              handleSave();
-            } else {
-              setIsEditing(true);
-            }
-          }}
-        >
-          <Text className="text-white">{isEditing ? "Save" : "Edit"}</Text>
-        </Pressable>
-        <Text className={styles.inputLabel}>Username</Text>
-        <TextInput
-          className={styles.textInput}
-          value={username}
-          onChangeText={setUsername}
-          editable={isEditing}
-        />
-        <Text className={styles.inputLabel}>First Name</Text>
-        <TextInput
-          className={styles.textInput}
-          value={firstName}
-          onChangeText={setFirstName}
-          editable={isEditing}
-        />
-        <Text className={styles.inputLabel}>Last Name</Text>
-        <TextInput
-          className={styles.textInput}
-          value={lastName}
-          onChangeText={setLastName}
-          editable={isEditing}
-        />
-        <Text className={styles.inputLabel}>Date of Birth</Text>
-        <Pressable
-          className={styles.textInput}
-          onPress={() => {
-            isEditing && setShowCalender(true);
-          }}
-        >
-          <Text>{date.toLocaleDateString()}</Text>
-        </Pressable>
-        {showCalender && (
-          <DateTimePicker
-            value={date || new Date()}
-            mode="date"
-            onChange={(event, selectedDate) => {
-              onDateChange(event, selectedDate);
-            }}
-          />
-        )}
+    <View className="flex-1">
+      <ScrollView contentContainerClassName="flex-grow">
+        <View className="flex-1 justify-between">
+          <View className={styles.container}>
+            <Text className={styles.headingTwo}>My Profile</Text>
 
-        {isEditing ? <Text className={styles.inputLabel}>Country</Text> : null}
-        {isEditing ? (
-          <CountryDropdown setCountryTimezones={setCountryTimezones} />
-        ) : null}
-        <Text className={styles.inputLabel}>Timezone</Text>
-        {isEditing ? (
-          <TimezonesDropdown
-            countryTimezones={countryTimezones}
-            newUserDetails={timezone}
-            setNewUserDetails={setTimezone}
-          />
-        ) : (
-          <TextInput
-            className={styles.textInput}
-            value={userDetails.timezone}
-            editable={false}
-          />
-        )}
+            <View>
+              <ImageViewer
+                imgSource={PlaceholderImage}
+                selectedImage={userDetails.avatar_url}
+                className={styles.profileImage}
+              />
+            </View>
 
-        <Pressable
-          className={styles.deleteButton}
-          onPress={() => {
-            navigation.navigate("LandingScreen");
-          }}
-        >
-          <Text className="text-white">Delete Account</Text>
-        </Pressable>
-      </View>
-    </ScrollView>
+            <View className={styles.pictureButton}>
+              <Button
+                title="Choose a photo"
+                color="black"
+                onPress={() => pickImage(setUserDetails)}
+              />
+            </View>
+
+            <Text className={styles.headingThree}>My Details</Text>
+
+            <Text className={styles.inputLabel}>Username</Text>
+            <TextInput
+              className={styles.textInput}
+              value={username}
+              onChangeText={setUsername}
+              editable={isEditing}
+            />
+
+            <Text className={styles.inputLabel}>First Name</Text>
+            <TextInput
+              className={styles.textInput}
+              value={firstName}
+              onChangeText={setFirstName}
+              editable={isEditing}
+            />
+
+            <Text className={styles.inputLabel}>Last Name</Text>
+            <TextInput
+              className={styles.textInput}
+              value={lastName}
+              onChangeText={setLastName}
+              editable={isEditing}
+            />
+
+            <Text className={styles.inputLabel}>Date of Birth</Text>
+            <Pressable
+              className={styles.textInput}
+              onPress={() => {
+                isEditing && setShowCalender(true);
+              }}
+            >
+              <Text>{date.toLocaleDateString()}</Text>
+            </Pressable>
+            {showCalender && (
+              <DateTimePicker
+                value={date || new Date()}
+                mode="date"
+                onChange={(event, selectedDate) => {
+                  onDateChange(event, selectedDate);
+                }}
+              />
+            )}
+
+            {isEditing ? (
+              <Text className={styles.inputLabel}>Country</Text>
+            ) : null}
+            {isEditing ? (
+              <CountryDropdown setCountryTimezones={setCountryTimezones} />
+            ) : null}
+
+            <Text className={styles.inputLabel}>Timezone</Text>
+            {isEditing ? (
+              <TimezonesDropdown
+                countryTimezones={countryTimezones}
+                newUserDetails={timezone}
+                setNewUserDetails={setTimezone}
+              />
+            ) : (
+              <TextInput
+                className={styles.textInput}
+                value={userDetails.timezone}
+                editable={false}
+              />
+            )}
+          </View>
+
+          <View className="flex-row justify-between items-end p-4 bg-white">
+            <View className="flex-1 items-center">
+              <Pressable
+                className="items-center"
+                onPress={() => {
+                  if (isEditing) {
+                    handleSave();
+                  } else {
+                    setIsEditing(true);
+                  }
+                }}
+              >
+                <MaterialIcons name="edit" size={30} />
+                <Text className="mt-1 text-sm text-center">
+                  {isEditing ? "Save" : "Edit"}
+                </Text>
+              </Pressable>
+            </View>
+
+            <View className="flex-1 items-center">
+              <Pressable
+                className="items-center"
+                onPress={() => navigation.navigate("LandingScreen")}
+              >
+                <MaterialIcons name="delete-forever" size={30} />
+                <Text className="mt-1 text-sm text-center">Delete Account</Text>
+              </Pressable>
+            </View>
+
+            <View className="flex-1 items-center">
+              <Pressable
+                className="items-center"
+                onPress={() => navigation.navigate("LogInScreen")}
+              >
+                <MaterialIcons name="logout" size={30} />
+                <Text className="mt-1 text-sm text-center">Log Out</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
