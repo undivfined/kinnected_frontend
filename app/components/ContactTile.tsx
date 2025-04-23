@@ -81,8 +81,8 @@ export default function ContactTile({ contact } : { contact: contact  }) {
             
             <View className={styles.lastContacted}>
                 <Text className="text-xs mb-3">Last Contacted</Text>
-                <Text>
-                  {contact.date_of_last_contact ? `${getDaysSinceLastContact(contact.date_of_last_contact)}    days` : ''}
+                <Text className='text-center'>
+                {contact.date_of_last_contact ? getDaysSinceLastContact(contact.date_of_last_contact) ===  0 ? 'Today' :`${getDaysSinceLastContact(contact.date_of_last_contact)} days ago` : 'Not Contacted'}
                 </Text>
 
             </View>
@@ -119,8 +119,8 @@ export default function ContactTile({ contact } : { contact: contact  }) {
             
             <View className={styles.lastContacted}>
                 <Text className="text-xs mb-3">Last Contacted</Text>
-                <Text>
-                  {contact.date_of_last_contact ? `${getDaysSinceLastContact(contact.date_of_last_contact)} days ago` : 'Not Contacted'}
+                <Text className='text-center'>
+                  {contact.date_of_last_contact ? getDaysSinceLastContact(contact.date_of_last_contact) ===  0 ? 'Today' :`${getDaysSinceLastContact(contact.date_of_last_contact)} days ago` : 'Not Contacted'}
                 </Text>
 
             </View>
