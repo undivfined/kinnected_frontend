@@ -22,7 +22,11 @@ function TimezonesDropdown({
         data={timezonesMapped}
         labelField="timezone"
         valueField="timezone"
-        placeholder="Select your timezone"
+        placeholder={
+          newUserDetails.timezone
+            ? newUserDetails.timezone
+            : "Select your timezone"
+        }
         value={newUserDetails.timezone}
         onChange={(item) => {
           setNewUserDetails((current: { [key: string]: string }) => {
