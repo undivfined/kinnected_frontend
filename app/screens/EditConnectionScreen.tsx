@@ -9,6 +9,8 @@ import { useState } from "react";
 import RelationshipDropdown from "../components/RelationshipDropdown";
 import { editConnection } from "../../api";
 import { contact } from "../../types/databaseTypes";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+
 
 type Props = NativeStackScreenProps<RootStackParamList, "EditConnectionScreen">;
 
@@ -74,7 +76,7 @@ export default function EditConnectionScreen({ navigation, route }: Props) {
       <ScrollView contentContainerClassName="flex-grow">
         <View className="flex-1 justify-between">
           <View className={styles.container}>
-            <Text className={styles.headingFour}>Kinnected User</Text>
+            <Text className={styles.headingTwo}>Kinnected User</Text>
             <View className={styles.profileImage}>
               <ImageViewer
                 imgSource={
@@ -129,9 +131,17 @@ export default function EditConnectionScreen({ navigation, route }: Props) {
               <Text className={styles.inputLabel}>Relationship Type</Text>
               <RelationshipDropdown setter={handleChange} value={newDetails} />
             </View>
-            <Pressable onPress={sendChanges}>
-              <Text>Save</Text>
-            </Pressable>
+          </View>
+          <View className="flex-row justify-between items-end p-4 bg-white">
+            <View className="flex-1 items-center">
+              <Pressable
+                className="items-center"
+                onPress={sendChanges}
+              >
+                <MaterialIcons name="save" size={30} />
+                <Text className="mt-1 text-sm text-center">Save</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </ScrollView>

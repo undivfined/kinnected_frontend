@@ -62,7 +62,7 @@ export default function ViewContactScreen({ navigation, route }: Props) {
 
   return (
     <View className="flex-1">
-      <View className="flex-grow">
+      <ScrollView contentContainerClassName="flex-grow">
         <View className="flex-1 justify-between">
           <View className={styles.container}>
             <Text className={styles.headingTwo}>
@@ -176,7 +176,7 @@ export default function ViewContactScreen({ navigation, route }: Props) {
             </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
