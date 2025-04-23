@@ -9,6 +9,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { deleteCard, deleteConnection } from "../../api";
 
+
 type Props = NativeStackScreenProps<RootStackParamList, "ViewContactScreen">;
 
 export default function ViewContactScreen({ navigation, route }: Props) {
@@ -138,7 +139,7 @@ export default function ViewContactScreen({ navigation, route }: Props) {
                 <Pressable
                   className="items-center"
                   onPress={() => {
-                    navigation.navigate("MessagingScreen");
+                    navigation.navigate("MessagingScreen", {username: contact.username!});
                   }}
                 >
                   <Ionicons name="chatbox-ellipses" size={30} />

@@ -8,7 +8,7 @@ import ContactListScreen from "../screens/ContactListScreen";
 import ConnectAfterSignUp from "../screens/ConnectAfterSignUp";
 import UserProfileScreen from "../screens/UserProfileScreen";
 import ViewContactScreen from "../screens/ViewContactScreen";
-// import MessagingScreen from "../screens/MessagingScreen";
+import MessagingScreen from "../screens/MessagingScreen";
 import { contact, User } from "../../types/databaseTypes";
 import SearchedUserScreen from "../screens/SearchedUserScreen";
 import CreateCardScreen from "../screens/CreateCardScreen";
@@ -25,7 +25,7 @@ export type RootStackParamList = {
   ContactListScreen: undefined;
   ConnectAfterSignUp: undefined;
   ViewContactScreen: { contact: contact };
-  MessagingScreen: undefined;
+  MessagingScreen: {username: string };
   TabNavigator: undefined;
   SearchedProfileScreen: undefined;
   CreateCardScreen: undefined;
@@ -39,7 +39,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function StackNavigator() {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: true }}
+      screenOptions={{ headerShown: true, headerTitle: "Kinnected"}}
       initialRouteName="LandingScreen"
     >
       <Stack.Screen name="LandingScreen" component={LandingScreen} />
@@ -50,7 +50,7 @@ export default function StackNavigator() {
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       <Stack.Screen name="ConnectAfterSignUp" component={ConnectAfterSignUp} />
       <Stack.Screen name="ViewContactScreen" component={ViewContactScreen} />
-      {/* <Stack.Screen name="MessagingScreen" component={MessagingScreen} /> */}
+      <Stack.Screen name="MessagingScreen" component={MessagingScreen} />
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
       <Stack.Screen name="SearchedUserScreen" component={SearchedUserScreen} />
       <Stack.Screen name="CreateCardScreen" component={CreateCardScreen} />
