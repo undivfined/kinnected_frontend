@@ -66,11 +66,9 @@ export default function EditCardScreen({ navigation, route }: Props) {
         ]);
       })
       .catch((error) => {
-        console.log(error);
         Alert.alert("OOPS", "Something went wrong", [{ text: "OK" }]);
       });
   };
-  console.log(newDetails);
   return (
     <View className="flex-1">
       <ScrollView contentContainerClassName="flex-grow">
@@ -92,7 +90,7 @@ export default function EditCardScreen({ navigation, route }: Props) {
             <View>
               <Text className={styles.inputLabel}>Name</Text>
               <TextInput
-                className={styles.inputLabel}
+                className="bg-white border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] mb-5"
                 value={newDetails.name}
                 onEndEditing={() => {
                   if (!newDetails.name) {
@@ -120,11 +118,11 @@ export default function EditCardScreen({ navigation, route }: Props) {
                 }}
               >
                 <Text>
-                  {new Date(
-                    newDetails.date_of_birth
-                      ? newDetails.date_of_birth
-                      : "1992-5-5"
-                  ).toLocaleDateString("en-GB")}
+                  {newDetails.date_of_birth
+                    ? new Date(newDetails.date_of_birth).toLocaleDateString(
+                        "en-GB"
+                      )
+                    : "Not set"}
                 </Text>
               </Pressable>
 
@@ -163,14 +161,13 @@ export default function EditCardScreen({ navigation, route }: Props) {
                 newUserDetails={newDetails}
               />
             </View>
-
-            <View className="flex-row justify-between items-end p-4 bg-white">
-              <View className="flex-1 items-center">
-                <Pressable className="items-center" onPress={sendChanges}>
-                  <MaterialIcons name="save" size={30} />
-                  <Text className="mt-1 text-sm text-center">Save</Text>
-                </Pressable>
-              </View>
+          </View>
+          <View className="flex-row justify-between items-end p-4 bg-white">
+            <View className="flex-1 items-center">
+              <Pressable className="items-center" onPress={sendChanges}>
+                <MaterialIcons name="save" size={30} />
+                <Text className="mt-1 text-sm text-center">Save</Text>
+              </Pressable>
             </View>
           </View>
         </View>
