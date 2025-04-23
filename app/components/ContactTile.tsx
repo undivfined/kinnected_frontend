@@ -55,7 +55,7 @@ export default function ContactTile({ contact } : { contact: contact  }) {
 
   if(contact.isCard) {
     return (
-      <Pressable onPress={()=>  {  Alert.alert("Sorry", "You can't contact this person through the app", [
+      <Pressable onPress={()=>  {  Alert.alert("Sorry", "This contact is not currently on the Kinnected app", [
                   {
                     text: "OK",
                     onPress: () => {
