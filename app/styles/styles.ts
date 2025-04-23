@@ -32,7 +32,8 @@ export const styles = {
 
 	inputLabel: 'text-m font-bold mb-3 text-left w-[300px]',
 
-	textInput: 'bg-white border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5',
+	textInput:
+		'bg-white border border-black rounded-md w-[300px] h-[45px] pt-[10px] pl-[10px] text-center mb-5',
 
 	pickerInput:
 		'bg-white border border-black rounded-md w-[300px] h-[50px] px-3 justify-center mb-5',
@@ -43,10 +44,10 @@ export const styles = {
 	logIn:
 		'rounded-md w-3/5 px-4 py-2 text-center font-bold mb-10 mt-10 bg-black items-center self-center',
 
-	pictureButton:
-	"rounded-md border-1 overflow-hidden m-2.5 mb-10",
+	pictureButton: 'rounded-md border-1 overflow-hidden m-2.5 mb-10',
 
-	deleteButton: "hover:bg-red-700 rounded-md w-3/5 px-4 py-2 mb-10 mt-5 bg-black items-center",
+	deleteButton:
+		'hover:bg-red-700 rounded-md w-3/5 px-4 py-2 mb-10 mt-5 bg-black items-center',
 
 	contactListScreenButton:
 		'flex-1 rounded-md w-[120px] px-3 py-3  content-center font-bold mb-1 mt-2 bg-black items-center self-center text-xs ',
@@ -67,7 +68,7 @@ export const styles = {
 
 	skipPress: 'self-end text-2xl font-bold text-gray-400 pt-16 pr-8',
 
-	underline: 'mt-20 underline',
+	underline: 'mt-5 underline',
 
 	gap: 'flex-row justify-between mb-2',
 
@@ -84,7 +85,8 @@ export const styles = {
 	kinnectWithUserBtn:
 		'rounded-md h-15 w-20 text-center bg-black text-white font-bold p-1',
 
-	contactListButtonText: 'text-white font-bold text-center text-sm align-bottom',
+	contactListButtonText:
+		'text-white font-bold text-center text-sm align-bottom',
 
 	contactTileRelationship: 'bg-gray-400 p-1 text-white mt-1 text-xs',
 
