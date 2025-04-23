@@ -14,12 +14,15 @@ export default function LogInScreen({ navigation }: Props) {
 	const [userName, setUserName] = useState('');
 	const [password, setPassword] = useState('');
 	const { userDetails, setUserDetails } = useContext(UserContext);
+	const [isLoggingIn, setIsLoggingIn] = useState(false);
 
 	function onLogin() {
+		setIsLoggingIn(true)
 		getCredentials(userName)
 			.then(({ password: hash }) => {
 				bcrypt.compare(password, hash, (err, result) => {
 					if (result) {
+						setIsLoggingIn(false)
 						navigation.navigate('ContactListScreen');
 						getUserByUsername(userName).then((user) => {
 							setUserDetails(user);
@@ -31,10 +34,11 @@ export default function LogInScreen({ navigation }: Props) {
 				});
 			})
 			.catch((error) => {
+				setIsLoggingIn(false)
 				setPassword('');
 				setUserName('');
 				Alert.alert('OOPS!', 'Incorrect!', [{ text: 'Understood' }]);
-			});
+			})
 	}
 
 	return (
@@ -67,8 +71,8 @@ export default function LogInScreen({ navigation }: Props) {
 				<Text className={styles.underline}>Forgotten Password</Text>
 			</Pressable>
 
-			<Pressable className={styles.logIn} onPress={onLogin}>
-				<Text className={styles.submitButtonText}>Log In</Text>
+			<Pressable className={styles.logIn} disabled={isLoggingIn} onPress={onLogin}>
+				<Text className={styles.submitButtonText}>{isLoggingIn ? "Logging In..." : "Log In"}</Text>
 			</Pressable>
 
 			<Pressable
