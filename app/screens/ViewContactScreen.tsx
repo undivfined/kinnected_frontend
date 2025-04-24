@@ -80,6 +80,7 @@ export default function ViewContactScreen({ navigation, route }: Props) {
               />
             </View>
             <Text className="text-xl pt-8">{contact.name}</Text>
+
             <View className={tileStyle}>
               <View className="flex-row justify-between mb-2">
                 <Text className="text-sm font-semibold text-gray-700">
@@ -103,10 +104,15 @@ export default function ViewContactScreen({ navigation, route }: Props) {
                 <Text className="text-sm font-semibold text-gray-700">
                   Current Time:
                 </Text>
-                <Text className="text-sm text-gray-500">
+				<View className="flex-row justify-between">
+				<MaterialIcons name={isWithinDaytimeHours() ? "check-circle" : "do-not-disturb-on"} size={20} color={isWithinDaytimeHours()  ? "green" : "red"}/>
+                <Text className="pl-5 text-sm text-gray-500">
                   {getCurrentTime(contact.timezone)}
                 </Text>
+				</View>
               </View>
+			  
+			  
             </View>
 
             <View>

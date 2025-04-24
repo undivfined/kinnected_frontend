@@ -65,9 +65,15 @@ export default function LogInScreen({ navigation }: Props) {
 			/>
 
 			<Pressable
-				onPress={() => {
-					console.log('I forgot me password');
-				}}
+				onPress={() => {{  Alert.alert("Oh no!", "I forgot me password.", [
+					{
+					  text: "OK",
+					  onPress: () => {
+						
+					  },
+					},
+				  ]);
+				  } }}
 			>
 				<Text className={styles.underline}>Forgotten Password</Text>
 			</Pressable>
