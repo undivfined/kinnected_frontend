@@ -8,6 +8,8 @@ import ImageViewer from "./ImageViewer";
 import { contact } from "../../types/databaseTypes";
 import { Text } from "react-native";
 import { convertMilliseconds } from "../utils/milliseconds-day";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+
 
 const blankProfileImg = require('../../assets/freepik-basic-placeholder-profile-picture.png')
         
@@ -65,8 +67,10 @@ export default function ContactTile({ contact } : { contact: contact  }) {
                 ]);
                 } }> 
         <View className={styles.contactTile+ " " + tileStyle}>
+        <View className="justify-center items-center">
+            <MaterialIcons name={isWithinDaytimeHours() ? "check-circle" : "do-not-disturb-on"} size={20} color={isWithinDaytimeHours()  ? "green" : "red"} />
+            </View>
             <View className={styles.contactInfo}>
-
 
               <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}} className={'items-center'}>
 
@@ -92,7 +96,6 @@ export default function ContactTile({ contact } : { contact: contact  }) {
               <Text>{getTime(contact.timezone)}</Text>
               <Text className={styles.contactTileRelationship}>{contact.type_of_relationship ? contact.type_of_relationship: 'Not set'}</Text>
             </View>
-
   
         </View>
        
@@ -103,8 +106,10 @@ export default function ContactTile({ contact } : { contact: contact  }) {
   return (
     <Pressable onPress={()=>{navigation.navigate("MessagingScreen", {username: contact.username!})}}> 
         <View className={styles.contactTile+ " " + tileStyle}>
+        <View className="justify-center items-center">
+            <MaterialIcons name={isWithinDaytimeHours() ? "check-circle" : "do-not-disturb-on"} size={20} color={isWithinDaytimeHours()  ? "green" : "red"} />
+            </View>
             <View className={styles.contactInfo}>
-
 
               <Pressable onPress={()=>{navigation.navigate("ViewContactScreen", { contact })}} className={'items-center'}>
 
@@ -130,7 +135,6 @@ export default function ContactTile({ contact } : { contact: contact  }) {
               <Text>{getTime(contact.timezone)}</Text>
               <Text className={styles.contactTileRelationship}>{contact.type_of_relationship ? contact.type_of_relationship: 'Not Set'}</Text>
             </View>
-
   
         </View>
        
