@@ -39,6 +39,7 @@ export default function SignUpScreen({ navigation }: Props) {
 
   const [showCalender, setShowCalender] = useState<boolean>(false);
   const [countryTimezones, setCountryTimezones] = useState<string[]>([]);
+  const [isSigningUp, setIsSigningUp] = useState(false);
 
   function onDateChange(
     event: DateTimePickerEvent,
@@ -62,6 +63,7 @@ export default function SignUpScreen({ navigation }: Props) {
   }
 
   function handleSignup() {
+    setIsSigningUp(true)
     let allValues = true;
     Object.values(newUserDetails).forEach((value) => {
       if (!value) {
@@ -71,6 +73,7 @@ export default function SignUpScreen({ navigation }: Props) {
     if (allValues) {
       bcrypt.hash(newUserDetails.password, 10, function (err, hash) {
         if (err) {
+          setIsSigningUp(false)
           Alert.alert("OOPS!", "Something went wrong", [
             { text: "Not again..." },
           ]);
@@ -86,6 +89,7 @@ export default function SignUpScreen({ navigation }: Props) {
             navigation.navigate("ConnectAfterSignUp");
           })
           .catch((error) => {
+            setIsSigningUp(false)
             if (
               error.response.data.message ===
               "A user with this username already exists"
@@ -101,6 +105,7 @@ export default function SignUpScreen({ navigation }: Props) {
           });
       });
     } else {
+      setIsSigningUp(false)
       Alert.alert("OOPS!", "Please fill in all the fields", [{ text: "Fine" }]);
     }
   }
@@ -184,8 +189,8 @@ export default function SignUpScreen({ navigation }: Props) {
           Terms and conditions
         </Text>
 
-        <Pressable className={styles.logIn} onPress={handleSignup}>
-          <Text className={styles.submitButtonText}>Create Account</Text>
+        <Pressable className={styles.logIn} disabled={isSigningUp} onPress={handleSignup}>
+          <Text className={styles.submitButtonText}>{isSigningUp ? "Creating Account...": "Create Account"}</Text>
         </Pressable>
 
         <Pressable

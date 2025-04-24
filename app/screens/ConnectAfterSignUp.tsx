@@ -38,7 +38,6 @@ export default function ConnectAfterSignUp({ navigation }: Props) {
 						!existingContacts.includes(user.username) &&
 						user.username !== userDetails.username
 				);
-				console.log(searchResults);
 				setUsers(searchResults);
 				setIsLoading(false);
 				setIsLoggingIn(false)
