@@ -1,13 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
-import {
-  ScrollView,
-  Text,
-  View,
-  TextInput,
-  FlatList,
-  Pressable,
-} from "react-native";
+import { Text, View, FlatList, Pressable } from "react-native";
 import { styles } from "../styles/styles";
 import { Profiler, useContext, useEffect, useState } from "react";
 
@@ -16,6 +9,7 @@ import ContactTile from "../components/ContactTile";
 import { getContacts } from "../../api";
 import { contact } from "../../types/databaseTypes";
 import { UserContext } from "../context/UserContext";
+import { RefreshControl } from "react-native-gesture-handler";
 
 const blankProfileImg = require("../../assets/freepik-basic-placeholder-profile-picture.png");
 
@@ -23,16 +17,31 @@ type Props = NativeStackScreenProps<RootStackParamList, "ContactListScreen">;
 
 export default function ContactListScreen({ navigation }: Props) {
   const { userDetails } = useContext(UserContext);
-
   const [contacts, setContacts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    loadContacts();
+  }, [userDetails]);
+
+  function loadContacts() {
     if (userDetails.username) {
+      setIsLoading(true);
       getContacts(userDetails.username).then((newContacts) => {
+        newContacts.sort((a: contact, b: contact) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
         setContacts(newContacts);
+        setIsLoading(false);
       });
     }
-  }, [userDetails]);
+  }
 
   return (
     <View className={styles.contactsContainer}>
@@ -84,6 +93,9 @@ export default function ContactListScreen({ navigation }: Props) {
         renderItem={({ item }) => <ContactTile contact={item} />}
         keyExtractor={(item: contact) =>
           `${item.contact_id}` + `${item.username}`
+        }
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={loadContacts} />
         }
       />
     </View>

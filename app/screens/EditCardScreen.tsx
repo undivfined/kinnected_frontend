@@ -65,10 +65,11 @@ export default function EditCardScreen({ navigation, route }: Props) {
           },
         ]);
       })
-      .catch((error) => {
+      .catch(() => {
         Alert.alert("OOPS", "Something went wrong", [{ text: "OK" }]);
       });
   };
+
   return (
     <View className="flex-1">
       <ScrollView contentContainerClassName="flex-grow">
