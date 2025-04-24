@@ -1,17 +1,16 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
-	View,
-	Pressable,
-	Text,
-	TextInput,
-	ScrollView,
-	Alert,
-} from 'react-native';
-import DateTimePicker, {	
-
+  View,
+  Pressable,
+  Text,
+  TextInput,
+  ScrollView,
+  Alert,
+} from "react-native";
+import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { styles } from '../styles/styles';
+import { styles } from "../styles/styles";
 
 import { useContext, useState } from "react";
 import bcrypt from "react-native-bcrypt";
@@ -23,7 +22,7 @@ import { postNewUser } from "../../api";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import CountryDropdown from "../components/CountryDropdown";
 import TimezonesDropdown from "../components/TimezonesDropdown";
-import DismissKeyboardView from '../utils/dismissKeyboardView';
+import DismissKeyboardView from "../utils/dismissKeyboardView";
 type Props = NativeStackScreenProps<RootStackParamList, "SignUpScreen">;
 
 export default function SignUpScreen({ navigation }: Props) {
@@ -63,7 +62,7 @@ export default function SignUpScreen({ navigation }: Props) {
   }
 
   function handleSignup() {
-    setIsSigningUp(true)
+    setIsSigningUp(true);
     let allValues = true;
     Object.values(newUserDetails).forEach((value) => {
       if (!value) {
@@ -73,7 +72,7 @@ export default function SignUpScreen({ navigation }: Props) {
     if (allValues) {
       bcrypt.hash(newUserDetails.password, 10, function (err, hash) {
         if (err) {
-          setIsSigningUp(false)
+          setIsSigningUp(false);
           Alert.alert("OOPS!", "Something went wrong", [
             { text: "Not again..." },
           ]);
@@ -89,7 +88,7 @@ export default function SignUpScreen({ navigation }: Props) {
             navigation.navigate("ConnectAfterSignUp");
           })
           .catch((error) => {
-            setIsSigningUp(false)
+            setIsSigningUp(false);
             if (
               error.response.data.message ===
               "A user with this username already exists"
@@ -105,105 +104,117 @@ export default function SignUpScreen({ navigation }: Props) {
           });
       });
     } else {
-      setIsSigningUp(false)
+      setIsSigningUp(false);
       Alert.alert("OOPS!", "Please fill in all the fields", [{ text: "Fine" }]);
     }
   }
 
   return (
-
     <ScrollView>
       <DismissKeyboardView>
-      <View className={styles.container}>
-        <Text className={styles.headingTwo}>Sign Up</Text>
+        <View className={styles.container}>
+          <Text className={styles.headingTwo}>Sign Up</Text>
 
-        <Text className={styles.inputLabel}>Username</Text>
-        <TextInput
-          className={styles.textInput}
-          onChangeText={(value) => {
-            handleChange(value, "username");
-          }}
-        />
-
-        <Text className={styles.inputLabel}>Password</Text>
-        <TextInput
-          className={styles.textInput}
-          onChangeText={(value) => {
-            handleChange(value, "password");
-          }}
-          secureTextEntry={true}
-        />
-
-        <Text className={styles.inputLabel}>First Name</Text>
-        <TextInput
-          className={styles.textInput}
-          onChangeText={(value) => {
-            handleChange(value, "first_name");
-          }}
-        />
-
-        <Text className={styles.inputLabel}>Last Name</Text>
-        <TextInput
-          className={styles.textInput}
-          onChangeText={(value) => {
-            handleChange(value, "last_name");
-          }}
-        />
-
-        <Text className={styles.inputLabel}>Date of Birth</Text>
-        <Pressable
-          className={styles.textInput}
-          onPress={() => {
-            setShowCalender(true);
-          }}
-        >
-          <Text>{new Date("1992-5-5").toLocaleDateString("en-GB")}</Text>
-        </Pressable>
-
-        {showCalender && (
-          <DateTimePicker
-            value={new Date(newUserDetails.date_of_birth)}
-            mode="date"
-            onChange={(event, selectedDate) => {
-              onDateChange(event, selectedDate);
+          <Text className={styles.inputLabel}>Username</Text>
+          <TextInput
+            className={styles.textInput}
+            onChangeText={(value) => {
+              handleChange(value, "username");
             }}
           />
-        )}
 
-        <Text className={styles.inputLabel}>Country</Text>
-        <CountryDropdown setCountryTimezones={setCountryTimezones} />
+          <Text className={styles.inputLabel}>Password</Text>
+          <TextInput
+            className={styles.textInput}
+            onChangeText={(value) => {
+              handleChange(value, "password");
+            }}
+            secureTextEntry={true}
+          />
 
-        <Text className={styles.inputLabel}>Timezone</Text>
-        <TimezonesDropdown
-          setNewUserDetails={setNewUserDetails}
-          countryTimezones={countryTimezones}
-          newUserDetails={newUserDetails}
-        />
+          <Text className={styles.inputLabel}>First Name</Text>
+          <TextInput
+            className={styles.textInput}
+            onChangeText={(value) => {
+              handleChange(value, "first_name");
+            }}
+          />
 
-        <Text
-          className={styles.underline}
-          onPress={() => {
-            navigation.navigate("ConnectAfterSignUp");
-          }}
-        >
-          Terms and conditions
-        </Text>
+          <Text className={styles.inputLabel}>Last Name</Text>
+          <TextInput
+            className={styles.textInput}
+            onChangeText={(value) => {
+              handleChange(value, "last_name");
+            }}
+          />
 
-        <Pressable className={styles.logIn} disabled={isSigningUp} onPress={handleSignup}>
-          <Text className={styles.submitButtonText}>{isSigningUp ? "Creating Account...": "Create Account"}</Text>
-        </Pressable>
+          <Text className={styles.inputLabel}>Date of Birth</Text>
+          <Pressable
+            className={styles.textInput}
+            onPress={() => {
+              setShowCalender(true);
+            }}
+          >
+            <Text>
+              {newUserDetails.date_of_birth
+                ? new Date(newUserDetails.date_of_birth).toLocaleDateString(
+                    "en-GB"
+                  )
+                : "Not set"}
+            </Text>
+          </Pressable>
 
-        <Pressable
-          className={styles.underline}
-          onPress={() => {
-            navigation.navigate("LogInScreen");
-          }}
-        >
-          <Text className={styles.underline}>Already have an account? Login</Text>
-        </Pressable>
-      </View>
-    </DismissKeyboardView>
+          {showCalender && (
+            <DateTimePicker
+              value={new Date(newUserDetails.date_of_birth)}
+              mode="date"
+              onChange={(event, selectedDate) => {
+                onDateChange(event, selectedDate);
+              }}
+            />
+          )}
+
+          <Text className={styles.inputLabel}>Country</Text>
+          <CountryDropdown setCountryTimezones={setCountryTimezones} />
+
+          <Text className={styles.inputLabel}>Timezone</Text>
+          <TimezonesDropdown
+            setNewUserDetails={setNewUserDetails}
+            countryTimezones={countryTimezones}
+            newUserDetails={newUserDetails}
+          />
+
+          <Text
+            className={styles.underline}
+            onPress={() => {
+              navigation.navigate("ConnectAfterSignUp");
+            }}
+          >
+            Terms and conditions
+          </Text>
+
+          <Pressable
+            className={styles.logIn}
+            disabled={isSigningUp}
+            onPress={handleSignup}
+          >
+            <Text className={styles.submitButtonText}>
+              {isSigningUp ? "Creating Account..." : "Create Account"}
+            </Text>
+          </Pressable>
+
+          <Pressable
+            className={styles.underline}
+            onPress={() => {
+              navigation.navigate("LogInScreen");
+            }}
+          >
+            <Text className={styles.underline}>
+              Already have an account? Login
+            </Text>
+          </Pressable>
+        </View>
+      </DismissKeyboardView>
     </ScrollView>
   );
-
 }
