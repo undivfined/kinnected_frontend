@@ -26,7 +26,7 @@ export const styles = {
 	strapLine: 'mt-10 text-lg pb-4',
 
 	enterPressable:
-		'w-40 h-40 bg-gray-400 rounded-full items-center justify-center',
+		'w-[300px] h-[300px] rounded-full items-center justify-center',
 
 	logInLabel: 'text-m font-bold mb-3',
 
