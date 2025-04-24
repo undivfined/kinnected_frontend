@@ -14,28 +14,21 @@
 // type MessagingScreenRouteProp = RouteProp<RootStackParamList, 'MessagingScreen'>;
 
 // const chatApiKey = 'xrxyswr6gz73';
+// const chatUserId = 'victor24';
+// const chatUserName = 'victor24';
+// const userToken = StreamChat.getInstance(chatApiKey).devToken(chatUserId);
 
 // export default function MessagingScreen(): JSX.Element {
 //   const route = useRoute<MessagingScreenRouteProp>();
 //   const otherUserId = route.params?.username;
-
-//   if (!otherUserId) {
-//     return (
-//       <View style={styles.loadingContainer}>
-//         <ActivityIndicator size="large" />
-//       </View>
-//     );
-//   }
-
-//   const chatUserId = 'test_user_1';
-//   const chatUserName = 'Victor';
-//   const userToken ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidGVzdF91c2VyXzEifQ.eEHt0TGMmR-yZ-3a1NZd3LYToR2ZUrjp-Za2fHvM9QM';
 
 //   const [client, setClient] = useState<StreamChat | null>(null);
 //   const [channel, setChannel] = useState<any>(null);
 //   const [isReady, setIsReady] = useState(false);
 
 //   useEffect(() => {
+//     if (!otherUserId) return;
+
 //     const chatClient = StreamChat.getInstance(chatApiKey);
 
 //     chatClient
@@ -71,7 +64,7 @@
 //         console.error('Disconnect failed:', err)
 //       );
 //     };
-//   }, []);
+//   }, [otherUserId]);
 
 //   if (!client || !isReady || !channel) {
 //     return (
