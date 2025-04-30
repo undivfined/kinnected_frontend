@@ -15,7 +15,7 @@ export type UserDetails = {
   username: string | undefined;
   first_name: string | undefined;
   last_name: string | undefined;
-  date_of_birth: Date | undefined;
+  date_of_birth: string | undefined;
   timezone: string | undefined;
   avatar_url: string | undefined;
 };
