@@ -1,22 +1,27 @@
-// import { useRoute, RouteProp } from '@react-navigation/native';
-// import { RootStackParamList } from '../navigation/StackNavigator';
-// import { useEffect, useState } from 'react';
-// import { View, ActivityIndicator, StyleSheet } from 'react-native';
+// import { useRoute, RouteProp } from "@react-navigation/native";
+// import { RootStackParamList } from "../navigation/StackNavigator";
+// import { useEffect, useState } from "react";
+// import { View, ActivityIndicator, StyleSheet } from "react-native";
 // import {
 //   Chat,
 //   Channel,
 //   MessageList,
 //   MessageInput,
 //   OverlayProvider,
-// } from 'stream-chat-react-native';
-// import { StreamChat } from 'stream-chat';
+// } from "stream-chat-react-native";
+// import { StreamChat } from "stream-chat";
+// import { useContext } from "react";
+// import { UserContext } from "../context/UserContext";
 
-// type MessagingScreenRouteProp = RouteProp<RootStackParamList, 'MessagingScreen'>;
+// type MessagingScreenRouteProp = RouteProp<
+//   RootStackParamList,
+//   "MessagingScreen"
+// >;
 
-// const chatApiKey = 'xrxyswr6gz73';
-// const chatUserId = 'victor24';
-// const chatUserName = 'victor24';
-// const userToken = StreamChat.getInstance(chatApiKey).devToken(chatUserId);
+// // const chatApiKey = "xrxyswr6gz73";
+// // const chatUserId = "victor24";
+// // const chatUserName = "victor24";
+// // const userToken = StreamChat.getInstance(chatApiKey).devToken(chatUserId);
 
 // export default function MessagingScreen(): JSX.Element {
 //   const route = useRoute<MessagingScreenRouteProp>();
@@ -25,6 +30,12 @@
 //   const [client, setClient] = useState<StreamChat | null>(null);
 //   const [channel, setChannel] = useState<any>(null);
 //   const [isReady, setIsReady] = useState(false);
+
+//   const { userDetails } = useContext(UserContext);
+//   const chatApiKey = "xrxyswr6gz73";
+//   const chatUserId = userDetails.username!;
+//   const chatUserName = userDetails.username;
+//   const userToken = StreamChat.getInstance(chatApiKey).devToken(chatUserId);
 
 //   useEffect(() => {
 //     if (!otherUserId) return;
@@ -40,13 +51,10 @@
 //         userToken
 //       )
 //       .then(() => {
-//         const channelId = ['dm', ...[chatUserId, otherUserId].sort()].join('-');
+//         const channelId = ["dm", ...[chatUserId, otherUserId].sort()].join("-");
 
-//         const newChannel = chatClient.channel('messaging', channelId, {
-//           members: [
-//             { user_id: chatUserId },
-//             { user_id: otherUserId },
-//           ],
+//         const newChannel = chatClient.channel("messaging", channelId, {
+//           members: [{ user_id: chatUserId }, { user_id: otherUserId }],
 //         });
 
 //         return newChannel.watch().then(() => {
@@ -56,13 +64,13 @@
 //         });
 //       })
 //       .catch((err) => {
-//         console.error('Stream Chat setup failed:', err);
+//         console.error("Stream Chat setup failed:", err);
 //       });
 
 //     return () => {
-//       chatClient.disconnectUser().catch((err) =>
-//         console.error('Disconnect failed:', err)
-//       );
+//       chatClient
+//         .disconnectUser()
+//         .catch((err) => console.error("Disconnect failed:", err));
 //     };
 //   }, [otherUserId]);
 
@@ -94,7 +102,7 @@
 //   },
 //   loadingContainer: {
 //     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
+//     justifyContent: "center",
+//     alignItems: "center",
 //   },
 // });
