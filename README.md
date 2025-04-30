@@ -48,3 +48,13 @@ To try out messenging:
 - uncomment the code in `/app/screens/MessagingScreen.tsx`
 - in `/app/navigation/StackNavigator.tsx`, uncomment `import MessagingScreen from "../screens/MessagingScreen"` and `<Stack.Screen name="MessagingScreen" component={MessagingScreen} />`
 - in the terminal, run `npm run android` or `npm run ios`
+
+### Login details
+
+Please feel free to create an account or explore one of the existing ones. For example, for the sake of convenience, `barbara38`'s password is `123456`.
+
+(Please note that the app's backend service (https://github.com/undivfined/kinnected_server) spins down after a period of inactivity and can take about a minute to spin back up. If you get an initial error message trying to sign up / log in, please try again after about a minute.)
+
+## Acknowledgment
+
+This group project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/).
