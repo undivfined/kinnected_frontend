@@ -19,7 +19,7 @@ kinnected is a mobile app designed to help people stay in touch with one another
 - Cards: "Dummy" profiles users can create to store information about people who do not use the app, for example their timezone, birthday and date of last contact. Cards are only visible to their creators
 - Contacts screen: A list of a user's contacts, including both other people's profiles found and added to connections and custom cards created by the user. The list provides a brief summary about each person, including time since last contact, timezone and local time, and features visual indication for when a person might be available depending on their timezone
 - Individual contact screens: Accessed by tapping a contact's avatar, these provide a summary about a person and the options to edit some (other users) or all (cards) of the information, delete a card / disconnect from a user, and chat (with another user)
-- Own profile screen: An overview of the user's own details with the option to edit the details (in development). Although there is the option to select a picture from the device as an avatar, which would persist for the session, image upload and storage are currently not supported
+- Own profile screen: An overview of the user's own details with the option to edit the details. Although there is the option to select a picture from the device as an avatar, which would persist for the session, image upload and storage are currently not supported
 - Messenger: Accessed by tapping a contact's tile in the contacts list or the chat icon on an individual contact's screen, this is a chat allowing for sending texts, GIFs and images and copying messages to the clipboard
 - User experience: The app provides feedback to the user in the form of loading messages and popups to confirm a successful action or when there has been an error
 
@@ -49,9 +49,11 @@ To try out messenging:
 - in `/app/navigation/StackNavigator.tsx`, uncomment `import MessagingScreen from "../screens/MessagingScreen"` and `<Stack.Screen name="MessagingScreen" component={MessagingScreen} />`
 - in the terminal, run `npm run android` or `npm run ios`
 
+NB: Please note that currently messaging is supported only between selected users whose usernames are added to Getstream. Among such users are, for example, Barbara Gonzales (`barbara38`, password: `123456`) and Elizabeth Woods (`woods770`, password: `456789`).
+
 ### Login details
 
-Please feel free to create an account or explore one of the existing ones. For example, for the sake of convenience, `barbara38`'s password is `123456`.
+Please feel free to create an account or explore one of the existing ones (sample credentials above).
 
 (Please note that the app's backend service (https://github.com/undivfined/kinnected_server) spins down after a period of inactivity and can take about a minute to spin back up. If you get an initial error message trying to sign up / log in, please try again after about a minute.)
 
