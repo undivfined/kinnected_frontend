@@ -1,24 +1,19 @@
-
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as React from "react";
 import StackNavigator from "./app/navigation/StackNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import "./global.css";
-import { ImageProvider } from "./app/context/ImageContext";
-import { UserProvider } from "./app/context/UserContext";
 
+import { UserProvider } from "./app/context/UserContext";
 
 export default function App() {
   return (
     <GestureHandlerRootView>
-    <UserProvider>
-      <ImageProvider>
+      <UserProvider>
         <NavigationContainer>
           <StackNavigator />
         </NavigationContainer>
-      </ImageProvider>
-    </UserProvider>
+      </UserProvider>
     </GestureHandlerRootView>
   );
 }
