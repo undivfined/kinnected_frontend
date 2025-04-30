@@ -23,7 +23,7 @@ import { styles } from "../styles/styles";
 import { UserContext } from "../context/UserContext";
 import CountryDropdown from "../components/CountryDropdown";
 import TimezonesDropdown from "../components/TimezonesDropdown";
-import { deleteOwnAccount } from "../../api";
+import { deleteOwnAccount, editAccountDetails } from "../../api";
 
 const PlaceholderImage = require("../../assets/freepik-basic-placeholder-profile-picture.png");
 
@@ -31,35 +31,35 @@ type Props = NativeStackScreenProps<RootStackParamList, "UserProfileScreen">;
 
 export default function UserProfileScreen({ navigation }: Props) {
   const { userDetails, setUserDetails } = useContext(UserContext);
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [username, setUsername] = useState(userDetails.username);
-  const [lastName, setLastName] = useState(userDetails.last_name);
-  const [firstName, setFirstName] = useState(userDetails.first_name);
-  const [date, setDate] = useState<Date>(
-    userDetails.date_of_birth ? new Date(userDetails.date_of_birth) : new Date()
-  );
-  const [showCalender, setShowCalender] = useState(false);
-  const [timezone, setTimezone] = useState({
-    timezone: userDetails.timezone || "",
+  const [updatedDetails, setUpdatedDetails] = useState({
+    first_name: userDetails.first_name!,
+    last_name: userDetails.last_name!,
+    timezone: userDetails.timezone!,
+    date_of_birth: userDetails.date_of_birth!,
   });
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [showCalender, setShowCalender] = useState(false);
+
   const [countryTimezones, setCountryTimezones] = useState<string[]>([]);
 
   function onDateChange(event: DateTimePickerEvent, selectedDate?: Date) {
     if (event.type === "set" && selectedDate) {
-      setDate(selectedDate);
+      setUpdatedDetails((current) => {
+        return { ...current, date_of_birth: selectedDate.toISOString() };
+      });
     }
     setShowCalender(false);
   }
 
   const handleSave = () => {
+    editAccountDetails(userDetails.username!, updatedDetails);
     setUserDetails({
       ...userDetails,
-      username,
-      first_name: firstName,
-      last_name: lastName,
-      date_of_birth: date,
-      timezone: timezone.timezone,
+      first_name: updatedDetails.first_name,
+      last_name: updatedDetails.last_name,
+      date_of_birth: updatedDetails.date_of_birth,
+      timezone: updatedDetails.timezone,
     });
     Alert.alert("Success", "New details have been saved", [
       {
@@ -100,24 +100,31 @@ export default function UserProfileScreen({ navigation }: Props) {
             <Text className={styles.inputLabel}>Username</Text>
             <TextInput
               className={styles.textInput}
-              value={username}
-              onChangeText={setUsername}
               editable={false}
+              value={userDetails.username}
             />
 
             <Text className={styles.inputLabel}>First Name</Text>
             <TextInput
               className={styles.textInput}
-              value={firstName}
-              onChangeText={setFirstName}
+              value={updatedDetails.first_name}
+              onChangeText={(text) => {
+                setUpdatedDetails((current) => {
+                  return { ...current, first_name: text };
+                });
+              }}
               editable={isEditing}
             />
 
             <Text className={styles.inputLabel}>Last Name</Text>
             <TextInput
               className={styles.textInput}
-              value={lastName}
-              onChangeText={setLastName}
+              value={updatedDetails.last_name}
+              onChangeText={(text) => {
+                setUpdatedDetails((current) => {
+                  return { ...current, last_name: text };
+                });
+              }}
               editable={isEditing}
             />
 
@@ -128,11 +135,15 @@ export default function UserProfileScreen({ navigation }: Props) {
                 isEditing && setShowCalender(true);
               }}
             >
-              <Text>{date.toLocaleDateString()}</Text>
+              <Text>
+                {new Date(updatedDetails.date_of_birth!).toLocaleDateString(
+                  "en-GB"
+                )}
+              </Text>
             </Pressable>
             {showCalender && (
               <DateTimePicker
-                value={date || new Date()}
+                value={new Date(updatedDetails.date_of_birth!)}
                 mode="date"
                 onChange={(event, selectedDate) => {
                   onDateChange(event, selectedDate);
@@ -151,8 +162,8 @@ export default function UserProfileScreen({ navigation }: Props) {
             {isEditing ? (
               <TimezonesDropdown
                 countryTimezones={countryTimezones}
-                newUserDetails={timezone}
-                setNewUserDetails={setTimezone}
+                newUserDetails={updatedDetails}
+                setNewUserDetails={setUpdatedDetails}
               />
             ) : (
               <TextInput
