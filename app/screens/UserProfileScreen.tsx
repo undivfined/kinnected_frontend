@@ -4,7 +4,6 @@ import { useContext, useState } from "react";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 import ImageViewer from "../components/ImageViewer";
@@ -24,6 +23,7 @@ import { styles } from "../styles/styles";
 import { UserContext } from "../context/UserContext";
 import CountryDropdown from "../components/CountryDropdown";
 import TimezonesDropdown from "../components/TimezonesDropdown";
+import { deleteOwnAccount } from "../../api";
 
 const PlaceholderImage = require("../../assets/freepik-basic-placeholder-profile-picture.png");
 
@@ -62,13 +62,13 @@ export default function UserProfileScreen({ navigation }: Props) {
       timezone: timezone.timezone,
     });
     Alert.alert("Success", "New details have been saved", [
-              {
-                text: "OK",
-                onPress: () => {
-                  navigation.navigate("UserProfileScreen");
-                },
-              },
-            ]);
+      {
+        text: "OK",
+        onPress: () => {
+          navigation.navigate("UserProfileScreen");
+        },
+      },
+    ]);
     setIsEditing(false);
   };
 
@@ -102,7 +102,7 @@ export default function UserProfileScreen({ navigation }: Props) {
               className={styles.textInput}
               value={username}
               onChangeText={setUsername}
-              editable={isEditing}
+              editable={false}
             />
 
             <Text className={styles.inputLabel}>First Name</Text>
@@ -185,7 +185,22 @@ export default function UserProfileScreen({ navigation }: Props) {
             <View className="flex-1 items-center">
               <Pressable
                 className="items-center"
-                onPress={() => navigation.navigate("LandingScreen")}
+                onPress={() => {
+                  Alert.alert(
+                    "Attention!",
+                    "You are about to delete your account forever. Are you sure?",
+                    [
+                      {
+                        text: "Delete",
+                        onPress: () => {
+                          deleteOwnAccount(userDetails.username!);
+                          navigation.navigate("LandingScreen");
+                        },
+                      },
+                      { text: "Cancel" },
+                    ]
+                  );
+                }}
               >
                 <MaterialIcons name="delete-forever" size={30} />
                 <Text className="mt-1 text-sm text-center">Delete Account</Text>
