@@ -79,3 +79,7 @@ export const editCard = (
     return card;
   });
 };
+
+export const deleteOwnAccount = (username: string) => {
+  return api.delete(`/users/${username}`);
+};
