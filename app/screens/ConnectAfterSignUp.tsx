@@ -2,15 +2,11 @@ import { View, Text, TextInput, Pressable, ScrollView } from 'react-native';
 import { styles } from '../styles/styles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/StackNavigator';
-
 import { UserContext } from '../context/UserContext';
 import { useContext, useState } from 'react';
 import { getContacts, getUsers } from '../../api';
-
 import SearchedUserTile from '../components/SearchedUserTile';
 import { contact, User } from '../../types/databaseTypes';
-import { FlatList } from 'react-native-reanimated/lib/typescript/Animated';
-import ContactTile from '../components/ContactTile';
 import DismissKeyboardView from '../utils/dismissKeyboardView';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ConnectAfterSignUp'>;

@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import { Text, View, FlatList, Pressable } from "react-native";
 import { styles } from "../styles/styles";
-import { Profiler, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import ImageViewer from "../components/ImageViewer";
 import ContactTile from "../components/ContactTile";
