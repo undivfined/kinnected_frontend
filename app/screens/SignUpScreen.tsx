@@ -88,19 +88,30 @@ export default function SignUpScreen({ navigation }: Props) {
             navigation.navigate("ConnectAfterSignUp");
           })
           .catch((error) => {
-            setIsSigningUp(false);
             if (
-              error.response.data.message ===
+              error.response?.data?.message ===
               "A user with this username already exists"
             ) {
               Alert.alert("OOPS!", error.response.data.message, [
                 { text: "OK" },
               ]);
+            } else if (
+              error.code === "ECONNABORTED" ||
+              error.code === "ERR_NETWORK"
+            ) {
+              Alert.alert(
+                "Connection error",
+                "The service is waking up. Please wait a minute and try again",
+                [{ text: "OK" }]
+              );
             } else {
-              Alert.alert("OOPS!", "Something went wrong", [
-                { text: "Not again..." },
-              ]);
+              Alert.alert(
+                "Something has gone wrong",
+                "Please try again later",
+                [{ text: "OK" }]
+              );
             }
+            setIsSigningUp(false);
           });
       });
     } else {

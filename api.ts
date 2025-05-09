@@ -79,3 +79,16 @@ export const editCard = (
     return card;
   });
 };
+
+export const deleteOwnAccount = (username: string) => {
+  return api.delete(`/users/${username}`);
+};
+
+export const editAccountDetails = (
+  username: string,
+  body: { [key: string]: string }
+) => {
+  return api.patch(`/users/${username}`, body).then(({ data: { user } }) => {
+    return user;
+  });
+};

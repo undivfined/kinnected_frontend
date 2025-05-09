@@ -2,7 +2,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LandingScreen from "../screens/LandingScreen";
 import LogInScreen from "../screens/LogInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
-import TabNavigator from "./TabNavigator";
 
 import ContactListScreen from "../screens/ContactListScreen";
 import ConnectAfterSignUp from "../screens/ConnectAfterSignUp";
@@ -25,8 +24,8 @@ export type RootStackParamList = {
   ContactListScreen: undefined;
   ConnectAfterSignUp: undefined;
   ViewContactScreen: { contact: contact };
-  MessagingScreen: {username: string };
-  TabNavigator: undefined;
+  MessagingScreen: { username: string };
+
   SearchedProfileScreen: undefined;
   CreateCardScreen: undefined;
   SearchedUserScreen: { user: User };
@@ -39,19 +38,17 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function StackNavigator() {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: true, headerTitle: "Kinnected"}}
+      screenOptions={{ headerShown: true, headerTitle: "Kinnected" }}
       initialRouteName="LandingScreen"
     >
       <Stack.Screen name="LandingScreen" component={LandingScreen} />
       <Stack.Screen name="LogInScreen" component={LogInScreen} />
       <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} />
-      {/* note: component, as a prop, refers to which screen the stack navigator points to, NOT UI components*/}
       <Stack.Screen name="ContactListScreen" component={ContactListScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       <Stack.Screen name="ConnectAfterSignUp" component={ConnectAfterSignUp} />
       <Stack.Screen name="ViewContactScreen" component={ViewContactScreen} />
       {/* <Stack.Screen name="MessagingScreen" component={MessagingScreen} /> */}
-      <Stack.Screen name="TabNavigator" component={TabNavigator} />
       <Stack.Screen name="SearchedUserScreen" component={SearchedUserScreen} />
       <Stack.Screen name="CreateCardScreen" component={CreateCardScreen} />
       <Stack.Screen
